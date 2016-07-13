@@ -1,15 +1,19 @@
 package com.example.sparsh23.laltern;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
+import java.util.HashMap;
 
 public class ProductView extends AppCompatActivity {
 
@@ -34,20 +38,35 @@ public class ProductView extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("map");
+
+        int noimg = Integer.parseInt(data.get("noimages"));
+
+        Log.d("No Images", ""+noimg);
 
 
-        TextSliderView textSliderView = new TextSliderView(this);
-        TextSliderView textSliderView1 = new TextSliderView(this);
-        textSliderView
-                .description("Game of Thrones").image("http://www.whydoweplay.com/lalten/Images/20160708174522.jpeg");
+        if(noimg>0){
 
-        textSliderView.image("http://www.whydoweplay.com/lalten/Images/20160708174743.jpeg").description("fuck off");
+            sliderShow.addSlider(new TextSliderView(this).image( data.get("path")));
 
 
+            for(int i=1;i<noimg;i++){
 
 
-        sliderShow.addSlider(new TextSliderView(this).image("http://www.whydoweplay.com/lalten/Images/20160708174743.jpeg"));
-        sliderShow.addSlider(new TextSliderView(this).image("http://www.whydoweplay.com/lalten/Images/20160708174522.jpeg"));
+                String n =  "http://www.whydoweplay.com/lalten/Images/"+data.get("uid")+"_"+i+".jpeg";
+
+                Log.d("path", n);
+
+                sliderShow.addSlider(new TextSliderView(this).image(n));
+
+
+            }
+
+
+        }
+
+
 
 
 

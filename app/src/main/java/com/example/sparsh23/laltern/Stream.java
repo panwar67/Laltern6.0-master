@@ -52,6 +52,10 @@ public class Stream extends AppCompatActivity {
                 HashMap<String, String> preview = new HashMap<String, String>();
                 preview = data.get(position);
                 Toast.makeText(getApplication(), "" + preview.get("title"), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Stream.this,ProductView.class);
+                intent.putExtra("map",preview);
+                startActivity(intent);
+
 
 
             }

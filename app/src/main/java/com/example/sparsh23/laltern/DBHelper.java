@@ -18,13 +18,13 @@ import android.content.ContentValues;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "coach.db";
+    public static final String DATABASE_NAME = "laltern.db";
 
 
 
     public DBHelper(Context context)
     {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 4);
     }
 
     @Override
