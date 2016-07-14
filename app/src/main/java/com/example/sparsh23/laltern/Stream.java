@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,8 +22,13 @@ public class Stream extends AppCompatActivity {
 
 
 
+    Spinner spinner;
     ImageView search;
+    ImageView upload;
+    ImageView profile;
     DBHelper dbHelper;
+    ListView listView;
+     ArrayList<HashMap<String,String>> data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +36,11 @@ public class Stream extends AppCompatActivity {
 
         dbHelper = new DBHelper(getApplicationContext());
 
+        spinner = (Spinner)findViewById(R.id.catspin);
+
         search = (ImageView)findViewById(R.id.search);
-        final ArrayList<HashMap<String,String>> data = dbHelper.getimageData();
-        ListView listView = (ListView)findViewById(R.id.listView);
+        data = dbHelper.getimageData();
+        listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(new CustomAdapter(this,data));
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +48,7 @@ public class Stream extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(Stream.this, Search.class));
                 finish();
+
 
             }
         });
@@ -62,9 +71,64 @@ public class Stream extends AppCompatActivity {
         });
 
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
 
+
+
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),selectedItem,Toast.LENGTH_SHORT).show();
+
+
+                if(selectedItem.equals("All")){
+
+                    SetcatAdapter(data);
+
+                }else {
+
+
+                    ArrayList<HashMap<String, String>> catdata = dbHelper.GetCategoryImageData(selectedItem);
+                    // listView.setAdapter(new CustomAdapter(this,catdata));
+                    SetcatAdapter(catdata);
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    upload=(ImageView)findViewById(R.id.upload);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent (Stream.this, Upload.class) );
+                finish();
+            }
+        });
+    profile=(ImageView)findViewById(R.id.profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Stream.this,Profile.class));
+                finish();
+            }
+        });
+
+
+    }
+
+
+    public void SetcatAdapter(ArrayList<HashMap<String,String>> cat){
+
+
+        listView.setAdapter(new CustomAdapter(this,cat));
 
 
     }

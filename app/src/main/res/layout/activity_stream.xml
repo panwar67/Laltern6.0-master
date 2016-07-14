@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/categories"
                 android:spinnerMode="dropdown"
+                        android:id="@+id/catspin"
                 android:layout_centerHorizontal="true">
             </Spinner>
 
@@ -62,47 +63,6 @@
 
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        >
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@android:color/transparent">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Scaned Card"
-                android:layout_gravity="center"
-                android:src="@drawable/logo"
-                android:gravity="top"
-                />
-
-
-
-
-
-
-
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/categories"
-                android:spinnerMode="dropdown"
-                android:layout_centerHorizontal="true">
-            </Spinner>
-
-        </LinearLayout>
-    </android.support.v7.widget.Toolbar>
 
 
 

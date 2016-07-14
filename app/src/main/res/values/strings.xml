@@ -96,7 +96,9 @@
     <string name="title_activity_search">Search</string>
 
     <string-array name="categories">
-       <item>
+
+        <item>All</item>
+        <item>
            category1
        </item>
         <item>
@@ -105,19 +107,10 @@
         <item>
             category3
         </item>
-        <item>
-            categry4
-        </item>
-        <item>
-            category5
-        </item>
-        <item>
-            category6
-        </item>
-        <item>
-            category7
-        </item>
+
     </string-array>
     <string name="title_activity_product_view">ProductView</string>
+    <string name="title_activity_upload">Upload</string>
+    <string name="title_activity_profile">Profile</string>
 </resources>
 

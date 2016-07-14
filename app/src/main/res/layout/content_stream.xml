@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sparsh23.laltern.Stream"
     tools:showIn="@layout/activity_stream"
     android:orientation="vertical">
@@ -16,34 +16,28 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:fitsSystemWindows="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"/>
-
-
-</LinearLayout>
-
-
-
     <LinearLayout
+        android:layout_above="@+id/layoutmenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:id="@+id/layoutlist1">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:fitsSystemWindows="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" />
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginTop="50dp"
-        android:background="#ACACAC" />
+    </LinearLayout>
+
+
+
+
+
+
+
 
 
 
@@ -53,6 +47,9 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="horizontal"
         android:background="#fff"
 
+
+        android:id="@+id/layoutmenu"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:gravity="fill_horizontal">
 
@@ -71,7 +68,10 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/feeds"/>
+                android:background="@drawable/feeds"
+                android:id="@+id/feed"
+                />
+
 
             <TextView
 
@@ -136,7 +136,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:id="@+id/more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="More"
+                android:text="Upload"
                 android:letterSpacing="0.1"
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
@@ -165,7 +165,7 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:id="@+id/que"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profile"
+                android:text="Query"
                 android:letterSpacing="0.1"
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
@@ -210,10 +210,10 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
 
     </LinearLayout>
-    </LinearLayout>
 
 
 
 
 
-</FrameLayout>
+
+</RelativeLayout>

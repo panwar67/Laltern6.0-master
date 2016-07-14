@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,6 +70,8 @@ public class CustomAdapter extends BaseAdapter{
 
 
     }
+
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub

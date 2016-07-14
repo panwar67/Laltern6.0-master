@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sparsh23.laltern.Stream"
-    tools:showIn="@layout/activity_search"
+    tools:showIn="@layout/activity_upload"
     android:orientation="vertical">
 
 
@@ -20,15 +20,26 @@
         android:layout_above="@+id/layoutmenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layoutlist1">
-        <ListView
+        android:id="@+id/layoutlist1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            />
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:fitsSystemWindows="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1" />
-
+            android:hint="submit your query"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/upload_submit"
+            android:layout_gravity="center"
+            android:text="Submit"
+            />
 
     </LinearLayout>
 
@@ -68,8 +79,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:id="@+id/feed"
-                android:background="@drawable/feeds"/>
+                android:background="@drawable/feeds"
+                android:id="@+id/feed"/>
 
             <TextView
 
@@ -91,7 +102,6 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:background="#007AFF"
             android:id="@+id/album">
 
             <ImageView
@@ -112,9 +122,7 @@
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
-
-                android:textColor="#fff"
-                />
+                android:textColor="#000"/>
 
         </LinearLayout>
 
@@ -123,7 +131,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="#007AFF">
 
             <ImageView
 
@@ -143,7 +152,8 @@
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
-                android:textColor="#000"/>
+
+                android:textColor="#fff"/>
 
         </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
@@ -17,26 +18,16 @@ import java.util.HashMap;
 
 public class ProductView extends AppCompatActivity {
 
+    TextView title , des, quan, price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
         SliderLayout sliderShow = (SliderLayout) findViewById(R.id.slider);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-
-            }
-        });
 
         Intent intent = getIntent();
         HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("map");
@@ -65,6 +56,22 @@ public class ProductView extends AppCompatActivity {
 
 
         }
+
+        title = (TextView)findViewById(R.id.headerpro);
+        des = (TextView)findViewById(R.id.descriptionpartpro);
+        quan = (TextView)findViewById(R.id.quantitypro);
+        price = (TextView)findViewById(R.id.pricepro);
+
+        price.setText(data.get("price"));
+        des.setText(data.get("des"));
+        quan.setText(data.get("quantity"));
+        title.setText(data.get("title"));
+
+
+
+
+
+
 
 
 

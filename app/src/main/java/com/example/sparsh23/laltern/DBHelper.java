@@ -98,6 +98,49 @@ public class DBHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public ArrayList<HashMap<String,String>> GetCategoryImageData(String query) {
+
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+query+"';", null);
+
+        res.moveToFirst();
+        while (res.isAfterLast() == false) {
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+
+
+            String uid = res.getString(res.getColumnIndex("UID"));
+
+
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
+            String type =res.getString(res.getColumnIndex("TYPE"));
+
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("des",des);
+            map.put("title", title);
+            map.put("price",price);
+            map.put("type",type);
+            map.put("quantity",quantity);
+            map.put("NOIMAGES", String.valueOf(nopic));
+
+
+
+            data.add(map);
+            res.moveToNext();
+        }
+
+        return data;
+    }
+
+
+
+
 
 
     public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category)
