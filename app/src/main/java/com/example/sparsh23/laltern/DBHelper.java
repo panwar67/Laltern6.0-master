@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.ContentValues;
-        import android.content.Context;
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.util.Log;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -31,7 +32,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
 
-        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text  )");
+        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, TAGS text )");
+        db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text)");
 
 
     }
@@ -67,44 +69,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from ImageData where TITLE LIKE '%"+query+"%';", null);
 
         res.moveToFirst();
-         while (res.isAfterLast() == false) {
-            HashMap<String, String> map = new HashMap<String, String>();
-            String path = res.getString(res.getColumnIndex("PATH"));
-
-
-            String uid = res.getString(res.getColumnIndex("UID"));
-
-
-             String des = res.getString(res.getColumnIndex("DES"));
-             String title = res.getString(res.getColumnIndex("TITLE"));
-             String price = res.getString(res.getColumnIndex("PRICE"));
-             String quantity = res.getString(res.getColumnIndex("QUANTITY"));
-             int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
-
-             map.put("uid",uid);
-             map.put("path",path);
-             map.put("des",des);
-             map.put("title", title);
-             map.put("price",price);
-             map.put("quantity",quantity);
-             map.put("NOIMAGES", String.valueOf(nopic));
-
-
-
-             data.add(map);
-             res.moveToNext();
-        }
-
-        return data;
-    }
-
-    public ArrayList<HashMap<String,String>> GetCategoryImageData(String query) {
-
-        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+query+"';", null);
-
-        res.moveToFirst();
         while (res.isAfterLast() == false) {
             HashMap<String, String> map = new HashMap<String, String>();
             String path = res.getString(res.getColumnIndex("PATH"));
@@ -118,14 +82,12 @@ public class DBHelper extends SQLiteOpenHelper {
             String price = res.getString(res.getColumnIndex("PRICE"));
             String quantity = res.getString(res.getColumnIndex("QUANTITY"));
             int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
-            String type =res.getString(res.getColumnIndex("TYPE"));
 
             map.put("uid",uid);
             map.put("path",path);
             map.put("des",des);
             map.put("title", title);
             map.put("price",price);
-            map.put("type",type);
             map.put("quantity",quantity);
             map.put("NOIMAGES", String.valueOf(nopic));
 
@@ -137,9 +99,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return data;
     }
-
-
-
 
 
 
@@ -164,7 +123,63 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public boolean InsertProfileData (String uid, String name, String comp, String design, String tob, String cont, String email, String addr,
+                                      String city,
+                                      String state, String pan, String webs)
 
+    {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Profile_Strut.Name, name);
+        contentValues.put(Profile_Strut.Comp_Name, comp);
+        contentValues.put(Profile_Strut.Designation, design);
+        contentValues.put(Profile_Strut.ToB, tob);
+        contentValues.put(Profile_Strut.Cont, cont);
+        contentValues.put(Profile_Strut.Email, email);
+        contentValues.put(Profile_Strut.Addr, addr);
+        contentValues.put(Profile_Strut.City,city);
+        contentValues.put(Profile_Strut.State,state);
+        contentValues.put(Profile_Strut.Pan,pan);
+        contentValues.put(Profile_Strut.Uid, uid);
+        contentValues.put(Profile_Strut.Web, webs);
+        long row = db.insertWithOnConflict(Profile_Strut.Table_Name,null,contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+        Log.d("Profile Data", String.valueOf(row)+"inserted");
+        return  true;
+    }
+
+
+    public HashMap<String,String> GetProfile()
+    {
+
+        HashMap<String,String> map = new HashMap<String, String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from "+Profile_Strut.Table_Name, null);
+        res.moveToFirst();
+        while (!res.isAfterLast())
+        {
+
+            map.put("name",res.getString(res.getColumnIndex(Profile_Strut.Name)));
+            map.put("comp",res.getString(res.getColumnIndex(Profile_Strut.Comp_Name)));
+            map.put("design",res.getString(res.getColumnIndex(Profile_Strut.Designation)));
+            map.put("tob",res.getString(res.getColumnIndex(Profile_Strut.ToB)));
+            map.put("cont",res.getString(res.getColumnIndex(Profile_Strut.Cont)));
+            map.put("email",res.getString(res.getColumnIndex(Profile_Strut.Email)));
+            map.put("addr",res.getString(res.getColumnIndex(Profile_Strut.Addr)));
+            map.put("city",res.getString(res.getColumnIndex(Profile_Strut.City)));
+            map.put("state",res.getString(res.getColumnIndex(Profile_Strut.State)));
+            map.put("pan",res.getString(res.getColumnIndex(Profile_Strut.Pan)));
+            map.put("uid",res.getString(res.getColumnIndex(Profile_Strut.Uid)));
+            map.put("web",res.getString(res.getColumnIndex(Profile_Strut.Web)));
+
+            Log.d("Profile fetching uid","" +res.getString(res.getColumnIndex(Profile_Strut.Uid)));
+
+            res.moveToNext();
+        }
+
+        return map;
+
+    }
 
     public ArrayList<HashMap<String,String>> getimageData()
     {
