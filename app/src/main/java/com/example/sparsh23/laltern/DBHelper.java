@@ -232,4 +232,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public ArrayList<HashMap<String,String>> GetCategoryImageData(String selectedItem) {
+    return null;
+    }
 }
