@@ -82,8 +82,6 @@ public class Update extends AppCompatActivity {
                                 }
                                 Log.d("Image data", s);
 
-
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

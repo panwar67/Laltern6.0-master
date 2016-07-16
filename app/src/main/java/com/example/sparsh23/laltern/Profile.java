@@ -14,7 +14,8 @@ public class Profile extends AppCompatActivity {
     ImageView search;
     ImageView upload;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -43,6 +44,12 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+
+
+
     }
 
 }
