@@ -11,6 +11,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sparsh23.laltern.ProfileForm"
     tools:showIn="@layout/activity_profile_form">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,8 +94,23 @@
             android:hint="Enter Your City"
             android:id="@+id/city"
             />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Enter password"
+            android:id="@+id/pass"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:id="@+id/cnfrmpass"
+            />
 
     </LinearLayout>
 
+</ScrollView>
 
 </RelativeLayout>
