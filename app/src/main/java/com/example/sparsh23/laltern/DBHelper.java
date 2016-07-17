@@ -62,6 +62,15 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+
+
+    public boolean InitProfile(){
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DELETE FROM PROFILE");
+        return true;
+    }
+
     public ArrayList<HashMap<String,String>> GetSearchImageData(String query) {
 
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
@@ -89,7 +98,7 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("title", title);
             map.put("price",price);
             map.put("quantity",quantity);
-            map.put("NOIMAGES", String.valueOf(nopic));
+            map.put("noimages", String.valueOf(nopic));
 
 
 
@@ -233,6 +242,43 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public ArrayList<HashMap<String,String>> GetCategoryImageData(String selectedItem) {
-    return null;
+
+
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ImageData where CATEGORY ='"+selectedItem+"';", null);
+
+        res.moveToFirst();
+        while (res.isAfterLast() == false)
+        {
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+
+
+            String uid = res.getString(res.getColumnIndex("UID"));
+
+
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
+
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("des",des);
+            map.put("title", title);
+            map.put("price",price);
+            map.put("quantity",quantity);
+            map.put("noimages", String.valueOf(nopic));
+
+
+
+            data.add(map);
+            res.moveToNext();
+        }
+
+        return data;
+
     }
 }

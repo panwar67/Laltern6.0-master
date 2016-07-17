@@ -9,15 +9,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Profile extends AppCompatActivity {
     ImageView stream;
     ImageView search;
     ImageView upload;
+    DBHelper dbHelper;
+    HashMap<String,String> data = new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        dbHelper = new DBHelper(getApplicationContext());
 
 
         stream=(ImageView)findViewById(R.id.feed);
@@ -46,6 +52,7 @@ public class Profile extends AppCompatActivity {
         });
 
 
+        data  = dbHelper.GetProfile();
 
 
 
