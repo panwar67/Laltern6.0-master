@@ -195,7 +195,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from ImageData ", null);
+        Cursor res = db.rawQuery("select * from ImageData order by UID desc", null);
         res.moveToFirst();
         String pass = null;
         while (res.isAfterLast() == false)

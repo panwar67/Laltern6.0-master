@@ -35,6 +35,7 @@ public class ProfileForm extends AppCompatActivity {
 
     String DOWN_URL="http://www.whydoweplay.com/lalten/reguser.php";
     EditText name,company,desg,bustype,addrs,cont,pan,email,webs,state,city,uid,pass,cnfrmpass;
+    SessionManager sessionManager;
 
 
     public void initvalue()
@@ -83,11 +84,33 @@ public class ProfileForm extends AppCompatActivity {
     public void upload_data(final String name, final String company, final String webs, final String desg, final String bustype, final String addrs, final String cont, final String pan,
                             final String email, final String state, final String city,final String pass)
     {
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting Your Data...","Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(this,"Registering User...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+
+
+
+                        if(s!=null){
+
+                            if(s.equals("Uploaded")){
+
+
+                                sessionManager.createLoginSession(email,pass);
+                                startActivity(new Intent(ProfileForm.this,Update.class));
+                                finish();
+
+
+
+                            }else if(s.equals("failed")){
+
+                                Toast.makeText(getApplicationContext(),"Email id already exists",Toast.LENGTH_LONG).show();
+
+                            }
+
+
+                        }
 
 
                         Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_SHORT).show();
@@ -144,6 +167,7 @@ public class ProfileForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_form);
         initvalue();
+        sessionManager = new SessionManager(getApplicationContext());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
