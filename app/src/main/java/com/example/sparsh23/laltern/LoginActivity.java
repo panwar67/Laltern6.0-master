@@ -335,6 +335,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 startActivity(new Intent(LoginActivity.this,Update.class));
                                 finish();
                             }
+
+                            else
+                            if (s.equals("Incorrent Credentials"))
+                            {
+
+                                Toast.makeText(getApplicationContext(),""+s,Toast.LENGTH_SHORT).show();
+
+
+
+                            }
                             Toast.makeText(getApplicationContext(),""+s,Toast.LENGTH_SHORT).show();
                                                  }
 
