@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +21,33 @@ public class Profile extends AppCompatActivity {
     DBHelper dbHelper;
     HashMap<String,String> data = new HashMap<String, String>();
     TextView name, company, desig, tob, addr, cont, pan, email, webs, state, city;
+    Button logout;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        name=(TextView)findViewById(R.id.reg_name);
+        company=(TextView)findViewById(R.id.reg_comp);
+        desig=(TextView)findViewById(R.id.reg_desg);
+        tob=(TextView)findViewById(R.id.reg_bustype);
+        addr=(TextView)findViewById(R.id.reg_addr);
+        cont=(TextView)findViewById(R.id.reg_cont);
+        pan=(TextView)findViewById(R.id.reg_pan);
+        email=(TextView)findViewById(R.id.reg_email);
+        webs=(TextView)findViewById(R.id.reg_webs);
+        state=(TextView)findViewById(R.id.reg_state);
+        city=(TextView)findViewById(R.id.reg_city);
+        logout=(Button)findViewById(R.id.logout);
+        sessionManager=new SessionManager(getApplicationContext());
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManager.logoutUser();
+                startActivity(new Intent(Profile.this,LoginActivity.class));
+                finish();
+            }
+        });
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         dbHelper = new DBHelper(getApplicationContext());
