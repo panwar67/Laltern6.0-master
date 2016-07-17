@@ -87,6 +87,8 @@ public class Update extends AppCompatActivity {
                                     String state = details.getString("STATE");
                                     String web = details.getString("WEBS");
 
+                                    dbHelper.InitProfile();
+
 
 
                                     dbHelper.InsertProfileData(uid,name,comp,design,tob,cont,email,addr,city,state,pan,web);

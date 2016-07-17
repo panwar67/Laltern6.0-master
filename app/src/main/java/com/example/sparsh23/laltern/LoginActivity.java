@@ -83,6 +83,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
         sessionManager = new SessionManager(getApplicationContext());
 
+        if(sessionManager.isLoggedIn()){
+
+            startActivity(new Intent(LoginActivity.this,Update.class));
+            finish();
+
+        }
+
+
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

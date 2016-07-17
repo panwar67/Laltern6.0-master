@@ -19,6 +19,7 @@ public class Profile extends AppCompatActivity {
     ImageView search;
     ImageView upload;
     DBHelper dbHelper;
+
     HashMap<String,String> data = new HashMap<String, String>();
     TextView name, company, desig, tob, addr, cont, pan, email, webs, state, city;
     Button logout;
@@ -43,6 +44,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sessionManager.logoutUser();
+                dbHelper.InitProfile();
                 startActivity(new Intent(Profile.this,LoginActivity.class));
                 finish();
             }
@@ -51,6 +53,10 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         dbHelper = new DBHelper(getApplicationContext());
+
+
+
+
 
 
         stream=(ImageView)findViewById(R.id.feed);
@@ -80,6 +86,22 @@ public class Profile extends AppCompatActivity {
 
 
         data  = dbHelper.GetProfile();
+
+        webs.setText(data.get("web").toString());
+        name.setText(data.get("name").toString());
+        company.setText(data.get("comp").toString());
+        desig.setText(data.get("design").toString());
+        tob.setText(data.get("tob").toString());
+        cont.setText(data.get("cont").toString());
+        email.setText(data.get("email").toString());
+        addr.setText(data.get("addr").toString());
+        city.setText(data.get("city").toString());
+        state.setText(data.get("state").toString());
+        pan.setText(data.get("pan").toString());
+
+
+
+
 
 
 

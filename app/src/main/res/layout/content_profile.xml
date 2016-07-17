@@ -332,7 +332,7 @@
             android:text="Log Out"
             android:id="@+id/logout"
             android:layout_marginTop="20dp"
-            />
+            android:background="#ffffff" />
 
 
     </LinearLayout>
