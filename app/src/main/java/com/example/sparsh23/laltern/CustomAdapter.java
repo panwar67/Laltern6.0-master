@@ -40,27 +40,27 @@ public class CustomAdapter extends BaseAdapter{
         result=imagesdata;
         context=mainActivity;
 
+        //imageLoader.destroy();
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-        options = new DisplayImageOptions.Builder()
-                .cacheOnDisk(true)
-                .cacheInMemory(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .resetViewBeforeLoading(true)
-                .build();
+      //  options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY).resetViewBeforeLoading(true).build();
         ImageLoaderConfiguration.Builder config1 = new ImageLoaderConfiguration.Builder(context);
-        config1.defaultDisplayImageOptions(options);
+        //config1.defaultDisplayImageOptions(options);
         config1.threadPriority(Thread.NORM_PRIORITY - 2);
         config1.denyCacheImageMultipleSizesInMemory();
         config1.diskCacheFileNameGenerator(new Md5FileNameGenerator());
         config1.diskCacheSize(50 * 1024 * 1024); // 50 MiB
         config1.tasksProcessingOrder(QueueProcessingType.LIFO);
         config1.writeDebugLogs();
-        imageLoader= ImageLoader.getInstance();
-        imageLoader.init(config1.build());
+
+
+
+            imageLoader = ImageLoader.getInstance();
+//        imageLoader.destroy();
+            imageLoader.init(config1.build());
+
 
 
 

@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
 
-        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, TAGS text )");
+        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text )");
         db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text)");
 
 
@@ -195,7 +195,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from ImageData order by UID desc", null);
+        Cursor res = db.rawQuery("select * from ImageData", null);
         res.moveToFirst();
         String pass = null;
         while (res.isAfterLast() == false)
@@ -211,6 +211,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String price = res.getString(res.getColumnIndex("PRICE"));
             String noimages = res.getString(res.getColumnIndex("NOIMAGES"));
             String type = res.getString(res.getColumnIndex("TYPE"));
+
+            Log.d("Image Data", ""+uid);
 
             map.put("uid",uid);
             map.put("path",path);

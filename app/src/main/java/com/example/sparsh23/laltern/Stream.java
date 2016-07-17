@@ -41,7 +41,7 @@ public class Stream extends AppCompatActivity {
         search = (ImageView)findViewById(R.id.search);
         data = dbHelper.getimageData();
         listView = (ListView)findViewById(R.id.listView);
-        listView.setAdapter(new CustomAdapter(this,data));
+       // listView.setAdapter(new CustomAdapter(this,data));
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override

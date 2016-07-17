@@ -27,6 +27,12 @@ public class Profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+
         name=(TextView)findViewById(R.id.reg_name);
         company=(TextView)findViewById(R.id.reg_comp);
         desig=(TextView)findViewById(R.id.reg_desg);
@@ -50,8 +56,6 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
         dbHelper = new DBHelper(getApplicationContext());
 
 
