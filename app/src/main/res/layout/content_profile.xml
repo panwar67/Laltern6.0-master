@@ -12,7 +12,9 @@
 
 
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
 
@@ -23,16 +25,319 @@
         android:id="@+id/layoutlist1"
         android:orientation="vertical">
 
-        <ImageView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/name_layout"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+
+                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Name: "
+            android:id="@+id/name1"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="abc"
+                android:id="@+id/reg_name"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/comp_layout"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Company: "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_comp"
+                android:text="company"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/desg_layout"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Designation: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_desg"
+                android:text="designation"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/cmptype"
+            >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Bussiness Type: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_bustype"
+                android:text="Bussiness type"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/addr_layout"
+            >
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="20dp"
+             android:layout_marginTop="20dp"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Address: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_addr"
+                android:text="Address"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/cont_layout"
+            >
+
+         <ImageView
+             android:layout_width="100dp"
+             android:layout_height="20dp"
+             android:layout_marginTop="20dp"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Contact Number: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_cont"
+                android:text="Contact number"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/pan_layout"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="PAN Card Number: "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_pan"
+                android:text="pan number"
+                />
+
+        </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:id="@+id/email_layout"
+           >
+
+           <ImageView
+               android:layout_width="100dp"
+               android:layout_height="20dp"
+               android:layout_marginTop="20dp"
+               />
+
+           <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Email-ID: "
+            />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="20dp"
+               android:layout_marginTop="20dp"
+               android:id="@+id/reg_email"
+               android:text="email id"
+               />
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/webs_layout"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"/>
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Website: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_webs"
+                android:text="website"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/state_layout"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                />
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="State: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_state"
+                android:text="State"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/city_layout"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"/>
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:text="City: "
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/reg_city"
+                android:text="city"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="Log Out"
+            android:id="@+id/logout"
+            android:layout_marginTop="20dp"
             />
 
 
     </LinearLayout>
 
-
+    </ScrollView>
 
 
 
@@ -211,6 +516,7 @@
 
 
     </LinearLayout>
+
 
 
 
