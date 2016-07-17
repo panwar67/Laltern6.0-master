@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public String DOWN_URL = "";
 
 
-    private UserLoginTask mAuthTask = null;
+  
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -153,9 +154,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -194,14 +192,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+            LogInUser(email,password);
+
         }
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isPasswordValid(String password) {
@@ -310,10 +309,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
 
-    public boolean setUpProfile(){
+    public boolean LogInUser(String email, String pass){
 
         //Showing the progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting Your Data...","Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(this,"Logging In User...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -350,7 +349,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(Update.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
