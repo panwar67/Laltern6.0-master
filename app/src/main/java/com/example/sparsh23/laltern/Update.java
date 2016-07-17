@@ -27,24 +27,54 @@ public class Update extends AppCompatActivity {
 
     DBHelper dbHelper;
     String DOWN_URL = "http://www.whydoweplay.com/lalten/GetImages.php";
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         dbHelper = new DBHelper(getApplicationContext());
+        sessionManager = new SessionManager(getApplicationContext());
 
-        setUpProfile();
+        setUpStream();
+        ProfileSetup();
 
 
 
 
     }
 
-    public boolean setUpProfile(){
+
+    public boolean ProfileSetup(){
+
+
+
+
+
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public boolean setUpStream(){
 
         //Showing the progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting Your Data...","Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(this,"Getting Image Data...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL,
                 new Response.Listener<String>() {
                     @Override

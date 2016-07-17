@@ -47,6 +47,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+        sessionManager = new SessionManager(getApplicationContext());
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -309,7 +312,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
 
-    public boolean LogInUser(String email, String pass){
+    public boolean LogInUser(final String email, final String pass){
 
         //Showing the progress dialog
         final ProgressDialog loading = ProgressDialog.show(this,"Logging In User...","Please wait...",false,false);
@@ -319,26 +322,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void onResponse(String s) {
 
 
+                        loading.dismiss();
+
+
                         if (s!=null)
                         {
 
+                            if(s.equals("Valid"))
 
+                            {
+                                sessionManager.createLoginSession(email,pass);
+                                startActivity(new Intent(LoginActivity.this,Update.class));
+                                finish();
+                            }
                             Toast.makeText(getApplicationContext(),""+s,Toast.LENGTH_SHORT).show();
-
-
-
-                            startActivity(new Intent( LoginActivity.this,Stream.class));
-                            finish();
-
-
-                        }
+                                                 }
 
 
 
 
 
                         //Disimissing the progress dialog
-                        loading.dismiss();
+
                         //Showing toast message of the response
                     }
                 },
@@ -353,11 +358,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                 }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError
+
+
+            {
                 //Converting Bitmap to String
 
 
                 HashMap<String,String> Keyvalue = new HashMap<String,String>();
+                Keyvalue.put("email", email);
+                Keyvalue.put("pass",pass);
+
+
 
 
                 //returning parameters
