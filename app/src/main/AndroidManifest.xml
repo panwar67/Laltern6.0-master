@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Update"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Stream"
             android:label="@string/lalternstream"
@@ -39,7 +39,6 @@
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
-
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".SetupProfile"
@@ -47,13 +46,11 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-
-        </activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".ProfileForm"
             android:label="@string/title_activity_profile_form"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Category_page"
             android:label="@string/title_activity_category_page"
@@ -63,8 +60,27 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".Jewelry_Category"
+            android:label="@string/title_activity_jewelry__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Accessories_Category"
+            android:label="@string/title_activity_accessories__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Sarees_Category"
+            android:label="@string/title_activity_sarees__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Apparel_Category"
+            android:label="@string/title_activity_apparel__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Home_Texile_Category"
+            android:label="@string/title_activity_home__texile__category"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

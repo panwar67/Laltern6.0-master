@@ -129,5 +129,10 @@
     </string>
     <string name="title_activity_profile_form">ProfileForm</string>
     <string name="title_activity_category_page">Category_page</string>
+    <string name="title_activity_jewelry__category">Jewelry_Category</string>
+    <string name="title_activity_accessories__category">Accessories_Category</string>
+    <string name="title_activity_sarees__category">Sarees_Category</string>
+    <string name="title_activity_apparel__category">Apparel_Category</string>
+    <string name="title_activity_home__texile__category">Home_Texile_Category</string>
 </resources>
 
