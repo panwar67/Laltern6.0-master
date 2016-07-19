@@ -128,5 +128,6 @@
         completions."
     </string>
     <string name="title_activity_profile_form">ProfileForm</string>
+    <string name="title_activity_category_page">Category_page</string>
 </resources>
 
