@@ -29,11 +29,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
         // TODO Auto-generated method stub
 
-        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text )");
-        db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text)");
+        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text);");
+        db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text);");
+        db.execSQL("CREATE TABLE "+Artisian_Struct.Table_Name+" ( "+Artisian_Struct.name+" text, "+Artisian_Struct.state+" text, "+Artisian_Struct.craft+" text, "+Artisian_Struct.awards+" text, "+Artisian_Struct.description+" text, "+Artisian_Struct.tob+" text, "+Artisian_Struct.pics+" text, "+Artisian_Struct.noimg+" text, "+Artisian_Struct.authentic+" text, "+Artisian_Struct.price+" text);");
 
 
     }
@@ -211,6 +213,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String price = res.getString(res.getColumnIndex("PRICE"));
             String noimages = res.getString(res.getColumnIndex("NOIMAGES"));
             String type = res.getString(res.getColumnIndex("TYPE"));
+            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
+            String meta = res.getString(res.getColumnIndex("META"));
 
             Log.d("Image Data", ""+uid);
 
@@ -224,11 +228,55 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("price", price);
             map.put("noimages",noimages);
             map.put("type",type);
+            map.put("subcat",subcat);
+            map.put("meta",meta);
             data.add(map);
             res.moveToNext();
         }
         return data;
     }
+
+    public HashMap<String, String> getArtisian(String uid)
+    {
+        HashMap<String,String> map = new HashMap<String, String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from "+Artisian_Struct.Table_Name+" where "+Artisian_Struct.uid+"='"+uid+"';",null);
+        res.moveToFirst();
+        while (!res.isAfterLast())
+        {
+
+            String name = res.getString(res.getColumnIndex(Artisian_Struct.name));
+            String state =res.getString(res.getColumnIndex(Artisian_Struct.state));
+            String craft = res.getString(res.getColumnIndex(Artisian_Struct.craft));
+            String des = res.getString(res.getColumnIndex(Artisian_Struct.description));
+            String tob = res.getString(res.getColumnIndex(Artisian_Struct.tob));
+            String awards = res.getString(res.getColumnIndex(Artisian_Struct.awards));
+            String pic = res.getString(res.getColumnIndex(Artisian_Struct.pics));
+            String noimg = res.getString(res.getColumnIndex(Artisian_Struct.noimg));
+            String ArtUid = res.getString(res.getColumnIndex(Artisian_Struct.uid));
+            String authentic  = res.getString(res.getColumnIndex(Artisian_Struct.authentic));
+            String price = res.getString(res.getColumnIndex(Artisian_Struct.price));
+            String rating = res.getString(res.getColumnIndex(Artisian_Struct.ratings));
+            map.put("name",name);
+            map.put("state",state);
+            map.put("craft",craft);
+            map.put("des",des);
+            map.put("tob",tob);
+            map.put("awards",awards);
+            map.put("pic",pic);
+            map.put("noimg",noimg);
+            map.put("artuid",ArtUid);
+            map.put("authentic",authentic);
+            map.put("price",price);
+            map.put("rating",rating);
+
+            res.moveToNext();
+        }
+
+        return map;
+    }
+
 
 
 
@@ -283,4 +331,49 @@ public class DBHelper extends SQLiteOpenHelper {
         return data;
 
     }
+
+    public ArrayList<HashMap<String,String>> GetSubCategoryImageData(HashMap<String,String> selected) {
+
+
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        Cursor res = db.rawQuery("select * from ImageData where CATEGORY ='"+selected.get("category")+"' and SUBCAT='"+selected.get("subcat")+"';", null);
+
+        res.moveToFirst();
+        while (res.isAfterLast() == false)
+        {
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+            String uid = res.getString(res.getColumnIndex("UID"));
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
+            String type = res.getString(res.getColumnIndex("TYPE"));
+            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
+            String meta = res.getString(res.getColumnIndex("META"));
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("des",des);
+            map.put("title", title);
+            map.put("price",price);
+            map.put("quantity",quantity);
+            map.put("noimages", String.valueOf(nopic));
+            map.put("type",type);
+            map.put("subcat",subcat);
+            map.put("meta",meta);
+            data.add(map);
+            res.moveToNext();
+        }
+
+        return data;
+
+    }
+
+
+
+
 }

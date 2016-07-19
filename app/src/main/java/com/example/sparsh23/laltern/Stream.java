@@ -28,6 +28,7 @@ public class Stream extends AppCompatActivity {
     ImageView profile;
     DBHelper dbHelper;
     ListView listView;
+    HashMap<String,String> map = new HashMap<String, String>();
      ArrayList<HashMap<String,String>> data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,9 @@ public class Stream extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.catspin);
 
         search = (ImageView)findViewById(R.id.search);
-        data = dbHelper.getimageData();
+        data = dbHelper.GetSubCategoryImageData(map);
         listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(new CustomAdapter(this,data));
        // listView.setAdapter(new CustomAdapter(this,data));
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -71,38 +73,7 @@ public class Stream extends AppCompatActivity {
         });
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-
-
-
-
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),selectedItem,Toast.LENGTH_SHORT).show();
-
-
-                if(selectedItem.equals("All")){
-
-                    SetcatAdapter(data);
-
-                }else {
-
-
-                    ArrayList<HashMap<String, String>> catdata = dbHelper.GetCategoryImageData(selectedItem);
-                    // listView.setAdapter(new CustomAdapter(this,catdata));
-                    SetcatAdapter(catdata);
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
     upload=(ImageView)findViewById(R.id.upload);
         upload.setOnClickListener(new View.OnClickListener() {
