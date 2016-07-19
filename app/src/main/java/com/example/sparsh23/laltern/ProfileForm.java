@@ -91,10 +91,20 @@ public class ProfileForm extends AppCompatActivity {
                     public void onResponse(String s) {
 
 
+                        String res = s.replaceAll("\\s+","");
 
-                        if(s!=null){
 
-                            if(s.equals("Uploaded")){
+                        Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_LONG).show();
+
+                        Log.d("response",s.toString());
+
+
+
+
+
+                            if(res.equals("Uploaded"))
+
+                            {
 
 
                                 sessionManager.createLoginSession(email,pass);
@@ -103,18 +113,17 @@ public class ProfileForm extends AppCompatActivity {
 
 
 
-                            }else if(s.equals("failed")){
+                            }else if(res.equals("failed")){
 
                                 Toast.makeText(getApplicationContext(),"Email id already exists",Toast.LENGTH_LONG).show();
 
                             }
 
 
-                        }
 
 
-                        Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_SHORT).show();
-                        loading.dismiss();
+
+                      loading.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -176,8 +185,7 @@ public class ProfileForm extends AppCompatActivity {
 
 
                 valid();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
             }
         });
     }

@@ -60,6 +60,8 @@ public class Update extends AppCompatActivity {
                     public void onResponse(String s) {
 
 
+                        loading.dismiss();
+
                         if (s!=null)
                         {
 
@@ -101,8 +103,8 @@ public class Update extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            startActivity(new Intent( Update.this,Stream.class));
-                            finish();
+
+
 
 
                         }
@@ -112,7 +114,7 @@ public class Update extends AppCompatActivity {
 
 
                         //Disimissing the progress dialog
-                        loading.dismiss();
+
                         //Showing toast message of the response
                     }
                 },
@@ -184,6 +186,7 @@ public class Update extends AppCompatActivity {
                     public void onResponse(String s) {
 
 
+                        loading.dismiss();
                         if (s!=null)
                         {
 
@@ -221,6 +224,12 @@ public class Update extends AppCompatActivity {
 
 
 
+                            startActivity(new Intent( Update.this,Stream.class));
+                            finish();
+
+
+
+
 
                         }
 
@@ -229,7 +238,7 @@ public class Update extends AppCompatActivity {
 
 
                         //Disimissing the progress dialog
-                        loading.dismiss();
+
                         //Showing toast message of the response
                     }
                 },

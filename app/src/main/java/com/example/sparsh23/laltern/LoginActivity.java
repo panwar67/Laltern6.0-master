@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    public String DOWN_URL = "";
+    public String DOWN_URL = "http://www.whydoweplay.com/lalten/CheckLogin.php";
 
 
   
@@ -342,6 +342,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
                         loading.dismiss();
+                        Log.d("response", s.toString());
 
 
                         if (s!=null)
@@ -380,7 +381,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+
 
                         //Showing toast
                         Toast.makeText(LoginActivity.this, "Error In Connectivity", Toast.LENGTH_LONG).show();

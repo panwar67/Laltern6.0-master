@@ -19,13 +19,7 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_gravity="center_horizontal" />
+
 
     <ScrollView
         android:id="@+id/login_form"
