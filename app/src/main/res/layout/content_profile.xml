@@ -7,20 +7,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sparsh23.laltern.Stream"
     tools:showIn="@layout/activity_profile"
-
-    android:scrollbars="vertical"
-    android:nestedScrollingEnabled="true">
+    android:orientation="vertical">
 
 
 
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
 
     <LinearLayout
-
-
+        android:layout_above="@+id/layoutmenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layoutlist1"
@@ -326,12 +325,19 @@
 
         </LinearLayout>
 
-
-
-
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Log Out"
+            android:id="@+id/logout"
+            android:layout_marginTop="20dp"
+            android:background="#ffffff" />
 
 
     </LinearLayout>
+
+    </ScrollView>
 
 
 

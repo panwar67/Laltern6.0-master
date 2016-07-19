@@ -18,11 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Update"
-            android:screenOrientation="portrait">
-
-
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Stream"
             android:label="@string/lalternstream"
@@ -51,20 +47,22 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+            android:label="@string/title_activity_login">
 
         </activity>
         <activity
             android:name=".ProfileForm"
             android:label="@string/title_activity_profile_form"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".Category_page"
+            android:label="@string/title_activity_category_page"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>
