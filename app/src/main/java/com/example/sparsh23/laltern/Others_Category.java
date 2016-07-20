@@ -9,12 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Sarees_Category extends AppCompatActivity {
+public class Others_Category extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sarees__category);
+        setContentView(R.layout.activity_others__category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -27,31 +27,24 @@ public class Sarees_Category extends AppCompatActivity {
             }
         });
 
-        ImageView woven,printed,embroidery;
+        ImageView miscellaneous,wastepaper;
 
-        woven=(ImageView)findViewById(R.id.woven);
-        printed=(ImageView)findViewById(R.id.printed);
-        embroidery=(ImageView)findViewById(R.id.embriodery);
+        miscellaneous=(ImageView)findViewById(R.id.miscellaneouscrafts);
+        wastepaper=(ImageView)findViewById(R.id.wastepaperproducts);
 
-        woven.setOnClickListener(new View.OnClickListener() {
+        miscellaneous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Sarees_Category.this,Stream.class));
+                startActivity(new Intent(Others_Category.this,Stream.class));
             }
         });
 
-      printed.setOnClickListener(new View.OnClickListener() {
+        wastepaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Sarees_Category.this,Stream.class));
+                startActivity(new Intent(Others_Category.this,Stream.class));
             }
         });
+    }
 
-   embroidery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Sarees_Category.this,Stream.class));
-            }
-        });
-}
 }

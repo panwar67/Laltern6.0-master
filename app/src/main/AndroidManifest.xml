@@ -80,6 +80,18 @@
         <activity
             android:name=".Home_Texile_Category"
             android:label="@string/title_activity_home__texile__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Home_Decor_Category"
+            android:label="@string/title_activity_home__decor__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Paintings_Category"
+            android:label="@string/title_activity_paintings__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Others_Category"
+            android:label="@string/title_activity_others__category"
             android:theme="@style/AppTheme"></activity>
     </application>
 

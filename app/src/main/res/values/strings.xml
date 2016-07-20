@@ -134,5 +134,8 @@
     <string name="title_activity_sarees__category">Sarees_Category</string>
     <string name="title_activity_apparel__category">Apparel_Category</string>
     <string name="title_activity_home__texile__category">Home_Texile_Category</string>
+    <string name="title_activity_home__decor__category">Home_Decor_Category</string>
+    <string name="title_activity_paintings__category">Paintings_Category</string>
+    <string name="title_activity_others__category">Others_Category</string>
 </resources>
 

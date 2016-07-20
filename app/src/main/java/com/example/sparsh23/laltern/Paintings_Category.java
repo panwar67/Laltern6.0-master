@@ -9,12 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Home_Texile_Category extends AppCompatActivity {
+public class Paintings_Category extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home__texile__category);
+        setContentView(R.layout.activity_paintings__category);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -26,48 +26,54 @@ public class Home_Texile_Category extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        ImageView cushioncovers,rugsanddhurries,quilts,bedlinen,tableinen;
 
-        cushioncovers=(ImageView)findViewById(R.id.cushioncover);
-        rugsanddhurries=(ImageView)findViewById(R.id.rugsanddhurries);
-        quilts=(ImageView)findViewById(R.id.quilts);
-        bedlinen=(ImageView)findViewById(R.id.bedlilen);
-        tableinen=(ImageView)findViewById(R.id.tablelinen);
+        ImageView murals,madhubani,gond,sanjhi,mud;
 
-        cushioncovers.setOnClickListener(new View.OnClickListener() {
+        murals=(ImageView)findViewById(R.id.murals);
+        madhubani=(ImageView)findViewById(R.id.madhubani);
+        gond=(ImageView)findViewById(R.id.gond);
+        sanjhi=(ImageView)findViewById(R.id.sanji);
+        mud=(ImageView)findViewById(R.id.mudpaintings);
+
+        murals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                startActivity(new Intent(Paintings_Category.this,Stream.class));
             }
         });
 
-        rugsanddhurries.setOnClickListener(new View.OnClickListener() {
+        madhubani.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                startActivity(new Intent(Paintings_Category.this,Stream.class));
             }
         });
 
-        quilts.setOnClickListener(new View.OnClickListener() {
+        gond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                startActivity(new Intent(Paintings_Category.this,Stream.class));
             }
         });
 
-        bedlinen.setOnClickListener(new View.OnClickListener() {
+        sanjhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                startActivity(new Intent(Paintings_Category.this,Stream.class));
             }
         });
 
-        tableinen.setOnClickListener(new View.OnClickListener() {
+        mud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                startActivity(new Intent(Paintings_Category.this,Stream.class));
             }
         });
+
+
     }
 
-}
+
+    }
+
+
