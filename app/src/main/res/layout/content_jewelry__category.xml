@@ -30,6 +30,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -37,6 +40,9 @@
                     android:src="@drawable/terracotta"
                     />
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -53,6 +59,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -60,6 +69,9 @@
                     android:src="@drawable/metal"
                     />
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -77,6 +89,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -84,6 +99,9 @@
                     android:src="@drawable/jute"
                     />
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -100,6 +118,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -107,6 +128,9 @@
                     android:src="@drawable/dokra"
                     />
                 <ImageView
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
