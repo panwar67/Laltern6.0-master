@@ -21,20 +21,8 @@
         android:id="@+id/cat_layout"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:id="@+id/category"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CATEGORIES"
-                android:textAlignment="center"
-                />
 
-        </LinearLayout>
+
 
 
         <LinearLayout

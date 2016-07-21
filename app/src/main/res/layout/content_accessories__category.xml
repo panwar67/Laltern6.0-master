@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/footwear"
                 android:src="@drawable/footwear"
+
                 />
         </LinearLayout>
 
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/bag_belts"
                 android:src="@drawable/bagsandbelts"
+
                 />
         </LinearLayout>
         <LinearLayout
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tribal"
             android:src="@drawable/tribal"
+
             />
     </LinearLayout>
     </LinearLayout>

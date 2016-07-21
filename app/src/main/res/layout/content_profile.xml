@@ -50,6 +50,7 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
                 android:text="abc"
+                android:textStyle="bold"
                 android:id="@+id/reg_name"
                 />
 
@@ -75,6 +76,8 @@
                 android:text="Company: "
                 />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -100,6 +103,8 @@
             android:text="Designation: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -128,6 +133,8 @@
             android:text="Bussiness Type: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -156,6 +163,8 @@
             android:text="Address: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -183,6 +192,8 @@
             android:text="Contact Number: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -208,6 +219,8 @@
                 android:text="PAN Card Number: "
                 />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -236,6 +249,8 @@
             android:text="Email-ID: "
             />
            <TextView
+
+               android:textStyle="bold"
                android:layout_width="wrap_content"
                android:layout_height="20dp"
                android:layout_marginTop="20dp"
@@ -262,6 +277,8 @@
             android:text="Website: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -289,6 +306,8 @@
             android:text="State: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
@@ -316,6 +335,8 @@
             android:text="City: "
             />
             <TextView
+
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"

@@ -45,15 +45,17 @@ public class CustomAdapter extends BaseAdapter{
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-      //  options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY).resetViewBeforeLoading(true).build();
+       options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY).resetViewBeforeLoading(true).build();
         ImageLoaderConfiguration.Builder config1 = new ImageLoaderConfiguration.Builder(context);
-        //config1.defaultDisplayImageOptions(options);
+        config1.defaultDisplayImageOptions(options);
         config1.threadPriority(Thread.NORM_PRIORITY - 2);
         config1.denyCacheImageMultipleSizesInMemory();
         config1.diskCacheFileNameGenerator(new Md5FileNameGenerator());
-        config1.diskCacheSize(50 * 1024 * 1024); // 50 MiB
+        config1.diskCacheSize(100 * 1024 * 1024); // 50 MiB
         config1.tasksProcessingOrder(QueueProcessingType.LIFO);
         config1.writeDebugLogs();
+
+
 
 
 

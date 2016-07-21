@@ -31,11 +31,13 @@ public class Search extends AppCompatActivity {
 
         dbHelper = new DBHelper(getApplicationContext());
 
-        ArrayList<HashMap<String,String>> data = dbHelper.getimageData();
+
+
+
         final ListView listView = (ListView)findViewById(R.id.listView);
 
 
-         dbHelper=new DBHelper(getApplicationContext());
+
 
 
         final TextView searchtext=(TextView)findViewById(R.id.textsearch);

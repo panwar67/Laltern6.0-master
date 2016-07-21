@@ -9,25 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Accessories_Category extends AppCompatActivity {
+
+    ImageView footwear,bagandbelt,tribal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accessories__category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        ImageView footwear,bagandbelt,tribal;
 
         footwear=(ImageView)findViewById(R.id.footwear);
         bagandbelt=(ImageView)findViewById(R.id.bag_belts);
@@ -36,21 +29,41 @@ public class Accessories_Category extends AppCompatActivity {
         footwear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Accessories_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","accessories");
+                map.put("subcat","footwear");
+                Intent intent = new Intent(Accessories_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
+
             }
         });
 
         bagandbelt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Accessories_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","accessories");
+                map.put("subcat","bagandbelt");
+                Intent intent = new Intent(Accessories_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
+
             }
         });
 
         tribal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Accessories_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","accessories");
+                map.put("subcat","tribal");
+                Intent intent = new Intent(Accessories_Category.this,Stream.class) ;
+                intent.putExtra("map", map);
+                startActivity(intent);
+
             }
         });
 

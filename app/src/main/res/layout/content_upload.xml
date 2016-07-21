@@ -132,7 +132,7 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:background="#007AFF">
+            android:background="#37474f">
 
             <ImageView
 
@@ -153,7 +153,7 @@
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
 
-                android:textColor="#fff"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

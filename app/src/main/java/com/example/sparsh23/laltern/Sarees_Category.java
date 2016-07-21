@@ -9,25 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Sarees_Category extends AppCompatActivity {
+    ImageView woven,printed,embroidery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sarees__category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        ImageView woven,printed,embroidery;
 
         woven=(ImageView)findViewById(R.id.woven);
         printed=(ImageView)findViewById(R.id.printed);
@@ -36,21 +28,43 @@ public class Sarees_Category extends AppCompatActivity {
         woven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Sarees_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","sarees");
+                map.put("subcat","woven");
+                Intent intent = new Intent(Sarees_Category.this,Stream.class);
+
+                intent.putExtra("map", map);
+
+                startActivity(intent);
+
+
             }
         });
 
       printed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Sarees_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","sarees");
+                map.put("subcat","printed");
+                Intent intent = new Intent(Sarees_Category.this,Stream.class);
+                intent.putExtra("map", map);
+
+                startActivity(intent);
+
             }
         });
 
    embroidery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Sarees_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","sarees");
+                map.put("subcat","embroidery");
+                Intent intent = new Intent(Sarees_Category.this,Stream.class);
+                intent.putExtra("map", map);
+
+                startActivity(intent);
             }
         });
 }

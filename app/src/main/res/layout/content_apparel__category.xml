@@ -38,6 +38,7 @@
                     android:layout_weight="1"
                     android:id="@+id/kurta"
                     android:src="@drawable/kurta"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"
@@ -46,8 +47,9 @@
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:id="@+id/topsanddresses"
                     android:src="@drawable/topsanddresses"
+                    android:id="@+id/topsanddresses"
+
                     />
 
             </LinearLayout>
@@ -67,6 +69,7 @@
                     android:layout_weight="1"
                     android:id="@+id/pantsandskirts"
                     android:src="@drawable/pantsandskirts"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"
@@ -77,6 +80,7 @@
                     android:layout_weight="1"
                     android:id="@+id/jackets"
                     android:src="@drawable/jackets"
+
                     />
 
             </LinearLayout>
@@ -97,6 +101,7 @@
                     android:layout_weight="1"
                     android:id="@+id/fabrics"
                     android:src="@drawable/fabrics"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"
@@ -107,6 +112,7 @@
                     android:layout_weight="1"
                     android:id="@+id/dupatta"
                     android:src="@drawable/dupatta"
+
                     />
 
             </LinearLayout>
@@ -126,6 +132,7 @@
                     android:layout_weight="1"
                     android:id="@+id/stole"
                     android:src="@drawable/stole"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"
@@ -134,8 +141,9 @@
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:id="@+id/shawls"
                     android:src="@drawable/shwals"
+                    android:id="@+id/shawls"
+
                     />
 
             </LinearLayout>

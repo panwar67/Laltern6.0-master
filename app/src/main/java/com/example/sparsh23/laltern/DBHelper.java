@@ -19,7 +19,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "laltern.db";
+    public static final String DATABASE_NAME = "laltern1.db";
 
 
 
@@ -113,18 +113,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category)
+    public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category,String subcat, String meta)
 
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("UID", uid);
+        Log.d("category", subcat);
         contentValues.put("PRICE",price);
         contentValues.put("QUANTITY", quantity);
         contentValues.put("NOIMAGES", noimages);
         contentValues.put("TITLE", title);
         contentValues.put("TYPE",type);
         contentValues.put("CATEGORY",category);
+        contentValues.put("SUBCAT",subcat);
+        contentValues.put("META",meta);
         contentValues.put("DES", des);
         contentValues.put("OWN", own);
         contentValues.put("PATH", path);
@@ -199,8 +202,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from ImageData", null);
         res.moveToFirst();
-        String pass = null;
-        while (res.isAfterLast() == false)
+
+        while (!res.isAfterLast())
         {
             HashMap<String, String> map = new HashMap<String, String>();
             String path = res.getString(res.getColumnIndex("PATH"));
@@ -216,7 +219,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String subcat = res.getString(res.getColumnIndex("SUBCAT"));
             String meta = res.getString(res.getColumnIndex("META"));
 
-            Log.d("Image Data", ""+uid);
+            Log.d("SUBCAT Data", ""+subcat);
 
             map.put("uid",uid);
             map.put("path",path);
@@ -280,15 +283,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public Cursor Getprofiledata(){
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from PROFILE", null);
-
-        res.moveToFirst();
-//        cursor.moveToFirst();
-        return  res;
-    }
 
 
     public ArrayList<HashMap<String,String>> GetCategoryImageData(String selectedItem) {
@@ -296,24 +290,20 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from ImageData where CATEGORY ='"+selectedItem+"';", null);
+        Cursor res = db.rawQuery("select * from ImageData where SUBCAT like '"+selectedItem+"';", null);
 
         res.moveToFirst();
+        Log.d("cursor count",""+res.getCount());
         while (res.isAfterLast() == false)
         {
             HashMap<String, String> map = new HashMap<String, String>();
             String path = res.getString(res.getColumnIndex("PATH"));
-
-
             String uid = res.getString(res.getColumnIndex("UID"));
-
-
             String des = res.getString(res.getColumnIndex("DES"));
             String title = res.getString(res.getColumnIndex("TITLE"));
             String price = res.getString(res.getColumnIndex("PRICE"));
             String quantity = res.getString(res.getColumnIndex("QUANTITY"));
             int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
-
             map.put("uid",uid);
             map.put("path",path);
             map.put("des",des);
@@ -328,6 +318,7 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
 
+
         return data;
 
     }
@@ -337,12 +328,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.d("Sent Data",selected.toString());
+      //  db.query("sku_table", columns, "owner=? and price=?", new String[] { owner, price }, null, null, null);
 
-
-        Cursor res = db.rawQuery("select * from ImageData where CATEGORY ='"+selected.get("category")+"' and SUBCAT='"+selected.get("subcat")+"';", null);
-
+        String[]  col = {"PATH,UID,DES,TITLE,PRICE,QUANTITY,NOIMAGES,TYPE,SUBCAT,META"};
+        Cursor res = db.query("ImageData",col,"CATEGORY =? and SUBCAT =?", new String[] { selected.get("category"), selected.get("subcat") }, null, null, null);
+        //Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+selected.get("category")+"' and SUBCAT= '"+selected.get("subcat")+"';", null);
+        Log.d("category size", ""+res.getCount());
         res.moveToFirst();
-        while (res.isAfterLast() == false)
+        while (!res.isAfterLast())
         {
             HashMap<String, String> map = new HashMap<String, String>();
             String path = res.getString(res.getColumnIndex("PATH"));
@@ -353,6 +347,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String quantity = res.getString(res.getColumnIndex("QUANTITY"));
             int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
             String type = res.getString(res.getColumnIndex("TYPE"));
+
+            Log.d("category", selected.get("category"));
             String subcat = res.getString(res.getColumnIndex("SUBCAT"));
             String meta = res.getString(res.getColumnIndex("META"));
             map.put("uid",uid);

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -19,10 +20,13 @@ import java.util.HashMap;
 public class ProductView extends AppCompatActivity {
 
     TextView title , des, quan, price;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
+
+        button= (Button)findViewById(R.id.submitreq);
 
 
         SliderLayout sliderShow = (SliderLayout) findViewById(R.id.slider);
@@ -30,7 +34,7 @@ public class ProductView extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("map");
+        final HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("map");
 
         int noimg = Integer.parseInt(data.get("noimages"));
 
@@ -66,6 +70,18 @@ public class ProductView extends AppCompatActivity {
         des.setText(data.get("des"));
         quan.setText(data.get("quantity"));
         title.setText(data.get("title"));
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(ProductView.this,SubmitRequest.class);
+                intent1.putExtra("map",data);
+                startActivity(intent1);
+
+
+            }
+        });
 
 
 

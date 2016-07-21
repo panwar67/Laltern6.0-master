@@ -9,25 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Others_Category extends AppCompatActivity {
 
+    ImageView miscellaneous,wastepaper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_others__category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        ImageView miscellaneous,wastepaper;
+
 
         miscellaneous=(ImageView)findViewById(R.id.miscellaneouscrafts);
         wastepaper=(ImageView)findViewById(R.id.wastepaperproducts);
@@ -35,14 +27,25 @@ public class Others_Category extends AppCompatActivity {
         miscellaneous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Others_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","others");
+                map.put("subcat","miscellaneous");
+                Intent intent = new Intent(Others_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         wastepaper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Others_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","others");
+                map.put("subcat","wastepaper");
+                Intent intent = new Intent(Others_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
     }

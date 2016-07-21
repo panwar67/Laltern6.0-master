@@ -137,5 +137,6 @@
     <string name="title_activity_home__decor__category">Home_Decor_Category</string>
     <string name="title_activity_paintings__category">Paintings_Category</string>
     <string name="title_activity_others__category">Others_Category</string>
+    <string name="title_activity_submit_request">SubmitRequest</string>
 </resources>
 

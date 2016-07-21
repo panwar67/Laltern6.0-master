@@ -38,6 +38,7 @@
                     android:layout_weight="1"
                     android:id="@+id/Terracotta"
                     android:src="@drawable/terracotta"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"
@@ -48,6 +49,7 @@
                     android:layout_weight="1"
                     android:id="@+id/Silver"
                     android:src="@drawable/silver"
+
                     />
 
             </LinearLayout>
@@ -67,6 +69,7 @@
                     android:layout_weight="1"
                     android:id="@+id/Metal"
                     android:src="@drawable/metal"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"
@@ -97,6 +100,7 @@
                     android:layout_weight="1"
                     android:id="@+id/Jute"
                     android:src="@drawable/jute"
+
                     />
                 <ImageView
                     android:scaleType="fitXY"

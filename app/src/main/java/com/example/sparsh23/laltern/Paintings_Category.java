@@ -9,25 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Paintings_Category extends AppCompatActivity {
+
+    ImageView murals,madhubani,gond,sanjhi,mud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paintings__category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        ImageView murals,madhubani,gond,sanjhi,mud;
 
         murals=(ImageView)findViewById(R.id.murals);
         madhubani=(ImageView)findViewById(R.id.madhubani);
@@ -38,35 +31,67 @@ public class Paintings_Category extends AppCompatActivity {
         murals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Paintings_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","paintings");
+                map.put("subcat","murals");
+                Intent intent = new Intent(Paintings_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         madhubani.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Paintings_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","paintings");
+                map.put("subcat","madhubani");
+                Intent intent = new Intent(Paintings_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         gond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Paintings_Category.this,Stream.class));
-            }
+
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","paintings");
+                map.put("subcat","gond");
+                Intent intent = new Intent(Paintings_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
+
+                     }
         });
 
         sanjhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Paintings_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","paintings");
+                map.put("subcat","sanjhi");
+                Intent intent = new Intent(Paintings_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         mud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Paintings_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","paintings");
+                map.put("subcat","mud");
+                Intent intent = new Intent(Paintings_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 

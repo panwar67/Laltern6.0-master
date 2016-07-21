@@ -22,7 +22,6 @@ public class Stream extends AppCompatActivity {
 
 
 
-    Spinner spinner;
     ImageView search;
     ImageView upload;
     ImageView profile;
@@ -36,11 +35,11 @@ public class Stream extends AppCompatActivity {
         setContentView(R.layout.activity_stream);
 
         dbHelper = new DBHelper(getApplicationContext());
-
-        spinner = (Spinner)findViewById(R.id.catspin);
-
         search = (ImageView)findViewById(R.id.search);
-        data = dbHelper.GetSubCategoryImageData(map);
+
+        Intent intent = getIntent();
+        final HashMap<String, String> hashMap = (HashMap<String, String>)intent.getSerializableExtra("map");
+        data = dbHelper.GetSubCategoryImageData(hashMap);
         listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(new CustomAdapter(this,data));
        // listView.setAdapter(new CustomAdapter(this,data));
@@ -96,12 +95,10 @@ public class Stream extends AppCompatActivity {
     }
 
 
-    public void SetcatAdapter(ArrayList<HashMap<String,String>> cat){
-
-
-        listView.setAdapter(new CustomAdapter(this,cat));
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Stream.this,Category_page.class));
+        finish();
     }
-
 }

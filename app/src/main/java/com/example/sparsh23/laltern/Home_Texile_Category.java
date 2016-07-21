@@ -9,24 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Home_Texile_Category extends AppCompatActivity {
+
+
+    ImageView cushioncovers,rugsanddhurries,quilts,bedlinen,tableinen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__texile__category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        ImageView cushioncovers,rugsanddhurries,quilts,bedlinen,tableinen;
 
         cushioncovers=(ImageView)findViewById(R.id.cushioncover);
         rugsanddhurries=(ImageView)findViewById(R.id.rugsanddhurries);
@@ -37,35 +30,62 @@ public class Home_Texile_Category extends AppCompatActivity {
         cushioncovers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","hometextiles");
+                map.put("subcat","cushioncovers");
+                Intent intent = new Intent(Home_Texile_Category.this,Stream.class) ;
+                startActivity(intent);
+
             }
         });
 
         rugsanddhurries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
-            }
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","hometextiles");
+                map.put("subcat","rugsanddhurries");
+                Intent intent = new Intent(Home_Texile_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);    }
         });
 
         quilts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","hometextiles");
+                map.put("subcat","quilts");
+                Intent intent = new Intent(Home_Texile_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         bedlinen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","hometextiles");
+                map.put("subcat","bedlinen");
+                Intent intent = new Intent(Home_Texile_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         tableinen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home_Texile_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","hometextiles");
+                map.put("subcat","tableinen");
+                Intent intent = new Intent(Home_Texile_Category.this,Stream.class);
+
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
     }

@@ -9,25 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Apparel_Category extends AppCompatActivity {
+
+    ImageView kurta,topsanddresses,pantsandskirts,jackets,fabrics,dupatta,stole,shawls;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apparel__category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        ImageView kurta,topsanddresses,pantsandskirts,jackets,fabrics,dupatta,stole,shawls;
 
         kurta=(ImageView)findViewById(R.id.kurta);
         topsanddresses=(ImageView)findViewById(R.id.topsanddresses);
@@ -41,56 +34,107 @@ public class Apparel_Category extends AppCompatActivity {
         kurta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","kurta");
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                startActivity(intent);
             }
         });
 
         topsanddresses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","topsanddresses");
+
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                startActivity(intent);
             }
         });
 
         pantsandskirts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","pantsandskirts");
+
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                startActivity(intent);
             }
         });
 
         jackets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","jackets");
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                startActivity(intent);
             }
         });
 
         fabrics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","fabrics");
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         dupatta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","dupatta");
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
+
             }
         });
 
         stole.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","stole");
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
             }
         });
 
         shawls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Apparel_Category.this,Stream.class));
+
+
+                HashMap<String,String> map = new HashMap<String, String>();
+                map.put("category","apparel");
+                map.put("subcat","shawls");
+                Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map", map);
+                startActivity(intent);
+
             }
         });
 

@@ -211,9 +211,11 @@ public class Update extends AppCompatActivity {
                                     String noimage = details.getString("NOIMAGE");
                                     String type = details.getString("TYPE");
                                     String category = details.getString("CATEGORY");
+                                    String subcat = details.getString("SUBCAT");
+                                    String meta = details.getString("META");
 
 
-                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category);
+                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta);
 
                                 }
                                 Log.d("Image data", s);
@@ -224,7 +226,7 @@ public class Update extends AppCompatActivity {
 
 
 
-                            startActivity(new Intent( Update.this,Stream.class));
+                            startActivity(new Intent( Update.this,Category_page.class));
                             finish();
 
 
