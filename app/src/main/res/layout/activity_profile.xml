@@ -27,26 +27,36 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@android:color/transparent">
-                <ImageView
-                    android:layout_width="300dp"
-                    android:layout_height="50dp"
-                    android:text="Scaned Card"
-                    android:layout_gravity="center"
-                    android:src="@drawable/logo"
-                    android:gravity="top"
-                    />
+
                 <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-
-                    android:text="Log Out"
+                    android:layout_height="wrap_content"                    android:text="Log Out"
                     android:id="@+id/logout"
                     android:textColor="@color/white"
-
-
+                    android:layout_gravity="left"
                     android:background="#37474f"
                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PROFILE"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"/>
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:text="Scaned Card"
+                    android:layout_gravity="right"
+                    android:src="@drawable/logo"
+                    android:gravity="top"
+
+                    />
+
 
 
 

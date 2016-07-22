@@ -31,6 +31,7 @@ public class SubmitRequest extends AppCompatActivity {
     String DOWN_URL = "http://www.whydoweplay.com/lalten/InsertReq.php";
     SessionManager sessionManager;
     DBHelper dbHelper;
+    HashMap<String, String> hashMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,24 +40,10 @@ public class SubmitRequest extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
 
         Intent intent = getIntent();
-        final HashMap<String, String> hashMap = (HashMap<String, String>)intent.getSerializableExtra("map");
-
-
-
+         hashMap = (HashMap<String, String>)intent.getSerializableExtra("map");
         final EditText editText = (EditText)findViewById(R.id.desreq);
-
-
-
-
-
         final HashMap<String,String> map = sessionManager.getUserDetails();
-
         dbHelper.GetProfile().get("uid");
-
-
-
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,26 +54,17 @@ public class SubmitRequest extends AppCompatActivity {
                 String des = editText.getText().toString();
                 String prouid = hashMap.get("uid");
                 String useruid = dbHelper.GetProfile().get("uid");
+                Log.d("Request data ", ""+des+" pro "+prouid+"user "+useruid);
 
-                upload_data(prouid,useruid,des,map.get("path"));
-
-
-
-
-
-
-
-
-
-
-
-            }
+                upload_data(prouid,useruid,des,hashMap.get("path"));
+         }
         });
     }
 
 
 
     public void upload_data(final String prouid, final String buyuid, final String des, final String path)
+
     {
         final ProgressDialog loading = ProgressDialog.show(this,"Registering User...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL,
@@ -94,41 +72,7 @@ public class SubmitRequest extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
 
-
-                        String res = s.replaceAll("\\s+","");
-
-
-                        Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_LONG).show();
-
-                        Log.d("response",s.toString());
-
-
-
-
-
-                        if(res.equals("Uploaded"))
-
-                        {
-
-                            startActivity(new Intent(SubmitRequest.this,ProductView.class));
-                            finish();
-
-
-
-
-
-
-
-
-                        }else if(res.equals("failed")){
-
-                            Toast.makeText(getApplicationContext(),"Email id already exists",Toast.LENGTH_LONG).show();
-
-                        }
-
-
-
-
+                        Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_SHORT).show();
 
                         loading.dismiss();
                     }
@@ -139,8 +83,9 @@ public class SubmitRequest extends AppCompatActivity {
                         //Dismissing the progress dialog
                         loading.dismiss();
 
+
                         //Showing toast
-                        Toast.makeText(SubmitRequest.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SubmitRequest.this, "Error In Connectivity"+volleyError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -158,7 +103,8 @@ public class SubmitRequest extends AppCompatActivity {
                 Keyvalue.put("requid",uid);
                 Keyvalue.put("path",path);
 
-                //returning parameters
+
+
                 return Keyvalue;
             }
         };
@@ -174,7 +120,7 @@ public class SubmitRequest extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SubmitRequest.this,ProductView.class));
+        startActivity(new Intent(SubmitRequest.this,ProductView.class).putExtra("promap",hashMap));
         finish();
 
 

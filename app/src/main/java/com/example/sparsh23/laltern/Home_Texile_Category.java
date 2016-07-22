@@ -90,4 +90,11 @@ public class Home_Texile_Category extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Home_Texile_Category.this,Category_page.class));
+        finish();
+    }
+
 }

@@ -69,4 +69,10 @@ public class Accessories_Category extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Accessories_Category.this,Category_page.class));
+        finish();
+    }
 }

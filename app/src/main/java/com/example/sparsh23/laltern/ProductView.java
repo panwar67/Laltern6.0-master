@@ -34,7 +34,7 @@ public class ProductView extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("map");
+        final HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("promap");
 
         int noimg = Integer.parseInt(data.get("noimages"));
 

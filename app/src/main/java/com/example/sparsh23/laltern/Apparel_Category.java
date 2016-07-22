@@ -142,4 +142,11 @@ public class Apparel_Category extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Apparel_Category.this,Category_page.class));
+        finish();
+    }
+
 }

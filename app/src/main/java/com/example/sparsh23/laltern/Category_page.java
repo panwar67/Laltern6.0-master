@@ -39,7 +39,7 @@ public class Category_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Category_page.this,Jewelry_Category.class));
-                //finish();
+                finish();
             }
         });
 

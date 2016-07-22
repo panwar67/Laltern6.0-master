@@ -38,8 +38,8 @@ public class Stream extends AppCompatActivity {
         search = (ImageView)findViewById(R.id.search);
 
         Intent intent = getIntent();
-        final HashMap<String, String> hashMap = (HashMap<String, String>)intent.getSerializableExtra("map");
-        data = dbHelper.GetSubCategoryImageData(hashMap);
+        map = (HashMap<String, String>)intent.getSerializableExtra("map");
+        data = dbHelper.GetSubCategoryImageData(map);
         listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(new CustomAdapter(this,data));
        // listView.setAdapter(new CustomAdapter(this,data));
@@ -47,7 +47,7 @@ public class Stream extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Stream.this, Search.class));
+                startActivity(new Intent(Stream.this, Search.class).putExtra("map",map));
                 finish();
 
 
@@ -63,7 +63,7 @@ public class Stream extends AppCompatActivity {
                 preview = data.get(position);
                 Toast.makeText(getApplication(), "" + preview.get("title"), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Stream.this,ProductView.class);
-                intent.putExtra("map",preview);
+                intent.putExtra("promap",preview);
                 startActivity(intent);
 
 
@@ -78,7 +78,7 @@ public class Stream extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent (Stream.this, Upload.class) );
+                startActivity(new Intent (Stream.this, Upload.class).putExtra("map",map) );
                 finish();
             }
         });
@@ -86,7 +86,7 @@ public class Stream extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Stream.this,Profile.class));
+                startActivity(new Intent(Stream.this,Profile.class).putExtra("map",map));
                 finish();
             }
         });

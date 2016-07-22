@@ -20,6 +20,7 @@ public class Profile extends AppCompatActivity {
     ImageView upload;
     DBHelper dbHelper;
 
+    HashMap<String,String> map = new HashMap<String, String>();
     HashMap<String,String> data = new HashMap<String, String>();
     TextView name, company, desig, tob, addr, cont, pan, email, webs, state, city;
     Button logout;
@@ -28,6 +29,9 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
 
+
+        Intent intent = getIntent();
+        map = (HashMap<String, String>)intent.getSerializableExtra("map");
 
 
         super.onCreate(savedInstanceState);
@@ -67,7 +71,7 @@ public class Profile extends AppCompatActivity {
         stream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Stream.class));
+                startActivity(new Intent(Profile.this, Stream.class).putExtra("map",map));
                 finish();
             }
         });
@@ -75,7 +79,7 @@ public class Profile extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Upload.class) );
+                startActivity(new Intent(Profile.this, Upload.class).putExtra("map",map) );
                 finish();
             }
         });
@@ -83,7 +87,7 @@ public class Profile extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this,Search.class));
+                startActivity(new Intent(Profile.this,Search.class).putExtra("map",map));
                 finish();
             }
         });

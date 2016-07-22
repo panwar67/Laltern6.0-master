@@ -98,6 +98,13 @@ public class Paintings_Category extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Paintings_Category.this,Category_page.class));
+        finish();
+    }
+
 
     }
 

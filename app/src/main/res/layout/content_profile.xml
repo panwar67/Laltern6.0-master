@@ -14,7 +14,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/please">
 
 
 
@@ -346,14 +347,7 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Log Out"
-            android:id="@+id/logout"
-            android:layout_marginTop="20dp"
-            android:background="#ffffff" />
+
 
 
     </LinearLayout>
@@ -374,10 +368,11 @@
         android:background="#fff"
 
 
+
         android:id="@+id/layoutmenu"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:gravity="fill_horizontal">
+
+        >
 
 
         <LinearLayout
@@ -470,33 +465,6 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <ImageView
-
-                android:id="@+id/query"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/querys"/>
-
-            <TextView
-                android:id="@+id/que"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Query"
-                android:letterSpacing="0.1"
-                android:textSize="12dp"
-                android:layout_marginTop="2dp"
-                android:textAlignment="center"
-                android:textColor="#000"/>
-
-        </LinearLayout>
 
 
         <LinearLayout
@@ -504,7 +472,7 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:background="#007AFF"
+            android:background="#37474f"
             >
 
             <ImageView

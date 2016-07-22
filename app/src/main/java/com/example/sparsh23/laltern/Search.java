@@ -20,7 +20,9 @@ public class Search extends AppCompatActivity {
     ImageView upload;
     ImageView profile;
     ImageView stream;
+     ListView listView;
 
+    HashMap<String,String> map = new HashMap<String, String>();
     ArrayList<HashMap<String, String>> piddi = new ArrayList<HashMap<String, String>>();
     DBHelper dbHelper;
     @Override
@@ -31,10 +33,14 @@ public class Search extends AppCompatActivity {
 
         dbHelper = new DBHelper(getApplicationContext());
 
+        Intent intent = getIntent();
+        map = (HashMap<String, String>)intent.getSerializableExtra("map");
 
 
 
-        final ListView listView = (ListView)findViewById(R.id.listView);
+
+
+        listView = (ListView)findViewById(R.id.listView);
 
 
 
@@ -60,7 +66,7 @@ public class Search extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent (Search.this, Upload.class) );
+                startActivity(new Intent (Search.this, Upload.class).putExtra("map",map) );
                 finish();
             }
         });
@@ -68,7 +74,7 @@ public class Search extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Search.this,Profile.class));
+                startActivity(new Intent(Search.this,Profile.class).putExtra("map",map));
                 finish();
             }
         });
@@ -77,12 +83,22 @@ public class Search extends AppCompatActivity {
         stream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Search.this, Stream.class));
+                startActivity(new Intent(Search.this, Stream.class).putExtra("map",map));
                 finish();
             }
         });
 
 
+
+
     }
 
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Search.this,Category_page.class));
+    }
 }

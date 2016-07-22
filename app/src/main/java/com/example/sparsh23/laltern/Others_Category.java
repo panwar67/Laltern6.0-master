@@ -17,6 +17,7 @@ public class Others_Category extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_others__category);
 
 
 
@@ -48,6 +49,15 @@ public class Others_Category extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Others_Category.this,Category_page.class));
+        finish();
     }
 
 }

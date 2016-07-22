@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sparsh23.laltern.Stream"
     tools:showIn="@layout/activity_upload"
@@ -17,28 +19,44 @@
 
 
     <LinearLayout
+        android:paddingTop="20dp"
         android:layout_above="@+id/layoutmenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layoutlist1"
         android:orientation="vertical">
 
-        <ImageView
+
+
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            />
+            android:layout_height="wrap_content"
+            android:hint="Enter Subject"
+            android:id="@+id/subjectque"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="submit your query"
+            android:id="@+id/queque"
             />
+
+        <View
+            android:layout_width="match_parent"
+
+            android:layout_height="30dp">
+
+        </View>
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/upload_submit"
+            android:id="@+id/que_submit"
             android:layout_gravity="center"
             android:text="Submit"
+            android:textColor="@color/white"
+            android:background="#37474f"
+
             />
 
     </LinearLayout>
@@ -158,33 +176,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
 
-            <ImageView
-
-                android:id="@+id/query"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/querys"/>
-
-            <TextView
-                android:id="@+id/que"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Query"
-                android:letterSpacing="0.1"
-                android:textSize="12dp"
-                android:layout_marginTop="2dp"
-                android:textAlignment="center"
-                android:textColor="#000"/>
-
-        </LinearLayout>
 
 
         <LinearLayout

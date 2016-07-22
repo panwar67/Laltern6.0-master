@@ -147,4 +147,11 @@ public class Home_Decor_Category extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Home_Decor_Category.this,Category_page.class));
+        finish();
+    }
+
 }
