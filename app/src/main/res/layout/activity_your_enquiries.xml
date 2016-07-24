@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.sparsh23.laltern.ProductView">
+    tools:context="com.example.sparsh23.laltern.YourEnquiries">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -25,40 +25,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="@android:color/transparent">
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    >
-
-                </View>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PRODUCT VIEW"
-                    android:textSize="20dp"
-                    android:singleLine="true"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:fontFamily="serif"
-                    android:textColor="@color/white"
-                    android:layout_weight="559"/>
-
-
-
                 <ImageView
-
-                    android:layout_width="70dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Scaned Card"
-                    android:layout_gravity="right"
-
-
+                    android:layout_gravity="center"
                     android:src="@drawable/logo"
+                    android:gravity="top"
                     />
+
+
+
+
+
+
+
+
 
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
@@ -67,9 +51,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <include layout="@layout/content_product_view" />
-
+    <include layout="@layout/content_your_enquiries" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -38,6 +38,7 @@ public class Apparel_Category extends AppCompatActivity {
                 map.put("category","apparel");
                 map.put("subcat","kurta");
                 Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map",map);
                 startActivity(intent);
             }
         });
@@ -51,6 +52,7 @@ public class Apparel_Category extends AppCompatActivity {
                 map.put("subcat","topsanddresses");
 
                 Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map",map);
                 startActivity(intent);
             }
         });
@@ -65,6 +67,8 @@ public class Apparel_Category extends AppCompatActivity {
                 map.put("subcat","pantsandskirts");
 
                 Intent intent = new Intent(Apparel_Category.this,Stream.class);
+
+                intent.putExtra("map",map);
                 startActivity(intent);
             }
         });
@@ -77,7 +81,9 @@ public class Apparel_Category extends AppCompatActivity {
                 map.put("category","apparel");
                 map.put("subcat","jackets");
                 Intent intent = new Intent(Apparel_Category.this,Stream.class);
+                intent.putExtra("map",map);
                 startActivity(intent);
+
             }
         });
 

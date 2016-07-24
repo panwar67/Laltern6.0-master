@@ -61,13 +61,11 @@
         <activity
             android:name=".Category_page"
             android:label="@string/title_activity_category_page"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SubmitRequest"
             android:label="@string/title_activity_submit_request"
-            android:theme="@style/AppTheme"></activity>
-
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Jewelry_Category"
             android:label="@string/title_activity_jewelry__category"
@@ -99,10 +97,11 @@
         <activity
             android:name=".Others_Category"
             android:label="@string/title_activity_others__category"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".YourEnquiries"
+            android:label="@string/title_activity_your_enquiries"
             android:theme="@style/AppTheme"></activity>
-
-
-
     </application>
 
 </manifest>

@@ -34,7 +34,7 @@
             android:id="@+id/name_layout"
             >
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
 
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Name: "
+            android:text="NAME : "
             android:id="@+id/name1"
             />
             <TextView
@@ -66,7 +66,7 @@
             >
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
                 />
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
-                android:text="Company: "
+                android:text="COMPANY : "
                 />
             <TextView
 
@@ -93,7 +93,7 @@
             android:id="@+id/desg_layout"
             >
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
                 />
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Designation: "
+            android:text="DESIGNATION : "
             />
             <TextView
 
@@ -122,7 +122,7 @@
             android:id="@+id/cmptype"
             >
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
             />
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Bussiness Type: "
+            android:text="BUSSINESS TYPE : "
             />
             <TextView
 
@@ -153,7 +153,7 @@
             >
 
          <ImageView
-             android:layout_width="100dp"
+             android:layout_width="20dp"
              android:layout_height="20dp"
              android:layout_marginTop="20dp"
              />
@@ -161,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Address: "
+            android:text="ADDRESS : "
             />
             <TextView
 
@@ -182,7 +182,7 @@
             >
 
          <ImageView
-             android:layout_width="100dp"
+             android:layout_width="20dp"
              android:layout_height="20dp"
              android:layout_marginTop="20dp"
              />
@@ -190,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Contact Number: "
+            android:text="CONTACT NUMBER : "
             />
             <TextView
 
@@ -210,14 +210,14 @@
             android:id="@+id/pan_layout"
             >
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
-                android:text="PAN Card Number: "
+                android:text="PAN CARD NUMBER : "
                 />
             <TextView
 
@@ -238,7 +238,7 @@
            >
 
            <ImageView
-               android:layout_width="100dp"
+               android:layout_width="20dp"
                android:layout_height="20dp"
                android:layout_marginTop="20dp"
                />
@@ -247,7 +247,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Email-ID: "
+            android:text="EMAIL-ID: "
             />
            <TextView
 
@@ -268,14 +268,14 @@
             >
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"/>
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="Website: "
+            android:text="WEBSITE : "
             />
             <TextView
 
@@ -296,7 +296,7 @@
             >
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"
                 />
@@ -304,7 +304,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="State: "
+            android:text="STATE : "
             />
             <TextView
 
@@ -326,14 +326,14 @@
             >
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"/>
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:text="City: "
+            android:text="CITY : "
             />
             <TextView
 
@@ -344,6 +344,21 @@
                 android:id="@+id/reg_city"
                 android:text="city"
                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Enquiries"
+                />
+
+
 
         </LinearLayout>
 

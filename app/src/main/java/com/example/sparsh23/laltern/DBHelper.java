@@ -36,6 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text);");
         db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text);");
         db.execSQL("CREATE TABLE "+Artisian_Struct.Table_Name+" ( "+Artisian_Struct.name+" text, "+Artisian_Struct.state+" text, "+Artisian_Struct.craft+" text, "+Artisian_Struct.awards+" text, "+Artisian_Struct.description+" text, "+Artisian_Struct.tob+" text, "+Artisian_Struct.pics+" text, "+Artisian_Struct.noimg+" text, "+Artisian_Struct.authentic+" text, "+Artisian_Struct.price+" text);");
+        db.execSQL("CREATE TABLE "+Request_Struct.table_name+" ( "+Request_Struct.ord_id+" text, "+Request_Struct.pro_id+" text, "+Request_Struct.buy_id+" text, "+Request_Struct.des+" text, "+Request_Struct.path+" text, "+Request_Struct.reply+" text, "+Request_Struct.status+" text);");
 
 
     }
@@ -65,11 +66,38 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public boolean InsertOrderData(String prouid, String buyuid, String orduid, String des, String path, String status, String reply)
+
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Request_Struct.ord_id, orduid );
+        contentValues.put(Request_Struct.buy_id,buyuid);
+        contentValues.put(Request_Struct.pro_id,prouid);
+        contentValues.put(Request_Struct.des,des);
+        contentValues.put(Request_Struct.path,path);
+        contentValues.put(Request_Struct.reply,reply);
+        contentValues.put(Request_Struct.status,status);
+        long row  = db.insertWithOnConflict(Request_Struct.table_name,null,contentValues,SQLiteDatabase.CONFLICT_IGNORE);
+        Log.d("Orders",String.valueOf(row));
+        return true;
+    }
+
+
+
+
 
     public boolean InitProfile(){
 
         SQLiteDatabase database = this.getWritableDatabase();
         database.execSQL("DELETE FROM PROFILE");
+        return true;
+    }
+
+    public boolean InitOrd(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DELETE FROM Orders");
+
         return true;
     }
 
@@ -109,6 +137,35 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return data;
+    }
+
+
+
+    public ArrayList<HashMap<String,String>> GetOrders()
+    {
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from "+Request_Struct.table_name,null);
+        res.moveToFirst();
+        while(!res.isAfterLast())
+        {
+
+         HashMap<String,String> map = new HashMap<String, String>();
+            map.put("prouid",res.getString(res.getColumnIndex(Request_Struct.pro_id)));
+            map.put("buyuid",res.getString(res.getColumnIndex(Request_Struct.buy_id)));
+            map.put("orduid",res.getString(res.getColumnIndex(Request_Struct.ord_id)));
+            map.put("des",res.getString(res.getColumnIndex(Request_Struct.des)));
+            map.put("path",res.getString(res.getColumnIndex(Request_Struct.path)));
+            map.put("reply",res.getString(res.getColumnIndex(Request_Struct.reply)));
+            map.put("status",res.getString(res.getColumnIndex(Request_Struct.status)));
+            data.add(map);
+            res.moveToNext();
+
+
+        }
+
+    return data;
+
     }
 
 

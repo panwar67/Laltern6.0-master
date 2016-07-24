@@ -159,23 +159,6 @@ public class Update extends AppCompatActivity {
         return true;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public boolean setUpStream(){
 
         //Showing the progress dialog
@@ -274,6 +257,112 @@ public class Update extends AppCompatActivity {
         //Adding request to the queue
         requestQueue.add(stringRequest);
         return false;
+    }
+
+
+    public boolean setOrders(String uid)
+    {
+        final ProgressDialog loading = ProgressDialog.show(this,"Getting Requests...","Please wait...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+
+
+                        loading.dismiss();
+
+                        if (s!=null)
+                        {
+
+
+
+                            try {
+                                JSONObject profile = new JSONObject(s);
+                                JSONArray data = profile.getJSONArray("BuyerRequest");
+
+                                dbHelper.InitImg();
+                                for(int i=0;i<data.length();i++)
+                                {
+                                    JSONObject details = data.getJSONObject(i);
+
+                                    String requid = details.getString("REQUID");
+                                    String prouid = details.getString("PROUID");
+                                    String buyuid = details.getString("BUYUID");
+                                    String description = details.getString("DESCRIPTION");
+                                    String status = details.getString("STATUS");
+                                    String path = details.getString("PATH");
+                                    String reply = details.getString("REPLY");
+
+                                    dbHelper.InitProfile();
+
+
+
+                                    dbHelper.InsertOrderData(prouid,buyuid,requid,description,path,status,reply);
+
+
+                                }
+                                Log.d("Profile fetched", s);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+
+
+                        }
+
+
+
+
+
+                        //Disimissing the progress dialog
+
+                        //Showing toast message of the response
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        loading.dismiss();
+
+                        //Showing toast
+                        Toast.makeText(Update.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+
+
+                HashMap<String,String> Keyvalue = new HashMap<String,String>();
+                Keyvalue.put("email",email);
+                Keyvalue.put("pass",pass);
+
+
+
+                //returning parameters
+                return Keyvalue;
+            }
+        };
+
+        //Creating a Request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+
+
+
+
+
+
+        return true;
+
+        return  true;
     }
 
 

@@ -138,5 +138,6 @@
     <string name="title_activity_paintings__category">Paintings_Category</string>
     <string name="title_activity_others__category">Others_Category</string>
     <string name="title_activity_submit_request">SubmitRequest</string>
+    <string name="title_activity_your_enquiries">YourEnquiries</string>
 </resources>
 
