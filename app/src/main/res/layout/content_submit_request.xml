@@ -20,7 +20,8 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:id="@+id/reqproimg"/>
         <EditText
        android:id="@+id/desreq"
             android:layout_width="match_parent"

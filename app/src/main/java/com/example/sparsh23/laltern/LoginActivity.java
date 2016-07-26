@@ -312,15 +312,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (s!=null)
                         {
 
-                            if(s.equals("Valid"))
 
-                            {
-                                sessionManager.createLoginSession(email,pass);
-                                startActivity(new Intent(LoginActivity.this,Update.class));
-                                finish();
-                            }
 
-                            else
                             if (s.equals("Incorrent Credentials"))
                             {
 
@@ -329,6 +322,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
                             }
+else
+                            {
+                                sessionManager.createLoginSession(email,pass,s);
+                                startActivity(new Intent(LoginActivity.this,Update.class));
+                                finish();
+                            }
+
+    //                        else
                             Toast.makeText(getApplicationContext(),""+s,Toast.LENGTH_SHORT).show();
                                                  }
 

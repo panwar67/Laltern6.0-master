@@ -139,5 +139,6 @@
     <string name="title_activity_others__category">Others_Category</string>
     <string name="title_activity_submit_request">SubmitRequest</string>
     <string name="title_activity_your_enquiries">YourEnquiries</string>
+    <string name="title_activity_artist__profile">Artist_Profile</string>
 </resources>
 

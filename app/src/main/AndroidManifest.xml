@@ -101,6 +101,10 @@
         <activity
             android:name=".YourEnquiries"
             android:label="@string/title_activity_your_enquiries"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Artist_Profile"
+            android:label="@string/title_activity_artist__profile"
             android:theme="@style/AppTheme"></activity>
     </application>
 

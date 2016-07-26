@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +29,7 @@ public class Stream extends AppCompatActivity {
     DBHelper dbHelper;
     ListView listView;
     HashMap<String,String> map = new HashMap<String, String>();
-     ArrayList<HashMap<String,String>> data;
+     ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class Stream extends AppCompatActivity {
         Intent intent = getIntent();
         map = (HashMap<String, String>)intent.getSerializableExtra("map");
         data = dbHelper.GetSubCategoryImageData(map);
+       // Log.d("artist UID Stream",data.get("artuid"));
         listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(new CustomAdapter(this,data));
        // listView.setAdapter(new CustomAdapter(this,data));
@@ -61,6 +63,7 @@ public class Stream extends AppCompatActivity {
 
                 HashMap<String, String> preview = new HashMap<String, String>();
                 preview = data.get(position);
+                Log.d("art uid stream",preview.get("artuid"));
                 Toast.makeText(getApplication(), "" + preview.get("title"), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Stream.this,ProductView.class);
                 intent.putExtra("promap",preview);

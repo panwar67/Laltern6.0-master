@@ -23,7 +23,7 @@ public class Profile extends AppCompatActivity {
     HashMap<String,String> map = new HashMap<String, String>();
     HashMap<String,String> data = new HashMap<String, String>();
     TextView name, company, desig, tob, addr, cont, pan, email, webs, state, city;
-    Button logout;
+    Button logout, orders;
     SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +37,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        orders = (Button)findViewById(R.id.orderscust);
         name=(TextView)findViewById(R.id.reg_name);
         company=(TextView)findViewById(R.id.reg_comp);
         desig=(TextView)findViewById(R.id.reg_desg);
@@ -66,6 +67,12 @@ public class Profile extends AppCompatActivity {
 
 
 
+        orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Profile.this,YourEnquiries.class));
+            }
+        });
 
         stream=(ImageView)findViewById(R.id.feed);
         stream.setOnClickListener(new View.OnClickListener() {

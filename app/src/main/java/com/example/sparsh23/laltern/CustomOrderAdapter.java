@@ -110,7 +110,7 @@ public class CustomOrderAdapter extends BaseAdapter {
         holder.status = (TextView) rowView.findViewById(R.id.StatusOrd);
         holder.img=(ImageView) rowView.findViewById(R.id.imageViewOrd);
         holder.reply = (TextView)rowView.findViewById(R.id.OrdRply);
-        holder.title = (TextView)rowView.findViewById(R.id.headerord);
+        //holder.title = (TextView)rowView.findViewById(R.id.headerord);
 
         holder.price.setText(result.get(position).get("des"));
         holder.status.setText(result.get(position).get("status"));

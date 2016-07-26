@@ -9,17 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.sparsh23.laltern.YourEnquiries"
-    tools:showIn="@layout/activity_your_enquiries">
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/orderslist"></ListView>
-
-
-
-
+    tools:context="com.example.sparsh23.laltern.Artist_Profile"
+    tools:showIn="@layout/activity_artist__profile">
 
 
 </RelativeLayout>

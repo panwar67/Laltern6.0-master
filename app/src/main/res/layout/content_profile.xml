@@ -14,7 +14,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal"
         android:id="@+id/please">
 
 
@@ -22,7 +23,7 @@
     <LinearLayout
         android:layout_above="@+id/layoutmenu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/layoutlist1"
         android:orientation="vertical">
 
@@ -56,15 +57,6 @@
                 />
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/comp_layout"
-            >
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -85,6 +77,18 @@
                 android:id="@+id/reg_comp"
                 android:text="company"
                 />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/comp_layout"
+            >
+
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -258,6 +262,27 @@
                android:id="@+id/reg_email"
                android:text="email id"
                />
+
+           <ImageView
+               android:layout_width="20dp"
+               android:layout_height="20dp"
+               android:layout_marginTop="20dp"/>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="20dp"
+               android:layout_marginTop="20dp"
+               android:text="WEBSITE : "
+               />
+           <TextView
+
+               android:textStyle="bold"
+               android:layout_width="wrap_content"
+               android:layout_height="20dp"
+               android:layout_marginTop="20dp"
+               android:id="@+id/reg_webs"
+               android:text="website"
+               />
+
        </LinearLayout>
 
         <LinearLayout
@@ -267,25 +292,6 @@
             android:id="@+id/webs_layout"
             >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp"/>
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="20dp"
-            android:text="WEBSITE : "
-            />
-            <TextView
-
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/reg_webs"
-                android:text="website"
-                />
 
         </LinearLayout>
         <LinearLayout
@@ -316,25 +322,16 @@
                 android:text="State"
                 />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/city_layout"
-            >
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="20dp"/>
             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginTop="20dp"
-            android:text="CITY : "
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="CITY : "
+                />
             <TextView
 
                 android:textStyle="bold"
@@ -350,17 +347,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/city_layout"
             >
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Your Enquiries"
-                />
 
 
 
         </LinearLayout>
+
+
+
+
+
+
+
+
 
 
 
@@ -381,6 +382,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#fff"
+        android:layout_gravity="bottom"
+        android:gravity="fill_horizontal"
+
 
 
 
@@ -395,6 +399,7 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:background="@color/maintheme"
             android:id="@+id/profiles">
 
             <ImageView
@@ -403,7 +408,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/feeds"
+                android:background="@drawable/streamwhite"
                 android:id="@+id/feed"/>
 
             <TextView
@@ -416,7 +421,7 @@
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
 
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -426,6 +431,7 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:background="@color/maintheme"
             android:id="@+id/album">
 
             <ImageView
@@ -435,7 +441,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/searchs"/>
+                android:background="@drawable/searchwhite"/>
 
             <TextView
 
@@ -446,7 +452,7 @@
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -455,6 +461,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="vertical"
+            android:background="@color/maintheme"
             android:layout_weight="1">
 
             <ImageView
@@ -464,7 +471,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/uploads"/>
+                android:background="@drawable/scontactuswhite"/>
 
             <TextView
                 android:id="@+id/more"
@@ -475,7 +482,7 @@
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -487,7 +494,7 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:background="#37474f"
+            android:background="@color/white"
             >
 
             <ImageView
@@ -497,7 +504,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/profiles"/>
+                android:background="@drawable/profileblack"/>
 
             <TextView
                 android:id="@+id/pro"
@@ -509,7 +516,7 @@
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
 
-                android:textColor="#fff"/>
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 

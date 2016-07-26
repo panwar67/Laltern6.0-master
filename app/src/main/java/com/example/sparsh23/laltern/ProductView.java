@@ -9,32 +9,58 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductView extends AppCompatActivity {
 
-    TextView title , des, quan, price;
+    TextView title , des, quan, price, artistname;
+    RatingBar authen, prices, overall;
+    DBHelper dbHelper;
     Button button;
+     HashMap<String, String> artdata = new HashMap<String, String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
 
         button= (Button)findViewById(R.id.submitreq);
+        authen = (RatingBar)findViewById(R.id.authenrate);
+        prices = (RatingBar)findViewById(R.id.pricerate);
+        overall = (RatingBar)findViewById(R.id.overallrating);
+        authen.setMax(5);
+        prices.setMax(5);
+        overall.setMax(5);
+
+        artistname = (TextView)findViewById(R.id.artistname);
+
+
+        dbHelper = new DBHelper(getApplicationContext());
+
 
 
         SliderLayout sliderShow = (SliderLayout) findViewById(R.id.slider);
 
 
 
+
         Intent intent = getIntent();
         final HashMap<String,String> data = (HashMap<String,String>)intent.getSerializableExtra("promap");
+
+        artdata = dbHelper.getArtisian(data.get("artuid"));
+
+        authen.setRating(Float.parseFloat(artdata.get("authentic")));
+        prices.setRating(Float.parseFloat(artdata.get("price")));
+        overall.setRating(Float.parseFloat(artdata.get("rating")));
+        artistname.setText(artdata.get("name").toString());
 
         int noimg = Integer.parseInt(data.get("noimages"));
 
@@ -61,6 +87,7 @@ public class ProductView extends AppCompatActivity {
 
         }
 
+
         title = (TextView)findViewById(R.id.headerpro);
         des = (TextView)findViewById(R.id.descriptionpartpro);
         quan = (TextView)findViewById(R.id.quantitypro);
@@ -82,6 +109,10 @@ public class ProductView extends AppCompatActivity {
 
             }
         });
+
+
+
+
 
 
 

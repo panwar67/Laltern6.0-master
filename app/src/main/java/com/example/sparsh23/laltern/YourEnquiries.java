@@ -6,24 +6,40 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class YourEnquiries extends AppCompatActivity {
 
+    ArrayList<HashMap<String,String>> map = new ArrayList<HashMap<String, String>>();
+    ListView listView;
+    DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_enquiries);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        dbHelper = new DBHelper(getApplicationContext());
+        map = dbHelper.GetOrders();
+        listView = (ListView)findViewById(R.id.orderslist);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        listView.setAdapter(new CustomOrderAdapter(this,map));
+
+
+
+
+
+
+
+
+
+
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

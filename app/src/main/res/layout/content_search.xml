@@ -59,6 +59,8 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:background="#37474f"
+
 
             android:id="@+id/profiles">
 
@@ -69,7 +71,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:id="@+id/feed"
-                android:background="@drawable/feeds"/>
+                android:background="@drawable/streamwhite"/>
 
             <TextView
 
@@ -81,7 +83,7 @@
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
 
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -91,7 +93,6 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:background="#37474f"
             android:id="@+id/album">
 
             <ImageView
@@ -101,7 +102,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/searchs"/>
+                android:background="@drawable/searchblack"/>
 
             <TextView
 
@@ -113,7 +114,7 @@
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
 
-                android:textColor="#fff"
+                android:textColor="@color/black"
                 />
 
         </LinearLayout>
@@ -123,6 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="vertical"
+            android:background="@color/maintheme"
             android:layout_weight="1">
 
             <ImageView
@@ -132,7 +134,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/uploads"/>
+                android:background="@drawable/scontactuswhite"/>
 
             <TextView
                 android:id="@+id/more"
@@ -143,7 +145,7 @@
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -154,6 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="vertical"
+            android:background="@color/maintheme"
             android:layout_weight="1">
 
             <ImageView
@@ -163,7 +166,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/profiles"/>
+                android:background="@drawable/profilewhite"/>
 
             <TextView
                 android:id="@+id/pro"
@@ -174,7 +177,7 @@
                 android:textSize="12dp"
                 android:layout_marginTop="2dp"
                 android:textAlignment="center"
-                android:textColor="#000"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

@@ -19,7 +19,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "laltern1.db";
+    public static final String DATABASE_NAME = "lalternNew1.db";
 
 
 
@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text);");
         db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text);");
-        db.execSQL("CREATE TABLE "+Artisian_Struct.Table_Name+" ( "+Artisian_Struct.name+" text, "+Artisian_Struct.state+" text, "+Artisian_Struct.craft+" text, "+Artisian_Struct.awards+" text, "+Artisian_Struct.description+" text, "+Artisian_Struct.tob+" text, "+Artisian_Struct.pics+" text, "+Artisian_Struct.noimg+" text, "+Artisian_Struct.authentic+" text, "+Artisian_Struct.price+" text);");
+        db.execSQL("CREATE TABLE "+Artisian_Struct.Table_Name+" ( "+Artisian_Struct.name+" text, "+Artisian_Struct.state+" text, "+Artisian_Struct.craft+" text, "+Artisian_Struct.awards+" text, "+Artisian_Struct.description+" text, "+Artisian_Struct.tob+" text, "+Artisian_Struct.pics+" text, "+Artisian_Struct.noimg+" text, "+Artisian_Struct.authentic+" text, "+Artisian_Struct.price+" text, "+Artisian_Struct.ratings+" text, "+Artisian_Struct.uid+" text);");
         db.execSQL("CREATE TABLE "+Request_Struct.table_name+" ( "+Request_Struct.ord_id+" text, "+Request_Struct.pro_id+" text, "+Request_Struct.buy_id+" text, "+Request_Struct.des+" text, "+Request_Struct.path+" text, "+Request_Struct.reply+" text, "+Request_Struct.status+" text);");
 
 
@@ -139,6 +139,31 @@ public class DBHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public void InitArtisian(){}
+
+    public void InsertArtisian(String authentic, String awards, String craft,
+                               String description, String name, String noimg, String pics, String price, String ratings, String state,
+    String tob, String uid){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Artisian_Struct.authentic,authentic);
+        contentValues.put(Artisian_Struct.awards,awards);
+        contentValues.put(Artisian_Struct.craft,craft);
+        contentValues.put(Artisian_Struct.description,description);
+        contentValues.put(Artisian_Struct.name,name);
+        contentValues.put(Artisian_Struct.noimg,noimg);
+        contentValues.put(Artisian_Struct.pics,pics);
+        contentValues.put(Artisian_Struct.price,price);
+        contentValues.put(Artisian_Struct.ratings,ratings);
+        contentValues.put(Artisian_Struct.state,state);
+        contentValues.put(Artisian_Struct.tob,tob);
+        contentValues.put(Artisian_Struct.uid,uid);
+        long row = db.insertWithOnConflict(Artisian_Struct.Table_Name, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+        Log.d("Artist", String.valueOf(row)+"inserted");
+
+    }
+
 
 
     public ArrayList<HashMap<String,String>> GetOrders()
@@ -186,7 +211,9 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("SUBCAT",subcat);
         contentValues.put("META",meta);
         contentValues.put("DES", des);
-        contentValues.put("OWN", own);
+        contentValues.put("OWNER", own);
+        Log.d("owner from network",""+own);
+
         contentValues.put("PATH", path);
         long row = db.insertWithOnConflict("ImageData", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
         Log.d("ImageData", String.valueOf(row)+"inserted");
@@ -302,6 +329,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from "+Artisian_Struct.Table_Name+" where "+Artisian_Struct.uid+"='"+uid+"';",null);
+        Log.d("uid artist",uid);
         res.moveToFirst();
         while (!res.isAfterLast())
         {
@@ -336,6 +364,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return map;
     }
+
+
+
 
 
 
@@ -388,26 +419,28 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("Sent Data",selected.toString());
       //  db.query("sku_table", columns, "owner=? and price=?", new String[] { owner, price }, null, null, null);
 
-        String[]  col = {"PATH,UID,DES,TITLE,PRICE,QUANTITY,NOIMAGES,TYPE,SUBCAT,META"};
-        Cursor res = db.query("ImageData",col,"CATEGORY =? and SUBCAT =?", new String[] { selected.get("category"), selected.get("subcat") }, null, null, null);
-        //Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+selected.get("category")+"' and SUBCAT= '"+selected.get("subcat")+"';", null);
-        Log.d("category size", ""+res.getCount());
-        res.moveToFirst();
-        while (!res.isAfterLast())
+        String[]  col = {"PATH,UID,DES,TITLE,PRICE,QUANTITY,NOIMAGES,TYPE,SUBCAT,META,OWNER"};
+        //Cursor res = db.query("ImageData",col,"CATEGORY =? and SUBCAT =?", new String[] { selected.get("category"), selected.get("subcat") }, null, null, null);
+        Cursor res1 = db.rawQuery("select * from ImageData where CATEGORY = '"+selected.get("category")+"' and SUBCAT= '"+selected.get("subcat")+"';", null);
+        Log.d("category size", ""+res1.getCount());
+        res1.moveToFirst();
+        while (!res1.isAfterLast())
         {
             HashMap<String, String> map = new HashMap<String, String>();
-            String path = res.getString(res.getColumnIndex("PATH"));
-            String uid = res.getString(res.getColumnIndex("UID"));
-            String des = res.getString(res.getColumnIndex("DES"));
-            String title = res.getString(res.getColumnIndex("TITLE"));
-            String price = res.getString(res.getColumnIndex("PRICE"));
-            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
-            int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
-            String type = res.getString(res.getColumnIndex("TYPE"));
+            String path = res1.getString(res1.getColumnIndex("PATH"));
+            String uid = res1.getString(res1.getColumnIndex("UID"));
+            String des = res1.getString(res1.getColumnIndex("DES"));
+            String title = res1.getString(res1.getColumnIndex("TITLE"));
+            String price = res1.getString(res1.getColumnIndex("PRICE"));
+            String quantity = res1.getString(res1.getColumnIndex("QUANTITY"));
+            int nopic = res1.getInt(res1.getColumnIndex("NOIMAGES"));
+            String type = res1.getString(res1.getColumnIndex("TYPE"));
+            String owner = res1.getString(res1.getColumnIndex("OWNER"));
+            Log.d("artist uid dbhelper",""+owner);
 
             Log.d("category", selected.get("category"));
-            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
-            String meta = res.getString(res.getColumnIndex("META"));
+            String subcat = res1.getString(res1.getColumnIndex("SUBCAT"));
+            String meta = res1.getString(res1.getColumnIndex("META"));
             map.put("uid",uid);
             map.put("path",path);
             map.put("des",des);
@@ -417,9 +450,10 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("noimages", String.valueOf(nopic));
             map.put("type",type);
             map.put("subcat",subcat);
+            map.put("artuid",owner);
             map.put("meta",meta);
             data.add(map);
-            res.moveToNext();
+            res1.moveToNext();
         }
 
         return data;

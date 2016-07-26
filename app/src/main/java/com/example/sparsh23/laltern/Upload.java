@@ -110,6 +110,9 @@ public class Upload extends AppCompatActivity {
                     public void onResponse(String s) {
                         if (s!=null)
                         {
+
+
+
                             loading.dismiss();
                             Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_SHORT).show();
                         }

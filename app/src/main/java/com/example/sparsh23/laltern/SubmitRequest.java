@@ -2,6 +2,7 @@ package com.example.sparsh23.laltern;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +22,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,7 +37,11 @@ import java.util.Map;
 public class SubmitRequest extends AppCompatActivity {
 
     String DOWN_URL = "http://www.whydoweplay.com/lalten/InsertReq.php";
+    ImageView imageView;
     SessionManager sessionManager;
+    ImageLoader imageLoader;
+    DisplayImageOptions options;
+
     DBHelper dbHelper;
     HashMap<String, String> hashMap;
     @Override
@@ -38,9 +50,24 @@ public class SubmitRequest extends AppCompatActivity {
         setContentView(R.layout.activity_submit_request);
         dbHelper = new DBHelper(getApplicationContext());
         sessionManager = new SessionManager(getApplicationContext());
+        imageView = (ImageView)findViewById(R.id.reqproimg);
+        options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY).resetViewBeforeLoading(true).build();
+        ImageLoaderConfiguration.Builder config1 = new ImageLoaderConfiguration.Builder(getApplicationContext());
+        config1.defaultDisplayImageOptions(options);
+        config1.threadPriority(Thread.NORM_PRIORITY - 2);
+        config1.denyCacheImageMultipleSizesInMemory();
+        config1.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        config1.diskCacheSize(100 * 1024 * 1024); // 50 MiB
+        config1.tasksProcessingOrder(QueueProcessingType.LIFO);
+        config1.writeDebugLogs();
+        imageLoader = ImageLoader.getInstance();
+//        imageLoader.destroy();
+        imageLoader.init(config1.build());
+
 
         Intent intent = getIntent();
          hashMap = (HashMap<String, String>)intent.getSerializableExtra("map");
+        imageLoader.displayImage(hashMap.get("path"),imageView);
         final EditText editText = (EditText)findViewById(R.id.desreq);
         final HashMap<String,String> map = sessionManager.getUserDetails();
         dbHelper.GetProfile().get("uid");
@@ -71,10 +98,21 @@ public class SubmitRequest extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+                        String res = s.replaceAll("\\s+","");
+                        if (res.equals("Uploaded"))
+
+
 
                         Toast.makeText(getApplicationContext(),s.toString(),Toast.LENGTH_SHORT).show();
 
+
+
                         loading.dismiss();
+
+                        finish();
+
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -120,7 +158,7 @@ public class SubmitRequest extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SubmitRequest.this,ProductView.class).putExtra("promap",hashMap));
+        //startActivity(new Intent(SubmitRequest.this,ProductView.class).putExtra("promap",hashMap));
         finish();
 
 

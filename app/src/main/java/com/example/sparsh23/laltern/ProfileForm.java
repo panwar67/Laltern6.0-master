@@ -76,13 +76,13 @@ public class ProfileForm extends AppCompatActivity {
 
              upload_data(name.getText().toString(),company.getText().toString(),webs.getText().toString(),desg.getText().toString(),bustype.getText().toString(),
                      addrs.getText().toString(),cont.getText().toString(),pan.getText().toString(),email.getText().toString(),state.getText().toString(),
-                     city.getText().toString(),pass.getText().toString());
+                     city.getText().toString(),pass.getText().toString(),new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
          }
          return false;
      }
 
     public void upload_data(final String name, final String company, final String webs, final String desg, final String bustype, final String addrs, final String cont, final String pan,
-                            final String email, final String state, final String city,final String pass)
+                            final String email, final String state, final String city, final String pass, final String uid)
     {
         final ProgressDialog loading = ProgressDialog.show(this,"Registering User...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL,
@@ -107,7 +107,7 @@ public class ProfileForm extends AppCompatActivity {
                             {
 
 
-                                sessionManager.createLoginSession(email,pass);
+                                sessionManager.createLoginSession(email,pass,uid);
                                 startActivity(new Intent(ProfileForm.this,Update.class));
                                 finish();
 
