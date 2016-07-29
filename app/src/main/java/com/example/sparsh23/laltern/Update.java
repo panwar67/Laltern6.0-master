@@ -216,7 +216,7 @@ public class Update extends AppCompatActivity {
 
 
 
-                            startActivity(new Intent( Update.this,Category_page.class));
+                            startActivity(new Intent( Update.this,NavigationMenu.class));
                             finish();
 
 

@@ -303,7 +303,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String subcat = res.getString(res.getColumnIndex("SUBCAT"));
             String meta = res.getString(res.getColumnIndex("META"));
 
-            Log.d("SUBCAT Data", ""+subcat);
+            Log.d("SUBCAT Data", ""+path);
 
             map.put("uid",uid);
             map.put("path",path);
@@ -364,6 +364,52 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return map;
     }
+
+
+    public ArrayList<HashMap<String,String>> getimageDatatype(String types )
+    {
+
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ImageData where TYPE = '"+types+"'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast())
+        {
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+            String uid = res.getString(res.getColumnIndex("UID"));
+            String own = res.getString(res.getColumnIndex("OWN"));
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String category = res.getString(res.getColumnIndex("CATEGORY"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String noimages = res.getString(res.getColumnIndex("NOIMAGES"));
+            String type = res.getString(res.getColumnIndex("TYPE"));
+            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
+            String meta = res.getString(res.getColumnIndex("META"));
+
+            Log.d("type Data", ""+type);
+
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("own",own);
+            map.put("des",des);
+            map.put("title",title);
+            map.put("category", category);
+            map.put("quantity", quantity);
+            map.put("price", price);
+            map.put("noimages",noimages);
+            map.put("type",type);
+            map.put("subcat",subcat);
+            map.put("meta",meta);
+            data.add(map);
+            res.moveToNext();
+        }
+        return data;
+    }
+
 
 
 

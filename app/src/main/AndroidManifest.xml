@@ -105,6 +105,10 @@
         <activity
             android:name=".Artist_Profile"
             android:label="@string/title_activity_artist__profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".NavigationMenu"
+            android:label="@string/title_activity_navigation_menu"
             android:theme="@style/AppTheme"></activity>
     </application>
 
