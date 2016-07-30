@@ -151,6 +151,7 @@ public class LandingHome extends Fragment {
 
 
 
+//        artistslider.setPresetTransformer;
 
 
 
@@ -188,31 +189,15 @@ public class LandingHome extends Fragment {
 
         for(int i =0; i<map.size();i++)
         {
-
-
-
             if(map.get(i).get("type").equals("trending"))
-
             {
-
                 sliderShow.addSlider(new DefaultSliderView(getContext()).image(map.get(i).get("path")));
-
-
             }
-
-
         }
-
         Log.d("final deals size", ""+finaldata.size());
-
-
-
         LandingHomeListAdapter landingHomeListAdapter = new LandingHomeListAdapter(getContext(),finaldata);
         listView.setAdapter(landingHomeListAdapter);
         landingHomeListAdapter.notifyDataSetChanged();
-
-
-
         header.findViewById(R.id.sliderlandingartist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,7 +283,7 @@ public class LandingHome extends Fragment {
                 HashMap<String, String> preview = new HashMap<String, String>();
                 preview = finaldata.get(position-1);
                 Log.d("landing selected",preview.toString());
-                Toast.makeText(getContext(), "" + preview.get("meta"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "" + preview.get("meta")+" path"+preview.get("uid"), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 bundle.putString("type", preview.get("meta"));
 

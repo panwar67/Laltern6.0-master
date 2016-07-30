@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -79,6 +81,42 @@ public class DealsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_deals, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.dealslist);
         listView.setAdapter(new DealsAdapter(getContext(),map));
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position==0){
+
+                    Toast.makeText(getContext(),"header clicked",Toast.LENGTH_LONG).show();
+                }
+
+                Toast.makeText(getContext(),""+id,Toast.LENGTH_SHORT).show();
+
+                HashMap<String, String> preview = new HashMap<String, String>();
+                preview = map.get(position);
+                Log.d("deals fragment selected",preview.toString());
+                Toast.makeText(getContext(), "" + preview.get("meta")+" path"+preview.get("uid"), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", preview.get("meta"));
+
+
+
+
+                    ItemFragment nextFrag= new ItemFragment();
+                    nextFrag.setArguments(bundle);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.navrep, nextFrag,null)
+                            .addToBackStack(null)
+                            .commit();
+
+
+
+
+            }
+        });
 
 
 

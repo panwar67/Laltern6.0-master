@@ -19,8 +19,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sparsh23.laltern.dummy.DummyContent;
+
 public class NavigationMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener {
 
 
     LandingHome landinghome;
@@ -36,11 +38,16 @@ public class NavigationMenu extends AppCompatActivity
 
 
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //new ActionBarDrawerToggle()
+
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -133,6 +140,11 @@ public class NavigationMenu extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
 }
