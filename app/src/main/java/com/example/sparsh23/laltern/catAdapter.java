@@ -2,21 +2,13 @@ package com.example.sparsh23.laltern;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,10 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Sparsh23 on 29/07/16.
- */
-
-public class DealsAdapter extends BaseAdapter  {
+ * Created by Sparsh23 on 31/07/16.
+ */public class catAdapter extends BaseAdapter {
 
 
     Context context;
@@ -42,7 +32,7 @@ public class DealsAdapter extends BaseAdapter  {
 
     ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 
-    public DealsAdapter(Context landingHome, ArrayList<HashMap<String,String>> data){
+    public catAdapter(Context landingHome, ArrayList<HashMap<String,String>> data){
 
         result=data;
         context = landingHome;
@@ -108,18 +98,18 @@ public class DealsAdapter extends BaseAdapter  {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder=new Holder();
         View rowView;
-        rowView = inflater.inflate(R.layout.landing_row, null);
+        rowView = inflater.inflate(R.layout.catrow, null);
 
-        holder.deals=(ImageView) rowView.findViewById(R.id.dealslanding);
-      //  holder.custom=(ImageView) rowView.findViewById(R.id.customlanding);
-       // holder.sliderShow = (SliderLayout) rowView.findViewById(R.id.sliderlandingtrending);
+        holder.deals=(ImageView) rowView.findViewById(R.id.catimg);
+        //  holder.custom=(ImageView) rowView.findViewById(R.id.customlanding);
+        // holder.sliderShow = (SliderLayout) rowView.findViewById(R.id.sliderlandingtrending);
 
         //holder.title = (TextView)rowView.findViewById(R.id.headerord);
 
 
 
 
-            imageLoader.displayImage(result.get(position).get("path"), holder.deals);
+        imageLoader.displayImage(result.get(position).get("path"), holder.deals);
 
 
 
@@ -129,3 +119,4 @@ public class DealsAdapter extends BaseAdapter  {
         return rowView;
     }
 }
+

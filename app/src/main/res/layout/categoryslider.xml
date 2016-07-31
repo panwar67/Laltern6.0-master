@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/sliderviewall"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="10dp"
+
+        android:scrollIndicators="none"
+        />
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slidercs"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+
+            android:scrollIndicators="none"
+            />
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/sliderec"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+
+            android:scrollIndicators="none"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slidertp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+
+            android:scrollIndicators="none"
+            />
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/sliderpa"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+
+            android:scrollIndicators="none"
+            />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/catheader"/>
+
+
+
+
+
+
+
+</LinearLayout>

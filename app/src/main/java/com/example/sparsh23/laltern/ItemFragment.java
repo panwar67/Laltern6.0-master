@@ -73,6 +73,8 @@ public class ItemFragment extends Fragment {
         data = dbHelper.getimageDatatype(ARG_TYPE);
         // Set the adapter
         if (view instanceof RecyclerView) {
+
+
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
@@ -80,6 +82,8 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
+
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(data, mListener, getContext()));
         }
         return view;

@@ -22,10 +22,12 @@ import android.view.MenuItem;
 import com.example.sparsh23.laltern.dummy.DummyContent;
 
 public class NavigationMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener, categoryFragment.OnListFragmentInteractionListener {
 
 
     LandingHome landinghome;
+    categoryFragment categoryFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +124,24 @@ public class NavigationMenu extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+
+            categoryFragment = categoryFragment.newInstance();
+            Bundle bundle = new Bundle();
+
+            bundle.putString("type","jewellery");
+
+
+
+            categoryFragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+            //transaction.beginTransaction().replace()
+            frag.addToBackStack(null);
+            frag.commit();
+
+
+
+
+
 
         } else if (id == R.id.nav_slideshow) {
 
