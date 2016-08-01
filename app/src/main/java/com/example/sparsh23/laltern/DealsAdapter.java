@@ -42,7 +42,9 @@ public class DealsAdapter extends BaseAdapter  {
 
     ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 
-    public DealsAdapter(Context landingHome, ArrayList<HashMap<String,String>> data){
+    public DealsAdapter(Context landingHome, ArrayList<HashMap<String,String>> data)
+
+    {
 
         result=data;
         context = landingHome;

@@ -52,9 +52,12 @@
                     android:layout_height="30dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
-                    android:layout_weight="12"
-                    android:src="@drawable/scontactuswhite"
+
+
+                    android:layout_weight="1"
+                    android:src="@drawable/searchwhite"
                     />
+
 
                 <ImageView
 
@@ -62,11 +65,30 @@
                     android:layout_height="30dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
-
-
-                    android:layout_weight="1"
-                    android:src="@drawable/searchwhite"
+                    android:layout_weight="12"
+                    android:src="@drawable/reqfinal"
                     />
+
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:text="Scaned Card"
+                    android:layout_gravity="right"
+                    android:layout_weight="12"
+                    android:src="@drawable/cartfinal"
+                    />
+
+
+
+
+
+
+
+
+
+
 
 
 

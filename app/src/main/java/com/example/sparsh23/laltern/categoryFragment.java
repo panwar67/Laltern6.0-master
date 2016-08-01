@@ -1,6 +1,7 @@
 package com.example.sparsh23.laltern;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,6 +21,12 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.sparsh23.laltern.dummy.DummyContent;
 import com.example.sparsh23.laltern.dummy.DummyContent.DummyItem;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,10 +42,15 @@ public class categoryFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+
+    ImageLoader imageLoader;
+    DisplayImageOptions options;
     String type;
     // TODO: Customize parameters
     private int mColumnCount = 2;
     DBHelper dbHelper;
+    ArrayList<HashMap<String,String>> headcategory = new ArrayList<HashMap<String, String>>();
+
     ArrayList<HashMap<String,String>> category = new ArrayList<HashMap<String, String>>();
     ArrayList<HashMap<String,String>> viewall = new ArrayList<HashMap<String, String>>();
     ArrayList<HashMap<String,String>> jewelec = new ArrayList<HashMap<String, String>>();
@@ -72,6 +85,26 @@ public class categoryFragment extends Fragment {
 
         }
 
+        options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY).resetViewBeforeLoading(true).build();
+        ImageLoaderConfiguration.Builder config1 = new ImageLoaderConfiguration.Builder(getContext());
+        config1.defaultDisplayImageOptions(options);
+        config1.threadPriority(Thread.NORM_PRIORITY - 2);
+        config1.denyCacheImageMultipleSizesInMemory();
+        config1.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        config1.diskCacheSize(100 * 1024 * 1024); // 50 MiB
+        config1.tasksProcessingOrder(QueueProcessingType.LIFO);
+        config1.writeDebugLogs();
+
+
+
+
+
+        imageLoader = ImageLoader.getInstance();
+//        imageLoader.destroy();
+        imageLoader.init(config1.build());
+
+
+
         dbHelper = new DBHelper(getContext());
     }
 
@@ -80,11 +113,12 @@ public class categoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        viewall = dbHelper.getimageDatatype("jewelcatall");
-        jewelpa = dbHelper.getimageDatatype("jewelcatpa");
-        jewelcs = dbHelper.getimageDatatype("jewelcatcs");
-        jewelec = dbHelper.getimageDatatype("jewelcatec");
-        jeweltp = dbHelper.getimageDatatype("jewelcatpt");
+        headcategory = dbHelper.getimageDatatype(type+"catheader");
+        viewall = dbHelper.getimageDatatype(type+"catall");
+        jewelpa = dbHelper.getimageDatatype(type+"catpa");
+        jewelcs = dbHelper.getimageDatatype(type+"catcs");
+        jewelec = dbHelper.getimageDatatype(type+"catec");
+        jeweltp = dbHelper.getimageDatatype(type+"catpt");
 
 
         category = dbHelper.getimageDatatype("jewelcat");
@@ -105,6 +139,15 @@ public class categoryFragment extends Fragment {
         final SliderLayout ecslider = (SliderLayout)header.findViewById(R.id.sliderec);
         ecslider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
         ecslider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+
+
+        ImageView imageView = (ImageView)header.findViewById(R.id.catheader1);
+
+        imageLoader.displayImage(headcategory.get(0).get("path"), imageView);
+
+
+
+
         final SliderLayout paslider = (SliderLayout)header.findViewById(R.id.sliderpa);
         paslider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
         paslider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);

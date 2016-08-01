@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.sparsh23.laltern.dummy.DummyContent;
 
@@ -34,6 +35,7 @@ public class NavigationMenu extends AppCompatActivity
         setContentView(R.layout.activity_navigation_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         //setActionBar(toolbar);
 
         //getActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
@@ -56,6 +58,22 @@ public class NavigationMenu extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setCheckedItem(R.id.nav_camera);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
+        landinghome =  LandingHome.newInstance();
+
+
+        android.app.FragmentManager fra = getFragmentManager();
+        FragmentManager transaction = getSupportFragmentManager();
+
+        // fra.beginTransaction().replace()
+        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, landinghome);
+        //transaction.beginTransaction().replace()
+        frag.addToBackStack(null);
+        frag.commit();
+        // break;
+
+
+
 
     }
 
@@ -127,11 +145,7 @@ public class NavigationMenu extends AppCompatActivity
 
             categoryFragment = categoryFragment.newInstance();
             Bundle bundle = new Bundle();
-
-            bundle.putString("type","jewellery");
-
-
-
+            bundle.putString("type","jewel");
             categoryFragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
             //transaction.beginTransaction().replace()
@@ -143,13 +157,17 @@ public class NavigationMenu extends AppCompatActivity
 
 
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_slideshow)
+        {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_manage)
+        {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_share)
+        {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_send)
+        {
 
         }
 
