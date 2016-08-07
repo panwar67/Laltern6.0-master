@@ -1,0 +1,115 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sparsh23.laltern.newHome">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+
+        <include
+            layout="@layout/nav_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <org.lucasr.twowayview.TwoWayView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/horizontallist23"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:background="#d6d7d7"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
+
+
+
+            </org.lucasr.twowayview.TwoWayView>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Trending Products"
+            android:background="@color/maintheme"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:textSize="15dp"/>
+
+
+
+   <org.lucasr.twowayview.TwoWayView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/horizontallist"
+       android:layout_weight="1"
+       android:paddingTop="10dp"
+       android:background="#d6d7d7"
+       android:orientation="horizontal"
+       android:paddingBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Crafts"
+            android:background="@color/maintheme"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:textSize="15dp"/>
+
+
+
+    <org.lucasr.twowayview.TwoWayView
+
+        android:layout_weight="1"
+
+
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontallist1"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
+
+   </org.lucasr.twowayview.TwoWayView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Artist"
+            android:background="@color/maintheme"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:textSize="15dp"/>
+
+        <org.lucasr.twowayview.TwoWayView
+
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/horizontallist2"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
+
+        </org.lucasr.twowayview.TwoWayView>
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

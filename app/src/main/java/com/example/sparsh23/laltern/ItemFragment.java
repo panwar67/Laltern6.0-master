@@ -33,7 +33,7 @@ public class ItemFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     String ARG_TYPE;
     // TODO: Customize parameters
-    private int mColumnCount = 2;
+    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**

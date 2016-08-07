@@ -80,21 +80,6 @@
                     android:src="@drawable/cartfinal"
                     />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <ImageView
 
                     android:layout_width="30dp"
@@ -127,7 +112,47 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_navigation_menu"
-        app:menu="@menu/activity_navigation_menu_drawer" />
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <ListView
+            android:paddingTop="20dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/listviewmenu"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+
+
+
+
+
+
+
+        <ExpandableListView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandedlist"
+            >
+
+
+
+        </ExpandableListView>
+
+        </LinearLayout>
+
+
+
+
+        </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

@@ -5,19 +5,24 @@
     android:orientation="horizontal"
     android:background="#d6d7d7"
 
+
+
     >
 
     <LinearLayout
+        android:layout_margin="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/round">
 
-
-
-        android:layout_margin="2dp"
-        android:background="#d6d7d7"
+    <LinearLayout
         android:paddingTop="5dp"
-        android:paddingBottom="1dp"
+        android:paddingBottom="5dp"
+        android:layout_weight="1"
+        android:paddingRight="1dp"
 
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
@@ -27,13 +32,24 @@
             android:layout_height="200dp"
             android:id="@+id/gridimg1"
 
+
             android:scaleType="fitXY"
             android:background="@color/white"/>
+    </LinearLayout>
 
         <LinearLayout
+
+
+
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@drawable/round"
+
             >
         <TextView
 
@@ -54,17 +70,37 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/pricegrid"
 
+                android:paddingTop="8dp"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:text="price"/>
+            <TextView
+
+                android:background="@color/white"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/moqgrid"
+                android:paddingTop="8dp"
+
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:text="MOQ"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artist"
+                android:id="@+id/artgrid"
+                android:paddingTop="8dp"
+                android:textAppearance="?attr/textAppearanceListItem"/>
 
         </LinearLayout>
 
 
 
 
+
+
     </LinearLayout>
-
-
 
 
 

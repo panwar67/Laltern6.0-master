@@ -33,4 +33,6 @@ dependencies {
     compile 'com.roughike:swipe-selector:1.0.6'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.github.lucasr:twoway-view:release-0.1.3'
+
 }

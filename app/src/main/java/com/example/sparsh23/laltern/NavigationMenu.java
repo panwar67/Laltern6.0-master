@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 //import android.support.v4.app.Fragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,16 +19,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.sparsh23.laltern.dummy.DummyContent;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class NavigationMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener, categoryFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener, categoryFragment.OnListFragmentInteractionListener, newHome.OnFragmentInteractionListener{
 
 
     LandingHome landinghome;
+    ExpandableListView expandableListView;
+    ArrayList<String> listDataHeader = new ArrayList<String>();
+    HashMap<String,List<String>> listDataChild = new HashMap<String, List<String>>();
+    ListView listView;
+
+
+
     categoryFragment categoryFragment;
+    newHome newhom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +54,64 @@ public class NavigationMenu extends AppCompatActivity
         setContentView(R.layout.activity_navigation_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        prepareListData();
+        listView = (ListView)findViewById(R.id.listviewmenu);
+
+
+        ArrayList<String> items = new ArrayList<String>();
+        items.add(" ");
+        items.add("Home");
+        items.add("Contact Us");
+        items.add("About Us");
+        items.add("Chat Us");
+        items.add("Shop For");
+
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items );
+
+
+
+      // listView.setAdapter(itemsAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+
+
+
+                    if(position==0){
+
+                        newhom =  newhom.newInstance("a","a");
+
+
+                        FragmentManager transaction = getSupportFragmentManager();
+
+
+                        // fra.beginTransaction().replace()
+                        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
+                        //transaction.beginTransaction().replace()
+                        frag.addToBackStack(null);
+                        frag.commit();
+                        // break;
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawer.closeDrawer(GravityCompat.START);
+
+
+
+
+                    }
+
+
+
+            }
+        });
 
         //setActionBar(toolbar);
 
         //getActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
-
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -52,30 +121,215 @@ public class NavigationMenu extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        expandableListView = (ExpandableListView)findViewById(R.id.expandedlist);
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
-        navigationView.setCheckedItem(R.id.nav_camera);
-        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+//        navigationView.getMenu().getItem(0).setChecked(true);
+//        onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
-        landinghome =  LandingHome.newInstance();
+        Log.d("child size" ,""+listDataChild.size());
+        com.example.sparsh23.laltern.ExpandableListAdapter expandableListAdapter = new com.example.sparsh23.laltern.ExpandableListAdapter(listDataChild,listDataHeader,getApplicationContext());
+
+        expandableListView.setAdapter(expandableListAdapter);
+
+        expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
 
-        android.app.FragmentManager fra = getFragmentManager();
+
+                return false;
+            }
+        });
+
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+
+                Toast.makeText(getApplicationContext(),""+groupPosition,Toast.LENGTH_SHORT).show();
+
+
+
+                    if (groupPosition == 0) {
+
+                        newhom = newhom.newInstance("a", "a");
+
+
+                        FragmentManager transaction = getSupportFragmentManager();
+
+
+                        // fra.beginTransaction().replace()
+                        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
+                        //transaction.beginTransaction().replace()
+                        frag.addToBackStack(null);
+                        frag.commit();
+                        // break;
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawer.closeDrawer(GravityCompat.START);
+                    }
+
+
+
+                    return false;
+                }
+
+        });
+
+
+        newhom =  newhom.newInstance("a","a");
+
+
         FragmentManager transaction = getSupportFragmentManager();
 
+
         // fra.beginTransaction().replace()
-        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, landinghome);
+        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
         //transaction.beginTransaction().replace()
         frag.addToBackStack(null);
         frag.commit();
         // break;
+        drawer.closeDrawer(GravityCompat.START);
+
+
+
 
 
 
 
     }
+
+    private void prepareListData() {
+
+
+        listDataHeader.add("Home");
+        listDataHeader.add("Shop For Us");
+        // Adding data header
+        listDataHeader.add("Jewellery");
+
+        listDataHeader.add("Accessories");
+
+        listDataHeader.add("Sarees");
+
+        listDataHeader.add("Apparel");
+
+        listDataHeader.add("Home Textile");
+
+        listDataHeader.add("Home Decor");
+
+        listDataHeader.add("Paintings");
+
+        listDataHeader.add("Others");
+
+        listDataHeader.add("About Us");
+        listDataHeader.add("Contact Us");
+        listDataHeader.add("Policies");
+        listDataHeader.add("Chat");
+
+
+
+        // Adding child data
+        List<String> heading1 = new ArrayList<String>();
+        heading1.add("Terracotta");
+        heading1.add("Silver");
+        heading1.add("Metal");
+        heading1.add("Cane");
+        heading1.add("Contemporary");
+        heading1.add("Jute");
+        heading1.add("Dokra");
+        heading1.add("Wooden");
+
+
+        List<String> heading2 = new ArrayList<String>();
+        heading2.add("Footwear");
+        heading2.add("Bag and Belts");
+        heading2.add("Tribal");
+
+        List<String> heading3 = new ArrayList<String>();
+
+
+
+                heading3.add("Printed");
+        heading3.add("Woven");
+        heading3.add("Embroidery");
+
+
+        List<String> heading4 = new ArrayList<String>();
+        heading4.add("Kurta");
+        heading4.add("Shawls");
+        heading4.add("Stole");
+        heading4.add("Dupatta");
+        heading4.add("Fabrics");
+        heading4.add("Pants and Skirts");
+        heading4.add("Jackets");
+        heading4.add("Tops and Dresses");
+
+
+        List<String> heading5 = new ArrayList<String>();
+                                heading5.add("Cushion Covers");
+                heading5.add("Rugs and Dhurries");
+        heading5.add("Quilts");
+        heading5.add("Bed Linen");
+                heading5.add("Table Linen");
+
+        List<String> heading6 = new ArrayList<String>();
+        heading6.add("Lamps");
+        heading6.add("Wooden Decor");
+        heading6.add("Marble Decor");
+        heading6.add("Stone Decor");
+        heading6.add("Ceramic");
+        heading6.add("Bone and Horn Decor");
+        heading6.add("Paper and Horn Decor");
+        heading6.add("Paper Mache");
+        heading6.add("Decor MISC");
+
+        List<String> heading7 = new ArrayList<String>();
+        heading7.add("Murals and Paintings");
+        heading7.add("Madhubani");
+        heading7.add("Gond");
+        heading7.add("Sanjhi");
+        heading7.add("Mud Paintings");
+
+
+        List<String> heading8 = new ArrayList<String>();
+        heading8.add("Miscellaneous Crafts");
+        heading8.add("Waste paper products");
+
+        List<String> heading9 = new ArrayList<String>();
+
+
+
+
+
+
+        listDataChild.put("Home", heading9 );
+        listDataChild.put("Shop For Us", heading9);
+        listDataChild.put(listDataHeader.get(2), heading1);// Header, Child data
+        listDataChild.put(listDataHeader.get(3), heading2);
+        listDataChild.put(listDataHeader.get(4),heading3);
+        listDataChild.put(listDataHeader.get(5),heading4);
+        listDataChild.put(listDataHeader.get(6),heading5);
+        listDataChild.put(listDataHeader.get(7),heading6);
+        listDataChild.put(listDataHeader.get(8),heading7);
+        listDataChild.put(listDataHeader.get(9),heading8);
+        listDataChild.put(listDataHeader.get(10),heading9);
+        listDataChild.put(listDataHeader.get(11),heading9);
+        listDataChild.put(listDataHeader.get(12),heading9);
+
+
+    }
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -127,12 +381,12 @@ public class NavigationMenu extends AppCompatActivity
 
 
 
-            landinghome =  LandingHome.newInstance();
+            newhom =  newhom.newInstance("a","a");
 
 
 
            // fra.beginTransaction().replace()
-            android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, landinghome);
+            android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
             //transaction.beginTransaction().replace()
             frag.addToBackStack(null);
             frag.commit();
@@ -152,16 +406,21 @@ public class NavigationMenu extends AppCompatActivity
             frag.addToBackStack(null);
             frag.commit();
 
-
-
-
-
-
         } else if (id == R.id.nav_slideshow)
         {
 
+
+
+
         } else if (id == R.id.nav_manage)
         {
+
+            newhom = newHome.newInstance("","");
+            android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
+            //transaction.beginTransaction().replace()
+            frag.addToBackStack(null);
+            frag.commit();
+
 
         } else if (id == R.id.nav_share)
         {

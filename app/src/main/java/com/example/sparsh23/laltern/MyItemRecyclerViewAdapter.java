@@ -68,7 +68,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
        // holder.mItem = mValues.get(position);
        // holder.mIdView.setText();
         holder.mContentView.setText(mValues.get(position).get("title"));
-        holder.gridprice.setText("PRICE "+mValues.get(position).get("price"));
+        holder.gridprice.setText("PRICE RS - "+mValues.get(position).get("price"));
+        holder.moq.setText("M.O.Q - "+mValues.get(position).get("quantity"));
+        holder.artist.setText("Artisian - ");
         imageLoader.displayImage(mValues.get(position).get("path"), holder.gridproduct);
 
 
@@ -92,6 +94,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mContentView;
+        public final TextView artist, moq;
         public final ImageView gridproduct;
 
         public final TextView gridprice;
@@ -105,11 +108,11 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             gridprice = (TextView)view.findViewById(R.id.pricegrid);
             mContentView = (TextView) view.findViewById(R.id.titlegrid);
             gridproduct = (ImageView)view.findViewById(R.id.gridimg1);
+            artist = (TextView)view.findViewById(R.id.artgrid);
+            moq = (TextView)view.findViewById(R.id.moqgrid);
+
+
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
-    }
+         }
 }

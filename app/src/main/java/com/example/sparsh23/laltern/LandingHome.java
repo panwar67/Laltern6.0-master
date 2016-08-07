@@ -121,6 +121,7 @@ public class LandingHome extends Fragment {
         ArrayList<HashMap<String,String>> craft = new ArrayList<HashMap<String, String>>();
         ArrayList<HashMap<String,String>> sponc = new ArrayList<HashMap<String, String>>();
 
+
         View rootView = inflater.inflate(R.layout.fragment_landing_home, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.landinglist);
 
@@ -214,38 +215,7 @@ public class LandingHome extends Fragment {
             }
         });
 
-        artistslider.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int eventaction = event.getAction();
-                switch (eventaction) {
-                    case MotionEvent.ACTION_DOWN:
-                        Toast.makeText(getContext(),""+artistdata.get(0).get("meta"),Toast.LENGTH_SHORT).show();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("type", artistdata.get(0).get("meta"));
-                        DealsFragment nextFrag= new DealsFragment();
-                        nextFrag.setArguments(bundle);
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.navrep, nextFrag,null)
-                                .addToBackStack(null)
-                                .commit();
-                        //transition.startTransition(duration);
-                        //Tell Android that you can handle this MotionEvent, and you
-                        //want to keep informed of further events of this touch
-                        return true;
-                    //break;
-                    case MotionEvent.ACTION_UP:
-                        //transition.reverseTransition(duration);
-                        break;
-                }
-                // tell the system that we handled the event but a further processing is required
-                return false;
-            }
-
-
-
-        });
 
 
 

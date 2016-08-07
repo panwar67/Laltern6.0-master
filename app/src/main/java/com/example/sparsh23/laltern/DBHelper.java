@@ -391,6 +391,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String meta = res.getString(res.getColumnIndex("META"));
 
             Log.d("type Data", ""+type);
+            Log.d("quantity",""+quantity);
 
             map.put("uid",uid);
             map.put("path",path);
