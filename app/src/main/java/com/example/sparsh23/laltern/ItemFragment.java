@@ -32,6 +32,8 @@ public class ItemFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     String ARG_TYPE;
+    String ARG_CAT;
+    String ARG_SUB;
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -58,7 +60,8 @@ public class ItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            ARG_TYPE = getArguments().getString("type");
+            ARG_CAT = getArguments().getString("category");
+            ARG_SUB = getArguments().getString("subcat");
         }
 
         dbHelper = new DBHelper(getContext());
@@ -70,7 +73,12 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
 
-        data = dbHelper.getimageDatatype(ARG_TYPE);
+        HashMap<String,String> aux = new HashMap<String, String>();
+        aux.put("category",ARG_CAT);
+        aux.put("subcat",ARG_SUB);
+
+        data = dbHelper.GetSubCategoryImageData(aux);
+       //  dbHelper.getimageDatatype(ARG_TYPE);
         // Set the adapter
         if (view instanceof RecyclerView) {
 

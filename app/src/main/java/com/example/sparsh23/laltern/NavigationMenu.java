@@ -2,6 +2,7 @@ package com.example.sparsh23.laltern;
 
 //import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,10 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sparsh23.laltern.dummy.DummyContent;
@@ -38,9 +41,11 @@ public class NavigationMenu extends AppCompatActivity
 
 
     LandingHome landinghome;
+    DBHelper dbHelper;
     ExpandableListView expandableListView;
     ArrayList<String> listDataHeader = new ArrayList<String>();
-    HashMap<String,List<String>> listDataChild = new HashMap<String, List<String>>();
+    ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+     HashMap<String,List<String>> listDataChild = new HashMap<String, List<String>>();
     ListView listView;
 
 
@@ -56,58 +61,66 @@ public class NavigationMenu extends AppCompatActivity
         setSupportActionBar(toolbar);
         prepareListData();
         listView = (ListView)findViewById(R.id.listviewmenu);
+        dbHelper = new DBHelper(getApplicationContext());
+
+        data = dbHelper.getimageData();
 
 
-        ArrayList<String> items = new ArrayList<String>();
-        items.add(" ");
-        items.add("Home");
-        items.add("Contact Us");
-        items.add("About Us");
-        items.add("Chat Us");
-        items.add("Shop For");
+        Spinner spinner = (Spinner) findViewById(R.id.searchspinner);
+        ArrayAdapter<String> adapter;
+        final List<String> list;
 
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items );
+        list = new ArrayList<String>();
+        list.add("title");
+        list.add("craft");
+        list.add("owner");
+        list.add("All");
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView)findViewById(R.id.searchproduct);
+
+
+
+
+
+
+
+        autoCompleteTextView.setThreshold(2);
+
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getBaseContext(),
+                        android.R.layout.simple_list_item_1, GetList(list.get(position)) );
+
+
+                autoCompleteTextView.setAdapter(adapter1);
+                autoCompleteTextView.setTextColor(Color.BLACK);
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
 
 
       // listView.setAdapter(itemsAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
-
-
-
-                    if(position==0){
-
-                        newhom =  newhom.newInstance("a","a");
-
-
-                        FragmentManager transaction = getSupportFragmentManager();
-
-
-                        // fra.beginTransaction().replace()
-                        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
-                        //transaction.beginTransaction().replace()
-                        frag.addToBackStack(null);
-                        frag.commit();
-                        // break;
-                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                        drawer.closeDrawer(GravityCompat.START);
-
-
-
-
-                    }
-
-
-
-            }
-        });
 
         //setActionBar(toolbar);
 
@@ -133,22 +146,68 @@ public class NavigationMenu extends AppCompatActivity
 
         expandableListView.setAdapter(expandableListAdapter);
 
-        expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                String cat = listDataHeader.get(groupPosition);
+                String subcat = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+
+                Toast.makeText(getApplicationContext(),""+cat+"  "+subcat,Toast.LENGTH_SHORT).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("category", cat);
+                bundle.putString("subcat",subcat);
+
+
+
+
+
+               ItemFragment newhom =  ItemFragment.newInstance(1);
+
+
+                FragmentManager transaction = getSupportFragmentManager();
+
+
+                newhom.setArguments(bundle);
+                // fra.beginTransaction().replace()
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+                // break;
+              //  drawer.closeDrawer(GravityCompat.START);
+
+
+
+
 
 
 
                 return false;
             }
         });
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            // Keep track of previous expanded parent
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                // Collapse previous parent if expanded.
+                if ((previousGroup != -1) && (groupPosition != previousGroup)) {
+                    expandableListView.collapseGroup(previousGroup);
+                }
+                previousGroup = groupPosition;
+            }
+        });
+
+
+
+
+
 
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -212,7 +271,7 @@ public class NavigationMenu extends AppCompatActivity
         listDataHeader.add("Home");
         listDataHeader.add("Shop For Us");
         // Adding data header
-        listDataHeader.add("Jewellery");
+        listDataHeader.add("jewellery");
 
         listDataHeader.add("Accessories");
 
@@ -235,10 +294,11 @@ public class NavigationMenu extends AppCompatActivity
 
 
 
+
         // Adding child data
         List<String> heading1 = new ArrayList<String>();
         heading1.add("Terracotta");
-        heading1.add("Silver");
+        heading1.add("silver");
         heading1.add("Metal");
         heading1.add("Cane");
         heading1.add("Contemporary");
@@ -443,5 +503,32 @@ public class NavigationMenu extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
+    }
+
+
+    public ArrayList<String> GetList(String type){
+
+        ArrayList<String> selections = new ArrayList<String>();
+
+        if(data!=null){
+
+
+
+
+
+            for(int i =0; i<data.size();i++){
+
+                selections.add(data.get(i).get(type));
+
+
+
+
+
+            }
+
+        }
+
+
+        return selections;
     }
 }

@@ -203,9 +203,10 @@ public class Update extends AppCompatActivity {
                                     String category = details.getString("CATEGORY");
                                     String subcat = details.getString("SUBCAT");
                                     String meta = details.getString("META");
+                                    String craft = details.getString("CRAFT");
 
 
-                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta);
+                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta,craft);
 
                                 }
                                 Log.d("Image data", s);

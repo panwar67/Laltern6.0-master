@@ -19,6 +19,7 @@
 
 
 
+
         <include
             layout="@layout/nav_menu"
             android:layout_width="match_parent"
@@ -75,10 +76,7 @@
 
 
     <org.lucasr.twowayview.TwoWayView
-
         android:layout_weight="1"
-
-
         android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,7 +98,6 @@
             android:textSize="15dp"/>
 
         <org.lucasr.twowayview.TwoWayView
-
             android:layout_weight="1"
             android:paddingTop="10dp"
             android:layout_width="match_parent"
@@ -108,7 +105,6 @@
             android:id="@+id/horizontallist2"
             android:orientation="horizontal"
             android:paddingBottom="20dp">
-
         </org.lucasr.twowayview.TwoWayView>
     </LinearLayout>
     </ScrollView>

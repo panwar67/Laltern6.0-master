@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 
 import org.lucasr.twowayview.TwoWayView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -29,6 +33,7 @@ public class newHome extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     DBHelper dbHelper;
+    AutoCompleteTextView autoCompleteTextView;
 
     ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
     // TODO: Rename and change types of parameters
@@ -67,6 +72,10 @@ public class newHome extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         dbHelper = new DBHelper(getContext());
+
+
+
+
     }
 
     @Override
@@ -75,18 +84,30 @@ public class newHome extends Fragment {
         // Inflate the layout for this fragment
 
         View root = inflater.inflate(R.layout.fragment_new_home, container, false);
+
+
+
         data = dbHelper.getimageDatatype("landing");
         Log.d("new home landing size",""+data.size());
         TwoWayView lvTest = (TwoWayView) root.findViewById(R.id.horizontallist);
-
         TwoWayView lvTest2 = (TwoWayView) root.findViewById(R.id.horizontallist2);
-
         TwoWayView lvTest1 = (TwoWayView) root.findViewById(R.id.horizontallist1);
+
         lvTest.setAdapter(new TrendingProAdapter(getContext(),dbHelper.getimageDatatype("trending")));
         lvTest1.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("craft")));
         lvTest2.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("artist")));
 
+
+
+
+
         return root;
+
+
+
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

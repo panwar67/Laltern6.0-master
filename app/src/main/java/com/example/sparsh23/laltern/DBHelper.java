@@ -33,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         // TODO Auto-generated method stub
 
-        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text);");
+        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text, CRAFT text);");
         db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text);");
         db.execSQL("CREATE TABLE "+Artisian_Struct.Table_Name+" ( "+Artisian_Struct.name+" text, "+Artisian_Struct.state+" text, "+Artisian_Struct.craft+" text, "+Artisian_Struct.awards+" text, "+Artisian_Struct.description+" text, "+Artisian_Struct.tob+" text, "+Artisian_Struct.pics+" text, "+Artisian_Struct.noimg+" text, "+Artisian_Struct.authentic+" text, "+Artisian_Struct.price+" text, "+Artisian_Struct.ratings+" text, "+Artisian_Struct.uid+" text);");
         db.execSQL("CREATE TABLE "+Request_Struct.table_name+" ( "+Request_Struct.ord_id+" text, "+Request_Struct.pro_id+" text, "+Request_Struct.buy_id+" text, "+Request_Struct.des+" text, "+Request_Struct.path+" text, "+Request_Struct.reply+" text, "+Request_Struct.status+" text);");
@@ -139,7 +139,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public void InitArtisian(){}
+    public void InitArtisian(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DELETE FROM "+Artisian_Struct.Table_Name);
+
+
+
+    }
 
     public void InsertArtisian(String authentic, String awards, String craft,
                                String description, String name, String noimg, String pics, String price, String ratings, String state,
@@ -195,7 +201,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category,String subcat, String meta)
+    public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category,String subcat, String meta, String craft)
 
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -212,6 +218,8 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("META",meta);
         contentValues.put("DES", des);
         contentValues.put("OWNER", own);
+        contentValues.put("CRAFT", craft);
+        Log.d("craft", craft);
         Log.d("owner from network",""+own);
 
         contentValues.put("PATH", path);
@@ -302,6 +310,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String type = res.getString(res.getColumnIndex("TYPE"));
             String subcat = res.getString(res.getColumnIndex("SUBCAT"));
             String meta = res.getString(res.getColumnIndex("META"));
+            String craft = res.getString(res.getColumnIndex("CRAFT"));
 
             Log.d("SUBCAT Data", ""+path);
 
@@ -317,6 +326,7 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("type",type);
             map.put("subcat",subcat);
             map.put("meta",meta);
+            map.put("craft",craft);
             data.add(map);
             res.moveToNext();
         }
@@ -372,6 +382,53 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from ImageData where TYPE = '"+types+"'", null);
+        res.moveToFirst();
+
+        while (!res.isAfterLast())
+        {
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+            String uid = res.getString(res.getColumnIndex("UID"));
+            String own = res.getString(res.getColumnIndex("OWN"));
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String category = res.getString(res.getColumnIndex("CATEGORY"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String noimages = res.getString(res.getColumnIndex("NOIMAGES"));
+            String type = res.getString(res.getColumnIndex("TYPE"));
+            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
+            String meta = res.getString(res.getColumnIndex("META"));
+
+            Log.d("type Data", ""+type);
+            Log.d("quantity",""+quantity);
+
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("own",own);
+            map.put("des",des);
+            map.put("title",title);
+            map.put("category", category);
+            map.put("quantity", quantity);
+            map.put("price", price);
+            map.put("noimages",noimages);
+            map.put("type",type);
+            map.put("subcat",subcat);
+            map.put("meta",meta);
+            data.add(map);
+            res.moveToNext();
+        }
+        return data;
+    }
+
+
+
+    public ArrayList<HashMap<String,String>> getSearchimageDatatype( )
+    {
+
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ImageData", null);
         res.moveToFirst();
 
         while (!res.isAfterLast())
