@@ -4,6 +4,7 @@ package com.example.sparsh23.laltern;
  * Created by Sparsh23 on 08/07/16.
  */
 
+import android.app.SearchManager;
 import android.database.Cursor;
 
 import java.util.ArrayList;
@@ -14,12 +15,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.provider.ContactsContract;
 import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "lalternNew1.db";
+    public static final String DATABASE_NAME = "lalterndb.db";
+    HashMap<String,String> mAliasMap = new HashMap<>();
 
 
 
@@ -33,11 +36,12 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         // TODO Auto-generated method stub
 
-        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text, CRAFT text);");
+        db.execSQL("CREATE TABLE ImageData (UID text, DES text, OWN text, PRICE float, PATH text, TYPE text, QUANTITY int, NOIMAGES int, OWNER text, TITLE text, CATEGORY text, SUBCAT text, META text, CRAFT text, PROTYPE text, RATING text);");
         db.execSQL("CREATE TABLE "+Profile_Strut.Table_Name+" ( "+Profile_Strut.Uid+" text, "+Profile_Strut.Name+" text, "+Profile_Strut.Comp_Name+" text, "+Profile_Strut.Designation+" text, "+Profile_Strut.Addr+" text, "+Profile_Strut.City+" text, "+Profile_Strut.Email+" text, "+Profile_Strut.Cont+" text, "+Profile_Strut.State+" text, "+Profile_Strut.ToB+" text, "+Profile_Strut.Pan+" text, "+Profile_Strut.Web+" text);");
         db.execSQL("CREATE TABLE "+Artisian_Struct.Table_Name+" ( "+Artisian_Struct.name+" text, "+Artisian_Struct.state+" text, "+Artisian_Struct.craft+" text, "+Artisian_Struct.awards+" text, "+Artisian_Struct.description+" text, "+Artisian_Struct.tob+" text, "+Artisian_Struct.pics+" text, "+Artisian_Struct.noimg+" text, "+Artisian_Struct.authentic+" text, "+Artisian_Struct.price+" text, "+Artisian_Struct.ratings+" text, "+Artisian_Struct.uid+" text);");
         db.execSQL("CREATE TABLE "+Request_Struct.table_name+" ( "+Request_Struct.ord_id+" text, "+Request_Struct.pro_id+" text, "+Request_Struct.buy_id+" text, "+Request_Struct.des+" text, "+Request_Struct.path+" text, "+Request_Struct.reply+" text, "+Request_Struct.status+" text);");
 
+        db.execSQL("CREATE TABLE SearchData ( UID INTEGER PRIMARY KEY AUTOINCREMENT, TAG text, SUGGEST text, TYPE text );");
 
     }
 
@@ -53,12 +57,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public boolean InitImg()
+
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL("DELETE FROM ImageData");
         Log.d("sql","Deleted");
 
+
+
+
+        return true;
+    }
+
+    public boolean InitSearchData(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("DELETE FROM SearchData");
+        Log.d("search tags","Deleted");
 
 
 
@@ -82,6 +99,8 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("Orders",String.valueOf(row));
         return true;
     }
+
+
 
 
 
@@ -201,7 +220,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category,String subcat, String meta, String craft)
+    public boolean InsertImageData  (String uid,String des, String own, String path, String price, String quantity, String title, String noimages, String type, String category,String subcat, String meta, String craft, String protype, String rating)
 
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -219,12 +238,39 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("DES", des);
         contentValues.put("OWNER", own);
         contentValues.put("CRAFT", craft);
+        contentValues.put("PROTYPE",protype);
+        contentValues.put("RATING",rating);
         Log.d("craft", craft);
         Log.d("owner from network",""+own);
 
         contentValues.put("PATH", path);
         long row = db.insertWithOnConflict("ImageData", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
         Log.d("ImageData", String.valueOf(row)+"inserted");
+        return true;
+    }
+
+
+    public boolean InsertSearchTag(String tag, String suggest, String type)
+
+    {
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("TAG", tag);
+        //Log.d("TAG", tag);
+       contentValues.put("SUGGEST",suggest);
+      //  Log.d("suggest", suggest);
+        contentValues.put("TYPE",type);
+        //Log.d("type",type);
+
+        long row = db.insertWithOnConflict("SearchData", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+        Log.d("Search data", String.valueOf(row)+"inserted");
+
+
+
+
+
         return true;
     }
 
@@ -311,6 +357,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String subcat = res.getString(res.getColumnIndex("SUBCAT"));
             String meta = res.getString(res.getColumnIndex("META"));
             String craft = res.getString(res.getColumnIndex("CRAFT"));
+            String rating = res.getString(res.getColumnIndex("RATING"));
 
             Log.d("SUBCAT Data", ""+path);
 
@@ -327,6 +374,8 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("subcat",subcat);
             map.put("meta",meta);
             map.put("craft",craft);
+            map.put("rating",rating);
+
             data.add(map);
             res.moveToNext();
         }
@@ -399,6 +448,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String type = res.getString(res.getColumnIndex("TYPE"));
             String subcat = res.getString(res.getColumnIndex("SUBCAT"));
             String meta = res.getString(res.getColumnIndex("META"));
+            String rating = res.getString(res.getColumnIndex("RATING"));
 
             Log.d("type Data", ""+type);
             Log.d("quantity",""+quantity);
@@ -415,7 +465,9 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("type",type);
             map.put("subcat",subcat);
             map.put("meta",meta);
+            map.put("rating",rating);
             data.add(map);
+
             res.moveToNext();
         }
         return data;
@@ -540,6 +592,8 @@ public class DBHelper extends SQLiteOpenHelper {
             int nopic = res1.getInt(res1.getColumnIndex("NOIMAGES"));
             String type = res1.getString(res1.getColumnIndex("TYPE"));
             String owner = res1.getString(res1.getColumnIndex("OWNER"));
+
+            String rating = res1.getString(res1.getColumnIndex("RATING"));
             Log.d("artist uid dbhelper",""+owner);
 
             Log.d("category", selected.get("category"));
@@ -556,6 +610,7 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("subcat",subcat);
             map.put("artuid",owner);
             map.put("meta",meta);
+            map.put("rating",rating);
             data.add(map);
             res1.moveToNext();
         }
@@ -563,6 +618,196 @@ public class DBHelper extends SQLiteOpenHelper {
         return data;
 
     }
+
+
+
+
+
+
+    public ArrayList<HashMap<String,String>> GetProductsFromSearch( String Uid)
+
+    {
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+
+        Cursor res1 = db.rawQuery("select * from SearchData where UID = '"+Uid+"';",null);
+        res1.moveToFirst();
+
+        String tag = res1.getString(res1.getColumnIndex("TAG"));
+        String suggest = res1.getString(res1.getColumnIndex("TYPE"));
+
+      //  Log.d("suggest new ", suggest);
+        //Log.d("suggest uid",Uid);
+        Log.d("suggest tag",tag);
+
+
+
+
+
+        Cursor res = db.rawQuery("select * from ImageData where "+suggest+" = '"+tag+"' ;",null);
+        Log.d("return cursor size", ""+res.getCount());
+
+        res.moveToFirst();
+        while (!res.isAfterLast()){
+
+
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+            String uid = res.getString(res.getColumnIndex("UID"));
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
+            String type = res.getString(res.getColumnIndex("TYPE"));
+            String owner = res.getString(res.getColumnIndex("OWNER"));
+
+            String rating = res.getString(res.getColumnIndex("RATING"));
+            Log.d("artist uid dbhelper",""+owner);
+
+            //Log.d("category", selected.get("category"));
+            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
+            String meta = res.getString(res.getColumnIndex("META"));
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("des",des);
+            map.put("title", title);
+            map.put("price",price);
+            map.put("quantity",quantity);
+            map.put("noimages", String.valueOf(nopic));
+            map.put("type",type);
+            map.put("subcat",subcat);
+            map.put("artuid",owner);
+            map.put("meta",meta);
+            map.put("rating",rating);
+            data.add(map);
+            res.moveToNext();
+
+
+        }
+
+
+
+
+    return data;
+    }
+
+    public Cursor getImageData(String[] sel){
+
+
+        sel[0] = "%"+sel[0]+"%";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        mAliasMap = new HashMap<String, String>();
+
+        // Unique id for the each Suggestions ( Mandatory )
+        mAliasMap.put("_ID", "UID" + " as " + "_id" );
+
+        // Text for Suggestions ( Mandatory )
+        mAliasMap.put(SearchManager.SUGGEST_COLUMN_TEXT_1, "TAG" + " as " + SearchManager.SUGGEST_COLUMN_TEXT_1);
+
+        mAliasMap.put(SearchManager.SUGGEST_COLUMN_TEXT_2, "SUGGEST" + " as " + SearchManager.SUGGEST_COLUMN_TEXT_2);
+
+
+        // Icon for Suggestions ( Optional )
+       // mAliasMap.put( SearchManager.SUGGEST_COLUMN_ICON_1, "CATEGORY" + " as " + SearchManager.SUGGEST_COLUMN_ICON_1);
+
+        // This value will be appended to the Intent data on selecting an item from Search result or Suggestions ( Optional )
+        mAliasMap.put( SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID, "UID" + " as " + SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID );
+
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        queryBuilder.setProjectionMap(mAliasMap);
+
+        queryBuilder.setTables("SearchData");
+
+        Cursor c = queryBuilder.query(this.getReadableDatabase(),
+                new String[] { "_ID",
+
+                        SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_TEXT_2, SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID } ,
+                " TAG LIKE ?",
+                sel,
+                "TAG",
+                null,
+                "TAG"+ " asc ",null
+        );
+
+        c.moveToFirst();
+
+
+
+        Log.d("cursize suggest",""+c.getCount());
+
+        return c;
+
+
+    }
+
+
+    public  ArrayList<HashMap<String,String>> getdatafromquery(String query){
+
+
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("select * from ImageData where TITLE LIKE '%"+query+"%' or CRAFT LIKE '%"+query+"%' or PROTYPE LIKE '%"+query+"%' ;",null);
+        Log.d("return cursor size", ""+res.getCount());
+
+        res.moveToFirst();
+        while (!res.isAfterLast()){
+
+
+            HashMap<String, String> map = new HashMap<String, String>();
+            String path = res.getString(res.getColumnIndex("PATH"));
+            String uid = res.getString(res.getColumnIndex("UID"));
+            String des = res.getString(res.getColumnIndex("DES"));
+            String title = res.getString(res.getColumnIndex("TITLE"));
+            String price = res.getString(res.getColumnIndex("PRICE"));
+            String quantity = res.getString(res.getColumnIndex("QUANTITY"));
+            int nopic = res.getInt(res.getColumnIndex("NOIMAGES"));
+            String type = res.getString(res.getColumnIndex("TYPE"));
+            String owner = res.getString(res.getColumnIndex("OWNER"));
+
+            String rating = res.getString(res.getColumnIndex("RATING"));
+            Log.d("artist uid dbhelper",""+owner);
+
+            //Log.d("category", selected.get("category"));
+            String subcat = res.getString(res.getColumnIndex("SUBCAT"));
+            String meta = res.getString(res.getColumnIndex("META"));
+            map.put("uid",uid);
+            map.put("path",path);
+            map.put("des",des);
+            map.put("title", title);
+            map.put("price",price);
+            map.put("quantity",quantity);
+            map.put("noimages", String.valueOf(nopic));
+            map.put("type",type);
+            map.put("subcat",subcat);
+            map.put("artuid",owner);
+            map.put("meta",meta);
+            map.put("rating",rating);
+            data.add(map);
+            res.moveToNext();
+
+
+        }
+
+
+
+
+        return data;
+
+
+
+
+    }
+
+
+
+
+
 
 
 

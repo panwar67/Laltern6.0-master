@@ -84,6 +84,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         rowView = inflater.inflate(R.layout.list_header, null);
 
         TextView category = (TextView)rowView.findViewById(R.id.list_header_text);
+
         category.setText(headers.get(groupPosition));
 
 

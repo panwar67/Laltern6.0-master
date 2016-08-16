@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.sparsh23.laltern.ItemFragment.OnListFragmentInteractionListener;
@@ -70,8 +71,12 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mContentView.setText(mValues.get(position).get("title"));
         holder.gridprice.setText("PRICE RS - "+mValues.get(position).get("price"));
         holder.moq.setText("M.O.Q - "+mValues.get(position).get("quantity"));
-        holder.artist.setText("Artisian - ");
+        holder.artist.setText("Artisian - "+mValues.get(position).get("artuid"));
+
+
+        holder.ratingBar.setRating(Float.parseFloat(mValues.get(position).get("rating")));
         imageLoader.displayImage(mValues.get(position).get("path"), holder.gridproduct);
+
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +101,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mContentView;
         public final TextView artist, moq;
         public final ImageView gridproduct;
+        public final RatingBar ratingBar;
 
         public final TextView gridprice;
 
@@ -110,6 +116,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             gridproduct = (ImageView)view.findViewById(R.id.gridimg1);
             artist = (TextView)view.findViewById(R.id.artgrid);
             moq = (TextView)view.findViewById(R.id.moqgrid);
+            ratingBar = (RatingBar)view.findViewById(R.id.productratingview);
 
 
         }

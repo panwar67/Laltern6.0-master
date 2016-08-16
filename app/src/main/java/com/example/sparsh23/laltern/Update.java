@@ -2,6 +2,7 @@ package com.example.sparsh23.laltern;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,16 +41,16 @@ public class Update extends AppCompatActivity {
         dbHelper = new DBHelper(getApplicationContext());
         sessionManager = new SessionManager(getApplicationContext());
 
+        dbHelper.InitSearchData();
 
+        LongOperation.execute(new Runnable() {
+            @Override
+            public void run() {
+                LongOperation longOperation = new LongOperation();
+                longOperation.execute();
+            }
+        });
 
-        ProfileSetup(sessionManager.getUserDetails().get("email"),sessionManager.getUserDetails().get("pass"));
-        setOrders(sessionManager.getUserDetails().get(SessionManager.KEY_UID));
-        Log.d("Userid for orders",""+sessionManager.getUserDetails().get(SessionManager.KEY_UID));
-        ArtisianSetup();
-
-
-
-        setUpStream();
 
 
 
@@ -60,14 +61,14 @@ public class Update extends AppCompatActivity {
     public boolean ProfileSetup(final String email, final String pass)
 
     {
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting Profile Data...","Please wait...",false,false);
+//        final ProgressDialog loading = ProgressDialog.show(this,"Getting Profile Data...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
 
 
-                        loading.dismiss();
+  //                      loading.dismiss();
 
                         if (s!=null)
                         {
@@ -129,10 +130,10 @@ public class Update extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                      //  loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(Update.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Update.this, "Error In Connectivity two", Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -166,17 +167,19 @@ public class Update extends AppCompatActivity {
         return true;
     }
 
-    public boolean setUpStream(){
+    public boolean setUpStream()
+
+    {
 
         //Showing the progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting Image Data...","Please wait...",false,false);
+      //  final ProgressDialog loading = ProgressDialog.show(this,"Getting Image Data...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
 
 
-                        loading.dismiss();
+                 //       loading.dismiss();
                         if (s!=null)
                         {
 
@@ -185,6 +188,8 @@ public class Update extends AppCompatActivity {
                             try {
                                 JSONObject profile = new JSONObject(s);
                                 JSONArray data = profile.getJSONArray("ImageData");
+
+                                dbHelper.InitSearchData();
 
                                 dbHelper.InitImg();
                                 for(int i=0;i<data.length();i++)
@@ -195,18 +200,32 @@ public class Update extends AppCompatActivity {
                                     String des = details.getString("DESCRIPTION");
                                     String path = details.getString("PATH");
                                     String own = details.getString("OWNER");
+                                    dbHelper.InsertSearchTag(own," In Artist", "OWNER");
                                     String price = details.getString("PRICE");
                                     String quantity = details.getString("QUANTITY");
                                     String title = details.getString("TITLE");
+                                    dbHelper.InsertSearchTag(title," In Products", "TITLE");
                                     String noimage = details.getString("NOIMAGE");
                                     String type = details.getString("TYPE");
+                                    String protype = details.getString("PROTYPE");
+                                    dbHelper.InsertSearchTag(protype," In Product Type", "PROTYPE");
                                     String category = details.getString("CATEGORY");
+
+
+
+
                                     String subcat = details.getString("SUBCAT");
+
+                                    
+
                                     String meta = details.getString("META");
                                     String craft = details.getString("CRAFT");
+                                    String rating = details.getString("RATING");
+                                    dbHelper.InsertSearchTag(craft,"In Craft","CRAFT");
 
 
-                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta,craft);
+
+                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta,craft,protype,rating);
 
                                 }
                                 Log.d("Image data", s);
@@ -239,10 +258,10 @@ public class Update extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                        //loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(Update.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Update.this, "Error In Connectivity three", Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -270,7 +289,7 @@ public class Update extends AppCompatActivity {
 
     public boolean setOrders(final String buyerid)
     {
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting orders...","Please wait...",false,false);
+       // final ProgressDialog loading = ProgressDialog.show(this,"Getting orders...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL2,
                 new Response.Listener<String>() {
                     @Override
@@ -315,7 +334,7 @@ public class Update extends AppCompatActivity {
 
                                 }
                                 Log.d("Profile fetched", s);
-                                loading.dismiss();
+                               // loading.dismiss();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -340,10 +359,10 @@ public class Update extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                        //loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(Update.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Update.this, "Error In Connectivity four", Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -384,7 +403,7 @@ public class Update extends AppCompatActivity {
     public boolean ArtisianSetup()
 
     {
-        final ProgressDialog loading = ProgressDialog.show(this,"Getting Artisian Data...","Please wait...",false,false);
+       // final ProgressDialog loading = ProgressDialog.show(this,"Getting Artisian Data...","Please wait...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL3,
                 new Response.Listener<String>() {
                     @Override
@@ -403,7 +422,7 @@ public class Update extends AppCompatActivity {
                                 JSONArray data = profile.getJSONArray("ArtisianData");
 
                                 dbHelper.InitArtisian();
-                                //dbHelper.InitImg();
+
                                 for(int i=0;i<data.length();i++)
                                 {
                                     JSONObject details = data.getJSONObject(i);
@@ -447,7 +466,7 @@ public class Update extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(),"Error Occured",Toast.LENGTH_SHORT).show();
                         }
-                        loading.dismiss();
+                       // loading.dismiss();
 
 
 
@@ -462,10 +481,10 @@ public class Update extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                       // loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(Update.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Update.this, "Error In Connectivity five", Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override
@@ -498,6 +517,40 @@ public class Update extends AppCompatActivity {
 
 
         return true;
+    }
+
+
+    private class LongOperation extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            ProfileSetup(sessionManager.getUserDetails().get("email"),sessionManager.getUserDetails().get("pass"));
+            setOrders(sessionManager.getUserDetails().get(SessionManager.KEY_UID));
+           // Log.d("Userid for orders",""+sessionManager.getUserDetails().get(SessionManager.KEY_UID));
+            ArtisianSetup();
+
+
+
+            setUpStream();
+
+
+
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 
 

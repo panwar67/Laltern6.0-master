@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="#d6d7d7"
+    android:background="@color/backgroundoff"
     tools:openDrawer="start">
 
     <android.support.design.widget.AppBarLayout
@@ -15,14 +15,23 @@
         android:theme="@style/AppTheme"
         android:background="@android:color/transparent">
 
+
+
+
+
+
+
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#37474f"
+            android:background="@color/white"
             >
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -38,7 +47,7 @@
                     android:layout_height="30dp"
 
 
-                    android:src="@drawable/logofinall"
+
 
                     />
 
@@ -52,92 +61,71 @@
 
                 <ImageView
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
 
 
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+
                     android:layout_weight="1"
-                    android:src="@drawable/searchwhite"
+                    android:src="@drawable/searchnew"
                     />
 
 
                 <ImageView
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
                     android:layout_weight="12"
-                    android:src="@drawable/reqfinal"
+                    android:src="@drawable/reqnew"
                     />
 
 
                 <ImageView
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
                     android:layout_weight="12"
-                    android:src="@drawable/cartfinal"
+                    android:src="@drawable/shop"
                     />
 
                 <ImageView
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
                     android:layout_weight="1"
 
 
-                    android:src="@drawable/profilewhite"
+                    android:src="@drawable/pro"
                     />
-
-            </LinearLayout>
-
-
-                <LinearLayout
-                    android:paddingBottom="10dp"
-                    android:paddingRight="5dp"
-                    android:paddingTop="10dp"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <AutoCompleteTextView
-                        android:id="@+id/searchproduct"
-                        android:layout_width="match_parent"
-                        android:layout_weight="2221"
-                        android:layout_gravity="left"
-                        android:layout_height="50dp"
-                        android:hint="Search For Anything"/>
-
-                    <Button
-                        android:layout_width="40dp"
-                        android:layout_height="50dp"
-                        android:text="GO"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:background="@color/maintheme"/>
-
-                    <Spinner
-
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/searchspinner"
-
-                        >
-
-                    </Spinner>
-                </LinearLayout>
+          </LinearLayout>
 
 
 
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
+
+
     </android.support.design.widget.AppBarLayout>
+
+
 
 
 
@@ -149,8 +137,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
+
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -159,32 +150,21 @@
 
 
 
+
         <LinearLayout
+
             android:layout_width="wrap_content"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
 
-
-            <ListView
-            android:paddingTop="20dp"
-            android:layout_width="wrap_content"
-            android:id="@+id/listviewmenu"
-            android:layout_height="wrap_content">
-
-        </ListView>
-
-
-
-
-
-
-
+            >
 
         <ExpandableListView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expandedlist"
+
             >
 
 

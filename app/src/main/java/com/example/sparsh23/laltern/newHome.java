@@ -1,15 +1,20 @@
 package com.example.sparsh23.laltern;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.lucasr.twowayview.TwoWayView;
@@ -34,6 +39,7 @@ public class newHome extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     DBHelper dbHelper;
     AutoCompleteTextView autoCompleteTextView;
+    ArrayList<HashMap<String,String>> dataall = new ArrayList<HashMap<String, String>>();
 
     ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
     // TODO: Rename and change types of parameters
@@ -79,12 +85,25 @@ public class newHome extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View root = inflater.inflate(R.layout.fragment_new_home, container, false);
 
+        dataall = dbHelper.getimageData();
+
+        EditText editText = (EditText)root.findViewById(R.id.searchviewid);
+
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                startActivity(new Intent(getActivity(),SearchInflated.class));
+
+            }
+        });
 
 
         data = dbHelper.getimageDatatype("landing");
@@ -93,9 +112,9 @@ public class newHome extends Fragment {
         TwoWayView lvTest2 = (TwoWayView) root.findViewById(R.id.horizontallist2);
         TwoWayView lvTest1 = (TwoWayView) root.findViewById(R.id.horizontallist1);
 
-        lvTest.setAdapter(new TrendingProAdapter(getContext(),dbHelper.getimageDatatype("trending")));
-        lvTest1.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("craft")));
-        lvTest2.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("artist")));
+        //lvTest.setAdapter(new TrendingProAdapter(getContext(),dbHelper.getimageDatatype("trending")));
+        //lvTest1.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("craft")));
+        //lvTest2.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("artist")));
 
 
 
@@ -147,5 +166,32 @@ public class newHome extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    public ArrayList<String> GetList(String type){
+
+        ArrayList<String> selections = new ArrayList<String>();
+
+        if(dataall!=null){
+
+
+
+
+
+            for(int i =0; i<dataall.size();i++){
+
+                selections.add(dataall.get(i).get(type));
+
+
+
+
+
+            }
+
+        }
+
+
+        return selections;
     }
 }

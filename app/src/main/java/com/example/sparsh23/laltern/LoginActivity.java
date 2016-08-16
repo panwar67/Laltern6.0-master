@@ -82,7 +82,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
         sessionManager = new SessionManager(getApplicationContext());
 
-        if(sessionManager.isLoggedIn()){
+        if((sessionManager.isLoggedIn())&&(sessionManager.getUserDetails().get("uid")!=null)){
+
+            Toast.makeText(getApplicationContext(),""+sessionManager.getUserDetails().get("uid"),Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(LoginActivity.this,Update.class));
             finish();
@@ -348,8 +350,9 @@ else
                         //Dismissing the progress dialog
 
 
+                        loading.dismiss();
                         //Showing toast
-                        Toast.makeText(LoginActivity.this, "Error In Connectivity", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Error In Connectivity one", Toast.LENGTH_LONG).show();
                     }
                 }){
             @Override

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.sparsh23.laltern.dummy.DummyContent;
 import com.example.sparsh23.laltern.dummy.DummyContent.DummyItem;
@@ -28,12 +29,15 @@ public class ItemFragment extends Fragment {
 
 
     ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+    ArrayList<HashMap<String,String>> searchdata = new ArrayList<HashMap<String, String>>();
     DBHelper dbHelper;
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     String ARG_TYPE;
     String ARG_CAT;
     String ARG_SUB;
+    String ARG_UID;
+    ArrayList<HashMap<String,String>> map = new ArrayList<HashMap<String, String>>();
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -51,6 +55,7 @@ public class ItemFragment extends Fragment {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,8 +65,12 @@ public class ItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            ARG_CAT = getArguments().getString("category");
-            ARG_SUB = getArguments().getString("subcat");
+
+            map = (ArrayList<HashMap<String,String>>)getArguments().getSerializable("data");
+           // ARG_CAT = getArguments().getString("category");
+            //ARG_SUB = getArguments().getString("subcat");
+
+            //ARG_UID = getArguments().getString("uid");
         }
 
         dbHelper = new DBHelper(getContext());
@@ -71,29 +80,56 @@ public class ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        RecyclerView recyclerView = (RecyclerView) view;
 
 
-        HashMap<String,String> aux = new HashMap<String, String>();
-        aux.put("category",ARG_CAT);
-        aux.put("subcat",ARG_SUB);
+        Toast.makeText(getContext(),""+ARG_CAT+" "+ARG_SUB+" "+ARG_UID+"",Toast.LENGTH_SHORT).show();
 
-        data = dbHelper.GetSubCategoryImageData(aux);
-       //  dbHelper.getimageDatatype(ARG_TYPE);
-        // Set the adapter
+
+
+
+
         if (view instanceof RecyclerView) {
 
 
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+        }
+
+
+        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(map, mListener, getContext()));
+
+
+       /* if(ARG_UID != "nouid")
+        {
+
+            searchdata = dbHelper.GetProductsFromSearch(ARG_UID);
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(searchdata, mListener, getContext()));
+
+
+        }
+
+        else
+        if((ARG_CAT!="nocat")&&(ARG_SUB!="nosub")){
+
+        HashMap<String,String> aux = new HashMap<String, String>();
+        aux.put("category",ARG_CAT);
+        aux.put("subcat",ARG_SUB);
+
+
+        data = dbHelper.GetSubCategoryImageData(aux);
+       //  dbHelper.getimageDatatype(ARG_TYPE);
+        // Set the adapter
 
 
             recyclerView.setAdapter(new MyItemRecyclerViewAdapter(data, mListener, getContext()));
-        }
+        }*/
+
         return view;
     }
 

@@ -2,12 +2,14 @@ package com.example.sparsh23.laltern;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -18,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,7 +39,7 @@ public class TrendingProAdapter extends BaseAdapter {
 
     ArrayList<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();
 
-    public TrendingProAdapter(Context landingHome, ArrayList<HashMap<String,String>> data){
+    public TrendingProAdapter(NavigationMenu landingHome, ArrayList<HashMap<String,String>> data){
 
         result=data;
         context = landingHome;
@@ -89,12 +92,15 @@ public class TrendingProAdapter extends BaseAdapter {
         return position;
     }
 
+
+
     public class Holder
     {
 
         ImageView deals,sponser, custom;
         TextView title, price, moq;
         SliderLayout sliderShow ;
+        RatingBar ratingBar;
 
 
     }
@@ -118,15 +124,33 @@ public class TrendingProAdapter extends BaseAdapter {
 
         holder.moq = (TextView)rowView.findViewById(R.id.trendingpromoq);
 
+        holder.ratingBar = (RatingBar)rowView.findViewById(R.id.productratingtrending);
 
 
 
+
+        String string = "\u20B9";
+        byte[] utf8 = null;
+        try {
+            utf8 = string.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        assert utf8 != null;
+        try {
+            string = new String(utf8, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         Log.d(" list trendingproduct", result.get(position).toString());
 
-        holder.title.setText(""+result.get(position).get("title"));
-        holder.price.setText(result.get(position).get("price"));
-        holder.moq.setText(result.get(position).get("quantity"));
+        holder.title.setText(""+result.get(position).get("title").toUpperCase());
+        holder.price.setTypeface(null,Typeface.BOLD);
+        holder.price.setText(string+" "+result.get(position).get("price"));
+       // holder.moq.setTextColor(#ff000000);
+        holder.moq.setText("M.O.Q - "+result.get(position).get("quantity"));
+        holder.ratingBar.setRating(Float.parseFloat(result.get(position).get("rating")));
 
         imageLoader.displayImage(result.get(position).get("path"), holder.deals);
 

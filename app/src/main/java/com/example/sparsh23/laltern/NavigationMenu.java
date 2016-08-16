@@ -2,6 +2,7 @@ package com.example.sparsh23.laltern;
 
 //import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 //import android.support.v4.app.Fragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -31,6 +34,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sparsh23.laltern.dummy.DummyContent;
+
+import org.lucasr.twowayview.TwoWayView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,74 +64,42 @@ public class NavigationMenu extends AppCompatActivity
         setContentView(R.layout.activity_navigation_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         prepareListData();
-        listView = (ListView)findViewById(R.id.listviewmenu);
+        //listView = (ListView)findViewById(R.id.listviewmenu);
         dbHelper = new DBHelper(getApplicationContext());
 
-        data = dbHelper.getimageData();
+        //data = dbHelper.getimageData();
+        TwoWayView lvTest = (TwoWayView)findViewById(R.id.horizontallist);
+        TwoWayView lvTest2 = (TwoWayView) findViewById(R.id.horizontallist2);
+        TwoWayView lvTest1 = (TwoWayView)findViewById(R.id.horizontallist1);
+
+        lvTest.refreshDrawableState();
+
+        lvTest.setAdapter(new TrendingProAdapter(NavigationMenu.this,dbHelper.getimageDatatype("trending")));
+        lvTest1.setAdapter(new LandingHomeListAdapter(getApplicationContext(),dbHelper.getimageDatatype("craft")));
+        lvTest2.setAdapter(new LandingHomeListAdapter(getApplicationContext(),dbHelper.getimageDatatype("artist")));
+        EditText searchView = (EditText) findViewById(R.id.searchviewrealid);
+        //searchView.setQueryHint("Search for crafts, products and artists");
+
+        if (searchView != null) {
+            searchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSearchRequested();
+                }
+            });
+        }
 
 
-        Spinner spinner = (Spinner) findViewById(R.id.searchspinner);
-        ArrayAdapter<String> adapter;
-        final List<String> list;
-
-        list = new ArrayList<String>();
-        list.add("title");
-        list.add("craft");
-        list.add("owner");
-        list.add("All");
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-
-        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView)findViewById(R.id.searchproduct);
-
-
-
-
-
-
-
-        autoCompleteTextView.setThreshold(2);
-
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
-                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getBaseContext(),
-                        android.R.layout.simple_list_item_1, GetList(list.get(position)) );
-
-
-                autoCompleteTextView.setAdapter(adapter1);
-                autoCompleteTextView.setTextColor(Color.BLACK);
-
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-
-
-      // listView.setAdapter(itemsAdapter);
+        // listView.setAdapter(itemsAdapter);
 
 
         //setActionBar(toolbar);
 
         //getActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //new ActionBarDrawerToggle()
@@ -134,17 +107,60 @@ public class NavigationMenu extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+
         expandableListView = (ExpandableListView)findViewById(R.id.expandedlist);
+
+
+        expandableListView.setGroupIndicator(null);
+
+//        expandableListView.addHeaderView();
+
+
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navigationView.getMenu().getItem(0).setChecked(true);
 //        onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
+
+        Intent intent = getIntent();
+
+        Bundle bundle = new Bundle();
+        bundle = intent.getBundleExtra("datas");
+
+        if(bundle!=null) {
+
+
+            ItemFragment newhom1 = ItemFragment.newInstance(1);
+
+
+            FragmentManager transaction = getSupportFragmentManager();
+
+
+            newhom1.setArguments(bundle);
+            // fra.beginTransaction().replace()
+            android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom1);
+            //transaction.beginTransaction().replace()
+            frag.addToBackStack(null);
+            frag.commit();
+        }
+
+
+
+
+
+
+
         Log.d("child size" ,""+listDataChild.size());
         com.example.sparsh23.laltern.ExpandableListAdapter expandableListAdapter = new com.example.sparsh23.laltern.ExpandableListAdapter(listDataChild,listDataHeader,getApplicationContext());
 
         expandableListView.setAdapter(expandableListAdapter);
+
+        View header = getLayoutInflater().inflate(R.layout.nav_header_navigation_menu, expandableListView, false);
+
+        expandableListView.addHeaderView(header, null, false);
+
 
 
 
@@ -157,13 +173,17 @@ public class NavigationMenu extends AppCompatActivity
 
                 Toast.makeText(getApplicationContext(),""+cat+"  "+subcat,Toast.LENGTH_SHORT).show();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("category", cat);
-                bundle.putString("subcat",subcat);
+
+                ArrayList<HashMap<String,String>> map = new ArrayList<HashMap<String, String>>();
+                HashMap<String,String> aux = new HashMap<String, String>();
+                aux.put("category",cat);
+                aux.put("subcat",subcat);
 
 
+                data = dbHelper.GetSubCategoryImageData(aux);
+                Bundle bundle1 = new Bundle();
 
-
+                bundle1.putSerializable("data",data);
 
                ItemFragment newhom =  ItemFragment.newInstance(1);
 
@@ -171,14 +191,15 @@ public class NavigationMenu extends AppCompatActivity
                 FragmentManager transaction = getSupportFragmentManager();
 
 
-                newhom.setArguments(bundle);
+                newhom.setArguments(bundle1);
                 // fra.beginTransaction().replace()
                 android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
                 //transaction.beginTransaction().replace()
                 frag.addToBackStack(null);
                 frag.commit();
+
                 // break;
-              //  drawer.closeDrawer(GravityCompat.START);
+                drawer.closeDrawer(GravityCompat.START);
 
 
 
@@ -243,19 +264,6 @@ public class NavigationMenu extends AppCompatActivity
         });
 
 
-        newhom =  newhom.newInstance("a","a");
-
-
-        FragmentManager transaction = getSupportFragmentManager();
-
-
-        // fra.beginTransaction().replace()
-        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
-        //transaction.beginTransaction().replace()
-        frag.addToBackStack(null);
-        frag.commit();
-        // break;
-        drawer.closeDrawer(GravityCompat.START);
 
 
 
@@ -382,6 +390,11 @@ public class NavigationMenu extends AppCompatActivity
         listDataChild.put(listDataHeader.get(10),heading9);
         listDataChild.put(listDataHeader.get(11),heading9);
         listDataChild.put(listDataHeader.get(12),heading9);
+        listDataChild.put("About Us",heading9);
+        listDataChild.put("Contact Us", heading9);
+        listDataChild.put("Policies",heading9);
+        listDataChild.put("Chat",heading9);
+
 
 
     }
@@ -506,29 +519,5 @@ public class NavigationMenu extends AppCompatActivity
     }
 
 
-    public ArrayList<String> GetList(String type){
 
-        ArrayList<String> selections = new ArrayList<String>();
-
-        if(data!=null){
-
-
-
-
-
-            for(int i =0; i<data.size();i++){
-
-                selections.add(data.get(i).get(type));
-
-
-
-
-
-            }
-
-        }
-
-
-        return selections;
-    }
 }
