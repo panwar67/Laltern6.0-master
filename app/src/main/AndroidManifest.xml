@@ -110,20 +110,14 @@
             android:name=".NavigationMenu"
             android:label="@string/title_activity_navigation_menu"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-
-
-
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
-            <meta-data android:name="android.app.default_searchable"
+            <meta-data
+                android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
-
-
-            </activity>
-
-
+        </activity>
         <activity
             android:name=".SearchableActivity"
             android:label="@string/title_activity_searchable"
@@ -139,15 +133,17 @@
         <activity
             android:name=".SearchInflated"
             android:label="@string/title_activity_search_inflated"
-            android:theme="@style/AppTheme" >
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
 
         <provider
             android:name=".CountryContentProvider"
             android:authorities="com.example.sparsh23.laltern.CountryContentProvider"
             android:exported="true" />
 
+        <activity
+            android:name=".FilterableActivity"
+            android:label="@string/title_activity_filterable"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -79,7 +80,7 @@ public class NavigationMenu extends AppCompatActivity
         lvTest.setAdapter(new TrendingProAdapter(NavigationMenu.this,dbHelper.getimageDatatype("trending")));
         lvTest1.setAdapter(new LandingHomeListAdapter(getApplicationContext(),dbHelper.getimageDatatype("craft")));
         lvTest2.setAdapter(new LandingHomeListAdapter(getApplicationContext(),dbHelper.getimageDatatype("artist")));
-        EditText searchView = (EditText) findViewById(R.id.searchviewrealid);
+        final EditText searchView = (EditText) findViewById(R.id.searchviewrealid);
         //searchView.setQueryHint("Search for crafts, products and artists");
 
         if (searchView != null) {
@@ -90,6 +91,30 @@ public class NavigationMenu extends AppCompatActivity
                 }
             });
         }
+
+        searchView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (searchView.getRight() - searchView.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+
+                        startActivity(new Intent(NavigationMenu.this,FilterableActivity.class));
+
+                        return true;
+                    }
+                }
+                return false;
+
+
+            }
+        });
 
 
         // listView.setAdapter(itemsAdapter);

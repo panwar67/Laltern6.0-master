@@ -43,6 +43,8 @@
                     android:focusable="false"
                     android:id="@+id/searchviewrealid"
 
+                    android:drawableRight="@drawable/filter"
+
 
                     android:layout_width="match_parent"
                     android:background="@drawable/shadowbag"

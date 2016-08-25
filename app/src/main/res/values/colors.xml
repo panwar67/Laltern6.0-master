@@ -7,4 +7,6 @@
     <color name="black">#ff000000</color>
     <color name="maintheme">#37474f</color>
     <color name="backgroundoff">#d6d7d7</color>
+    <color name="green">#669900</color>
+    <color name="backoffoff">#bebebe</color>
     </resources>
