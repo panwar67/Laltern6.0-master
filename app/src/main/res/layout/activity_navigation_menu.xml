@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/backgroundoff"
+    android:background="@color/white"
     tools:openDrawer="start">
 
     <android.support.design.widget.AppBarLayout
@@ -46,10 +46,7 @@
                     android:layout_width="50dp"
                     android:layout_height="30dp"
 
-
-
-
-                    />
+  />
 
 
                 <View
@@ -67,6 +64,7 @@
                     android:layout_gravity="right"
 
 
+                    android:id="@+id/toolsearch"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
 
@@ -78,6 +76,7 @@
                 <ImageView
 
 
+                    android:id="@+id/viewrequest"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_width="25dp"
@@ -94,6 +93,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_width="25dp"
+                    android:id="@+id/viewcart"
                     android:layout_height="25dp"
                     android:text="Scaned Card"
                     android:layout_gravity="right"
@@ -113,6 +113,7 @@
                     android:layout_weight="1"
 
 
+                    android:id="@+id/viewprofile"
                     android:src="@drawable/pro"
                     />
           </LinearLayout>
@@ -145,6 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+
         android:fitsSystemWindows="true"
         >
 
@@ -161,7 +163,7 @@
 
         <ExpandableListView
 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/expandedlist"
 

@@ -3,17 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/dealsfragments"
-    tools:context="com.example.sparsh23.laltern.DealsFragment">
+    android:background="@color/white"
+    tools:context="com.example.sparsh23.laltern.categoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
+    <!-- TODO: Update blank fragment gridsubitem -->
+
+
+
+    <in.srain.cube.views.GridViewWithHeaderAndFooter
+
+        android:id="@+id/subcatgrid"
+        android:numColumns="2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dealslist"
 
-        android:divider="#d6d7d7"
-        android:dividerHeight="5.0dp"
+        android:layout_height="match_parent">
 
-        android:background="#d6d7d7"></ListView>
+    </in.srain.cube.views.GridViewWithHeaderAndFooter>
 
 </FrameLayout>

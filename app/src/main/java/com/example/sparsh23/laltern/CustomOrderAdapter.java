@@ -32,7 +32,7 @@ public class CustomOrderAdapter extends BaseAdapter {
 
     ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
     private static LayoutInflater inflater=null;
-    public CustomOrderAdapter(YourEnquiries mainActivity, ArrayList<HashMap<String,String>> imagesdata) {
+    public CustomOrderAdapter(Context mainActivity, ArrayList<HashMap<String,String>> imagesdata) {
         // TODO Auto-generated constructor stub
         result=imagesdata;
         context=mainActivity;
@@ -93,10 +93,11 @@ public class CustomOrderAdapter extends BaseAdapter {
     {
 
         ImageView img;
-        TextView price;
+        TextView des;
         TextView status;
         TextView title;
-        TextView reply;
+        TextView quantity;
+        TextView craft;
 
     }
 
@@ -106,15 +107,17 @@ public class CustomOrderAdapter extends BaseAdapter {
         Holder holder=new Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.order_row, null);
-        holder.price=(TextView) rowView.findViewById(R.id.priceOrd);
-        holder.status = (TextView) rowView.findViewById(R.id.StatusOrd);
-        holder.img=(ImageView) rowView.findViewById(R.id.imageViewOrd);
-        holder.reply = (TextView)rowView.findViewById(R.id.OrdRply);
-        //holder.title = (TextView)rowView.findViewById(R.id.headerord);
+        holder.des=(TextView) rowView.findViewById(R.id.reqdes);
+        holder.status = (TextView) rowView.findViewById(R.id.reqstatus);
+        holder.img=(ImageView) rowView.findViewById(R.id.reqproductimg);
 
-        holder.price.setText(result.get(position).get("des"));
+        holder.craft = (TextView)rowView.findViewById(R.id.requestcraft);
+        holder.quantity = (TextView)rowView.findViewById(R.id.reqquantity);
+
+        holder.des.setText(result.get(position).get("des"));
         holder.status.setText(result.get(position).get("status"));
-        holder.reply.setText(result.get(position).get("reply"));
+        holder.quantity.setText(result.get(position).get("quantity"));
+
         imageLoader.displayImage(result.get(position).get("path"), holder.img);
 
         return rowView;

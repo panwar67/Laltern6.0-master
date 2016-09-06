@@ -74,7 +74,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        stream=(ImageView)findViewById(R.id.feed);
+     /*   stream=(ImageView)findViewById(R.id.feed);
         stream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +99,10 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        */
 
-        data  = dbHelper.GetProfile();
+
+      //  data  = dbHelper.GetProfile();
 
         webs.setText(data.get("web").toString());
         name.setText(data.get("name").toString());

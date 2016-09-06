@@ -5,13 +5,15 @@ package com.example.sparsh23.laltern;
  */
 public class Request_Struct {
 
-    public static  String table_name = "Orders";
-    public static String ord_id = "order_id";
-    public static String buy_id = "Buyer_id";
-    public static String pro_id = "Prod_id";
-    public static String des = "Des";
-    public static String path="Path";
-    public static String status="Status";
-    public static String reply = "Reply";
+    public static final String table_name = "Requests";
+    public static final String ord_id = "order_id";
+    public static final String buy_id = "Buyer_id";
+    public static final String pro_id = "Prod_id";
+    public static final String des = "Des";
+    public static final String path="Path";
+    public static final String status="Status";
+    public static final String reply = "Reply";
+    public static final String craft = "craft";
+    public static final String quantity = "quantity";
 
 }

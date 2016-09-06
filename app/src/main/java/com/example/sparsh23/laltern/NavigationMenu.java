@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -43,16 +44,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NavigationMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LandingHome.OnFragmentInteractionListener, DealsFragment.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener, categoryFragment.OnListFragmentInteractionListener, newHome.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener,   ItemFragment.OnListFragmentInteractionListener, categoryFragment.OnListFragmentInteractionListener, newHome.OnFragmentInteractionListener, SubCatItemsFragment.OnListFragmentInteractionListener, FilterFragment.OnFragmentInteractionListener{
 
 
-    LandingHome landinghome;
+   // LandingHome landinghome;
     DBHelper dbHelper;
+
     ExpandableListView expandableListView;
     ArrayList<String> listDataHeader = new ArrayList<String>();
     ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
      HashMap<String,List<String>> listDataChild = new HashMap<String, List<String>>();
     ListView listView;
+
+    ImageView jewel, homedecor, hometext, saree, painting,access, others,apparel, cart, request, profile;
 
 
 
@@ -71,16 +75,73 @@ public class NavigationMenu extends AppCompatActivity
         dbHelper = new DBHelper(getApplicationContext());
 
         //data = dbHelper.getimageData();
+
+        request = (ImageView)findViewById(R.id.viewrequest);
+        profile = (ImageView)findViewById(R.id.viewprofile);
         TwoWayView lvTest = (TwoWayView)findViewById(R.id.horizontallist);
         TwoWayView lvTest2 = (TwoWayView) findViewById(R.id.horizontallist2);
         TwoWayView lvTest1 = (TwoWayView)findViewById(R.id.horizontallist1);
 
         lvTest.refreshDrawableState();
 
-        lvTest.setAdapter(new TrendingProAdapter(NavigationMenu.this,dbHelper.getimageDatatype("trending")));
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                startActivity(new Intent(NavigationMenu.this,ProfileDrawer.class));
+
+            }
+        });
+
+
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(NavigationMenu.this,Submit_Request_Random.class));
+
+            }
+        });
+
+
+
+
+
+
+        cart = (ImageView)findViewById(R.id.viewcart);
+
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NavigationMenu.this,CartActivity.class));
+            }
+        });
+
+        
+
+        ArrayList<HashMap<String,String>> trendingmap = new ArrayList<HashMap<String, String>>();
+        trendingmap = dbHelper.getimageDatatype("trending");
+
+        lvTest.setAdapter(new TrendingProAdapter(NavigationMenu.this,trendingmap));
         lvTest1.setAdapter(new LandingHomeListAdapter(getApplicationContext(),dbHelper.getimageDatatype("craft")));
         lvTest2.setAdapter(new LandingHomeListAdapter(getApplicationContext(),dbHelper.getimageDatatype("artist")));
         final EditText searchView = (EditText) findViewById(R.id.searchviewrealid);
+
+        final ArrayList<HashMap<String, String>> finalTrendingmap = trendingmap;
+        lvTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),""+position+""+finalTrendingmap.get(position).get("uid")+" "+finalTrendingmap.get(position).get("artuid"),Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(NavigationMenu.this,ProductView.class);
+                intent.putExtra("promap", finalTrendingmap.get(position));
+                startActivity(intent);
+            }
+        });
+
         //searchView.setQueryHint("Search for crafts, products and artists");
 
         if (searchView != null) {
@@ -91,6 +152,9 @@ public class NavigationMenu extends AppCompatActivity
                 }
             });
         }
+
+
+
 
         searchView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -138,6 +202,8 @@ public class NavigationMenu extends AppCompatActivity
 
 
         expandableListView.setGroupIndicator(null);
+
+
 
 //        expandableListView.addHeaderView();
 
@@ -265,17 +331,12 @@ public class NavigationMenu extends AppCompatActivity
 
                     if (groupPosition == 0) {
 
-                        newhom = newhom.newInstance("a", "a");
+                        FragmentManager fm = NavigationMenu.this.getSupportFragmentManager();
+                        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                            fm.popBackStack();
+                        }
 
 
-                        FragmentManager transaction = getSupportFragmentManager();
-
-
-                        // fra.beginTransaction().replace()
-                        android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, newhom);
-                        //transaction.beginTransaction().replace()
-                        frag.addToBackStack(null);
-                        frag.commit();
                         // break;
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                         drawer.closeDrawer(GravityCompat.START);
@@ -286,6 +347,164 @@ public class NavigationMenu extends AppCompatActivity
                     return false;
                 }
 
+        });
+
+
+         jewel = (ImageView)findViewById(R.id.JwlSuperCat);
+
+
+        if (jewel!=null) {
+
+            jewel.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View v) {
+
+                    FragmentManager transaction = getSupportFragmentManager();
+
+                    categoryFragment = categoryFragment.newInstance();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "jewel");
+                    categoryFragment.setArguments(bundle);
+                    android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                    //transaction.beginTransaction().replace()
+                    frag.addToBackStack(null);
+                    frag.commit();
+
+
+                }
+            });
+        }
+        homedecor = (ImageView)findViewById(R.id.homecatSuperCat);
+
+        homedecor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "homedecor");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+
+            }
+        });
+
+        hometext = (ImageView)findViewById(R.id.hometextsupercat);
+
+
+        if(hometext!=null){
+        hometext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "hometextile");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+            }
+        });
+        }
+        saree = (ImageView)findViewById(R.id.sareeSuperCat);
+
+        saree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "saree");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+            }
+        });
+
+
+        painting = (ImageView)findViewById(R.id.paintingsSuperCat);
+
+        painting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "painting");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+            }
+        });
+                access = (ImageView)findViewById(R.id.accessoriesSuperCat);
+
+        access.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "accessories");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+            }
+        });
+        others = (ImageView)findViewById(R.id.othersSuperCat);
+
+        others.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "others");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+            }
+        });
+
+        apparel = (ImageView)findViewById(R.id.apparelSuperCat);
+        apparel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager transaction = getSupportFragmentManager();
+
+                categoryFragment = categoryFragment.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "apparel");
+                categoryFragment.setArguments(bundle);
+                android.support.v4.app.FragmentTransaction frag = transaction.beginTransaction().replace(R.id.navrep, categoryFragment);
+                //transaction.beginTransaction().replace()
+                frag.addToBackStack(null);
+                frag.commit();
+
+
+            }
         });
 
 
@@ -302,7 +521,7 @@ public class NavigationMenu extends AppCompatActivity
 
 
         listDataHeader.add("Home");
-        listDataHeader.add("Shop For Us");
+        listDataHeader.add("Shop From Us");
         // Adding data header
         listDataHeader.add("jewellery");
 
@@ -403,7 +622,7 @@ public class NavigationMenu extends AppCompatActivity
 
 
         listDataChild.put("Home", heading9 );
-        listDataChild.put("Shop For Us", heading9);
+        listDataChild.put("Shop From Us", heading9);
         listDataChild.put(listDataHeader.get(2), heading1);// Header, Child data
         listDataChild.put(listDataHeader.get(3), heading2);
         listDataChild.put(listDataHeader.get(4),heading3);

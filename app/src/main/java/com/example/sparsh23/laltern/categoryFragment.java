@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,6 +33,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import in.srain.cube.views.GridViewWithHeaderAndFooter;
 
 /**
  * A fragment representing a list of Items.
@@ -115,30 +119,44 @@ public class categoryFragment extends Fragment {
 
         headcategory = dbHelper.getimageDatatype(type+"catheader");
         viewall = dbHelper.getimageDatatype(type+"catall");
-        jewelpa = dbHelper.getimageDatatype(type+"catpa");
-        jewelcs = dbHelper.getimageDatatype(type+"catcs");
-        jewelec = dbHelper.getimageDatatype(type+"catec");
-        jeweltp = dbHelper.getimageDatatype(type+"catpt");
 
 
-        category = dbHelper.getimageDatatype("jewelcat");
+
+        category = dbHelper.getimageDatatype(type+"cat");
+
+       // Log.d("inside tiles cat",""+category);
+
+
+
         View view = inflater.inflate(R.layout.fragment_deals, container, false);
 
-        ListView listView = (ListView) view.findViewById(R.id.dealslist);
+        GridViewWithHeaderAndFooter listView = (GridViewWithHeaderAndFooter) view.findViewById(R.id.subcatgrid);
+
+
 
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.categoryslider, listView,false);
 
 
 
+
         listView.addHeaderView(header,null,true);
-        listView.setAdapter(new DealsAdapter(getContext(),category));
+        listView.setAdapter(new GridSubcatAdapter(getContext(),category));
+        listView.deferNotifyDataSetChanged();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                Toast.makeText(getContext(),""+category.get(position).get("path"),Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
 
 
         SliderLayout sliderShow = (SliderLayout) header.findViewById(R.id.sliderviewall);
-        final SliderLayout ecslider = (SliderLayout)header.findViewById(R.id.sliderec);
-        ecslider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        ecslider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
 
 
         ImageView imageView = (ImageView)header.findViewById(R.id.catheader1);
@@ -148,27 +166,19 @@ public class categoryFragment extends Fragment {
 
 
 
-        final SliderLayout paslider = (SliderLayout)header.findViewById(R.id.sliderpa);
-        paslider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        paslider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
-
-
-        final SliderLayout ptslider = (SliderLayout)header.findViewById(R.id.slidertp);
-        ptslider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        ptslider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
-
-        final SliderLayout csslider = (SliderLayout)header.findViewById(R.id.slidercs);
-        csslider.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
-        csslider.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
 
 
 
 
 
 
-        sliderShow.setPresetTransformer(SliderLayout.Transformer.Fade
-        );
+
+
+
+        sliderShow.setPresetTransformer(SliderLayout.Transformer.FlipHorizontal);
         sliderShow.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+        //sliderShow.startAutoCycle();
+
 
         for(int i =0; i<viewall.size();i++)
         {
@@ -184,95 +194,7 @@ public class categoryFragment extends Fragment {
             }));
 
         }
-
-
-
-        for(int i =0; i<jewelpa.size();i++)
-        {
-
-            Log.d("slider jewel all size",""+viewall.size());
-            paslider.addSlider(new DefaultSliderView(getContext()).image(jewelpa.get(i).get("path")).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getContext(),""+viewall.get(0).get("meta"),Toast.LENGTH_SHORT).show();
-                    // Bundle bundle = new Bundle();bundle.putString("type", artistdata.get(0).get("meta"));DealsFragment nextFrag= new DealsFragment();nextFrag.setArguments(bundle);getFragmentManager().beginTransaction().replace(R.id.navrep, nextFrag,null).addToBackStack(null).commit();
-
-                }
-            }));
-
-        }
-
-
-        for(int i =0; i<jeweltp.size();i++)
-        {
-
-            Log.d("slider jewel all size",""+viewall.size());
-            ptslider.addSlider(new DefaultSliderView(getContext()).image(jeweltp.get(i).get("path")).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getContext(),""+viewall.get(0).get("meta"),Toast.LENGTH_SHORT).show();
-                    // Bundle bundle = new Bundle();bundle.putString("type", artistdata.get(0).get("meta"));DealsFragment nextFrag= new DealsFragment();nextFrag.setArguments(bundle);getFragmentManager().beginTransaction().replace(R.id.navrep, nextFrag,null).addToBackStack(null).commit();
-
-                }
-            }));
-
-        }
-
-
-        for(int i =0; i<jewelcs.size();i++)
-        {
-
-            Log.d("slider jewel all size",""+viewall.size());
-            csslider.addSlider(new DefaultSliderView(getContext()).image(jewelcs.get(i).get("path")).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getContext(),""+viewall.get(0).get("meta"),Toast.LENGTH_SHORT).show();
-                    // Bundle bundle = new Bundle();bundle.putString("type", artistdata.get(0).get("meta"));DealsFragment nextFrag= new DealsFragment();nextFrag.setArguments(bundle);getFragmentManager().beginTransaction().replace(R.id.navrep, nextFrag,null).addToBackStack(null).commit();
-
-                }
-            }));
-
-        }
-
-
-        for(int i =0; i<jewelec.size();i++)
-        {
-
-            Log.d("slider jewel all size",""+viewall.size());
-            ecslider.addSlider(new DefaultSliderView(getContext()).image(jewelec.get(i).get("path")).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(BaseSliderView slider) {
-                    Toast.makeText(getContext(),""+viewall.get(0).get("meta"),Toast.LENGTH_SHORT).show();
-                    // Bundle bundle = new Bundle();bundle.putString("type", artistdata.get(0).get("meta"));DealsFragment nextFrag= new DealsFragment();nextFrag.setArguments(bundle);getFragmentManager().beginTransaction().replace(R.id.navrep, nextFrag,null).addToBackStack(null).commit();
-
-                }
-            }));
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Set the adapter
+// Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;

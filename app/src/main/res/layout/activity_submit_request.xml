@@ -17,7 +17,7 @@
             android:id="@+id/toolbar1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#37474f"
+            android:background="@color/white"
             >
 
 
@@ -27,12 +27,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@android:color/transparent">
-                <View
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                <ImageView
+                    android:src="@drawable/back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     >
 
-                </View>
+                </ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -44,21 +45,11 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:fontFamily="serif"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_weight="115" />
 
 
 
-                <ImageView
-
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:text="Scaned Card"
-                    android:layout_gravity="right"
-
-
-                    android:src="@drawable/logo"
-                    />
 
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
@@ -66,12 +57,6 @@
 
     <include layout="@layout/content_submit_request" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+
 
 </android.support.design.widget.CoordinatorLayout>

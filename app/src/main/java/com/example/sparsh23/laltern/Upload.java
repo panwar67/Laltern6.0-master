@@ -66,13 +66,13 @@ public class Upload extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                UploadQuery(dbHelper.GetProfile().get("uid"),des.getText().toString(),subject.getText().toString());
+                UploadQuery(dbHelper.GetProfile(sessionManager.getUserDetails().get("uid")).get("uid"),des.getText().toString(),subject.getText().toString());
 
 
             }
         });
 
-        profile=(ImageView)findViewById(R.id.profile);
+      /*  profile=(ImageView)findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +97,8 @@ public class Upload extends AppCompatActivity {
                 finish();
             }
         });
+
+        */
 
         }
 

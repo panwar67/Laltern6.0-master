@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.lucasr.twowayview.TwoWayView;
 
@@ -39,9 +40,12 @@ public class newHome extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     DBHelper dbHelper;
     AutoCompleteTextView autoCompleteTextView;
-    ArrayList<HashMap<String,String>> dataall = new ArrayList<HashMap<String, String>>();
+    SessionManager sessionManager;
+    HashMap<String,String> data = new HashMap<String, String>();
+    TextView name, company, desig, tob, addr, cont, pan, email, webs, state, city;
 
-    ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
+
+    //ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String,String>>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -87,34 +91,42 @@ public class newHome extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the gridsubitem for this fragment
 
         View root = inflater.inflate(R.layout.fragment_new_home, container, false);
 
-        dataall = dbHelper.getimageData();
 
-        EditText editText = (EditText)root.findViewById(R.id.searchviewid);
+        sessionManager = new SessionManager(getContext());
 
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        name=(TextView)root.findViewById(R.id.reg_name);
+        company=(TextView)root.findViewById(R.id.reg_comp);
+        desig=(TextView)root.findViewById(R.id.reg_desg);
+        tob=(TextView)root.findViewById(R.id.reg_bustype);
+        addr=(TextView)root.findViewById(R.id.reg_addr);
+        cont=(TextView)root.findViewById(R.id.reg_cont);
+        pan=(TextView)root.findViewById(R.id.reg_pan);
+        email=(TextView)root.findViewById(R.id.reg_email);
+        webs=(TextView)root.findViewById(R.id.reg_webs);
+        state=(TextView)root.findViewById(R.id.reg_state);
+        city=(TextView)root.findViewById(R.id.reg_city);
 
 
-                startActivity(new Intent(getActivity(),SearchInflated.class));
 
-            }
-        });
+        data  = dbHelper.GetProfile(sessionManager.getUserDetails().get("uid"));
+
+//        webs.setText(data.get("web").toString());
+        name.setText(data.get("name").toString());
+        company.setText(data.get("comp").toString());
+        desig.setText(data.get("design").toString());
+        tob.setText(data.get("tob").toString());
+        cont.setText(data.get("cont").toString());
+        email.setText(data.get("email").toString());
+        addr.setText(data.get("addr").toString());
+        city.setText(data.get("city").toString());
+        state.setText(data.get("state").toString());
+        pan.setText(data.get("pan").toString());
 
 
-        data = dbHelper.getimageDatatype("landing");
-        Log.d("new home landing size",""+data.size());
-        TwoWayView lvTest = (TwoWayView) root.findViewById(R.id.horizontallist);
-        TwoWayView lvTest2 = (TwoWayView) root.findViewById(R.id.horizontallist2);
-        TwoWayView lvTest1 = (TwoWayView) root.findViewById(R.id.horizontallist1);
-
-        //lvTest.setAdapter(new TrendingProAdapter(getContext(),dbHelper.getimageDatatype("trending")));
-        //lvTest1.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("craft")));
-        //lvTest2.setAdapter(new LandingHomeListAdapter(getContext(),dbHelper.getimageDatatype("artist")));
 
 
 
@@ -169,29 +181,5 @@ public class newHome extends Fragment {
     }
 
 
-    public ArrayList<String> GetList(String type){
 
-        ArrayList<String> selections = new ArrayList<String>();
-
-        if(dataall!=null){
-
-
-
-
-
-            for(int i =0; i<dataall.size();i++){
-
-                selections.add(dataall.get(i).get(type));
-
-
-
-
-
-            }
-
-        }
-
-
-        return selections;
-    }
 }

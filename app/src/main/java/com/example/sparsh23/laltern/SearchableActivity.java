@@ -92,10 +92,10 @@ public class SearchableActivity extends AppCompatActivity implements LoaderManag
         //});
 
 
-       // mCursorAdapter = new SimpleCursorAdapter(getBaseContext(), R.layout.layout, null, new String[] { SearchManager.SUGGEST_COLUMN_TEXT_1,SearchManager.SUGGEST_COLUMN_TEXT_2}, new int[] { R.id.texts1, R.id.texts2}, 0);
+       // mCursorAdapter = new SimpleCursorAdapter(getBaseContext(), R.gridsubitem.gridsubitem, null, new String[] { SearchManager.SUGGEST_COLUMN_TEXT_1,SearchManager.SUGGEST_COLUMN_TEXT_2}, new int[] { R.id.texts1, R.id.texts2}, 0);
 
 
-        //customCursorAdapter = new CustomCursorAdapter(getBaseContext(), R.layout.layout, null, new String[] { "TAG","SUGGEST"}, new int[] { R.id.texts1, R.id.texts2}, 0);
+        //customCursorAdapter = new CustomCursorAdapter(getBaseContext(), R.gridsubitem.gridsubitem, null, new String[] { "TAG","SUGGEST"}, new int[] { R.id.texts1, R.id.texts2}, 0);
         // Setting the cursor adapter for the country listview
         //mLVCountries.setAdapter(customCursorAdapter);
 

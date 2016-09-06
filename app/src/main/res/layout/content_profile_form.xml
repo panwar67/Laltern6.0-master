@@ -109,6 +109,13 @@
             android:id="@+id/cnfrmpass"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab"
+            android:layout_gravity="center"
+            android:background="@drawable/sigout"/>
+
 
 
     </LinearLayout>

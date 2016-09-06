@@ -33,13 +33,15 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     ImageLoader imageLoader;
     DisplayImageOptions options;
     Context context;
+    int typeitem;
     private final ArrayList<HashMap<String,String>> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(ArrayList<HashMap<String,String>> items, OnListFragmentInteractionListener listener, Context cont) {
+    public MyItemRecyclerViewAdapter(ArrayList<HashMap<String,String>> items, OnListFragmentInteractionListener listener, Context cont, int col) {
         mValues = items;
         mListener = listener;
         context = cont;
+        typeitem = col;
 
         options = new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true).bitmapConfig(Bitmap.Config.RGB_565).imageScaleType(ImageScaleType.EXACTLY).resetViewBeforeLoading(true).build();
         ImageLoaderConfiguration.Builder config1 = new ImageLoaderConfiguration.Builder(cont);
@@ -59,8 +61,23 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+
+        View view = null;
+        if(typeitem ==1){
+
+
+             view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.fragment_item, parent, false);
+
+
+
+        }
+        if(typeitem ==2){
+
+
+             view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.griditemlayout, parent, false);
+        }
         return new ViewHolder(view);
     }
 

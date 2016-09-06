@@ -4,25 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="5dp"
-    android:paddingLeft="5dp"
+
+
     android:background="@color/backgroundoff"
-    android:paddingRight="5dp"
-    android:paddingTop="5dp"
+
+
+
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/navrep"
     tools:context="com.example.sparsh23.laltern.NavigationMenu"
     tools:showIn="@layout/app_bar_navigation_menu">
     <ScrollView
+        android:layout_marginTop="5dp"
+        android:scrollbars="none"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <LinearLayout
 
-            android:background="@color/backgroundoff"
+
+
+            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:orientation="vertical"
+
 
             android:layout_height="match_parent">
 
@@ -31,10 +38,14 @@
 
                 <EditText
 
-                    android:layout_margin="10dp"
+
 
                     android:hint="Search for crafts, Artist and Products"
 
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:paddingTop="2dp"
                     android:paddingLeft="5dp"
                     android:paddingBottom="5dp"
@@ -65,20 +76,39 @@
             <include
                 layout="@layout/nav_menu"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+
+                android:layout_height="wrap_content"
                 />
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+
+
+                android:background="@color/white"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+               >
 
 
             <TextView
 
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="2dp"
+
+
+
+                android:layout_marginLeft="10dp"
+                android:paddingBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=" VIEW TRENDING PRODUCTS"
-                android:background="@drawable/shadowbag"
                 android:textColor="#5a595b"
                 android:textStyle="bold"
+
+                android:layout_marginRight="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/white"
+                android:paddingLeft="5dp"
 
                 android:textSize="15dp"/>
 
@@ -94,20 +124,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/horizontallist"
-                android:layout_weight="1"
 
+
+
+
+
+
+
+
+
+
+
+                android:paddingTop="-5dp"
+                android:background="@android:color/transparent"
 
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"/>
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadowbag"
+                android:orientation="vertical">
             <TextView
 
-                android:layout_marginBottom="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=" VIEW CRAFTS"
-                android:background="@drawable/shadowbag"
                 android:textColor="#5a595b"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 android:textSize="15dp"/>
@@ -116,24 +167,36 @@
 
             <org.lucasr.twowayview.TwoWayView
                 android:layout_weight="1"
+
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/horizontallist1"
                 android:orientation="horizontal"
-                android:background="@color/backgroundoff"
+                android:background="@android:color/transparent"
                 android:paddingBottom="10dp">
 
             </org.lucasr.twowayview.TwoWayView>
 
+            </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shadowbag">
             <TextView
-                android:layout_marginBottom="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=" VIEW ARTIST"
 
-                android:background="@drawable/shadowbag"
+                android:layout_marginLeft="10dp"
+                android:background="@color/white"
                 android:textColor="#5a595b"
+
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 android:textSize="15dp"/>
@@ -143,10 +206,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/horizontallist2"
-                android:background="@color/backgroundoff"
+                android:background="@color/white"
                 android:orientation="horizontal"
+
                 android:paddingBottom="10dp">
             </org.lucasr.twowayview.TwoWayView>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

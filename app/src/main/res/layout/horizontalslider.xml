@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d6d7d7"
+    android:background="@color/white"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
     android:paddingBottom="5dp"
@@ -38,6 +38,7 @@
         android:id="@+id/trendingprotit"/>
 
     <TextView
+        android:layout_margin="3dp"
         android:textStyle="bold"
         android:textSize="20dp"
         android:textColor="@color/black"
@@ -48,13 +49,15 @@
 
     <TextView
 
+        android:layout_margin="3dp"
         android:textColor="@color/black"
         android:id="@+id/trendingpromoq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MOQ"/>
         <RatingBar
-            android:layout_margin="3dp"
+
+            android:layout_margin="5dp"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:numStars="5"

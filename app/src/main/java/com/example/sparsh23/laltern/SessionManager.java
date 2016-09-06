@@ -49,6 +49,10 @@ public class SessionManager
      * */
     public void createLoginSession(String email, String pass, String uid){
         // Storing login value as TRUE
+
+        editor.clear();
+        editor.commit();
+
         editor.putBoolean(IS_LOGIN, true);
 
         // Storing name in pref

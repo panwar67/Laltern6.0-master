@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="#d6d7d7"
+    android:background="@color/white"
 
 
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/round">
+        android:background="@drawable/shadowbag">
 
     <LinearLayout
         android:paddingTop="5dp"
@@ -33,7 +33,7 @@
             android:id="@+id/gridimg1"
 
 
-            android:scaleType="fitXY"
+
             android:background="@color/white"/>
     </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -41,7 +42,9 @@ public class SubmitRequest extends AppCompatActivity {
     SessionManager sessionManager;
     ImageLoader imageLoader;
     DisplayImageOptions options;
+    EditText craft, quantity;
 
+    Button submit;
     DBHelper dbHelper;
     HashMap<String, String> hashMap;
     @Override
@@ -65,32 +68,37 @@ public class SubmitRequest extends AppCompatActivity {
         imageLoader.init(config1.build());
 
 
+
+        craft = (EditText)findViewById(R.id.requestcraft);
+        quantity = (EditText)findViewById(R.id.requestquantity);
+        submit = (Button)findViewById(R.id.submitreq);
+
         Intent intent = getIntent();
          hashMap = (HashMap<String, String>)intent.getSerializableExtra("map");
         imageLoader.displayImage(hashMap.get("path"),imageView);
         final EditText editText = (EditText)findViewById(R.id.desreq);
         final HashMap<String,String> map = sessionManager.getUserDetails();
-        dbHelper.GetProfile().get("uid");
+        dbHelper.GetProfile(sessionManager.getUserDetails().get("uid")).get("uid");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
                 String des = editText.getText().toString();
                 String prouid = hashMap.get("uid");
-                String useruid = dbHelper.GetProfile().get("uid");
+                String useruid = dbHelper.GetProfile(sessionManager.getUserDetails().get("uid")).get("uid");
                 Log.d("Request data ", ""+des+" pro "+prouid+"user "+useruid);
 
-                upload_data(prouid,useruid,des,hashMap.get("path"));
+                upload_data(prouid,sessionManager.getUserDetails().get("uid"),des,hashMap.get("path"), craft.getText().toString(),quantity.getText().toString());
          }
         });
     }
 
 
 
-    public void upload_data(final String prouid, final String buyuid, final String des, final String path)
+    public void upload_data(final String prouid, final String buyuid, final String des, final String path, final String craft, final String quantity)
 
     {
         final ProgressDialog loading = ProgressDialog.show(this,"Registering User...","Please wait...",false,false);
@@ -140,6 +148,8 @@ public class SubmitRequest extends AppCompatActivity {
                 Keyvalue.put("des",des);
                 Keyvalue.put("requid",uid);
                 Keyvalue.put("path",path);
+                Keyvalue.put("craft",craft);
+                Keyvalue.put("quantity",quantity);
 
 
 

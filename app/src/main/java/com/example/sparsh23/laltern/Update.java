@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class Update extends AppCompatActivity {
     String DOWN_URL1 = "http://www.whydoweplay.com/lalten/GetUser.php";
     String DOWN_URL2="http://www.whydoweplay.com/lalten/GetReq.php";
     String DOWN_URL3="http://www.whydoweplay.com/lalten/GetArtisian.php";
+    String DOWN_URL4 = "http://www.whydoweplay.com/lalten/Getcart.php";
     SessionManager sessionManager;
 
     @Override
@@ -39,6 +42,7 @@ public class Update extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         dbHelper = new DBHelper(getApplicationContext());
+
         sessionManager = new SessionManager(getApplicationContext());
 
         dbHelper.InitSearchData();
@@ -50,12 +54,10 @@ public class Update extends AppCompatActivity {
                 longOperation.execute();
             }
         });
-
-
-
-
-
     }
+
+
+
 
 
     public boolean ProfileSetup(final String email, final String pass)
@@ -74,6 +76,7 @@ public class Update extends AppCompatActivity {
                         {
 
 
+                            dbHelper.InitProfile();
 
                             try {
                                 JSONObject profile = new JSONObject(s);
@@ -97,7 +100,7 @@ public class Update extends AppCompatActivity {
                                     String state = details.getString("STATE");
                                     String web = details.getString("WEBS");
 
-                                    dbHelper.InitProfile();
+
 
 
 
@@ -210,6 +213,8 @@ public class Update extends AppCompatActivity {
                                     String protype = details.getString("PROTYPE");
                                     dbHelper.InsertSearchTag(protype," In Product Type", "PROTYPE");
                                     String category = details.getString("CATEGORY");
+                                    String color = details.getString("COLOR");
+                                    String size = details.getString("SIZE");
 
 
 
@@ -225,8 +230,9 @@ public class Update extends AppCompatActivity {
 
 
 
-                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta,craft,protype,rating);
+                                    dbHelper.InsertImageData(uid,des,own,path,price,quantity,title,noimage,type,category,subcat,meta,craft,protype,rating,color,size);
 
+                                    dbHelper.InsertFilterData(category,subcat,color,protype,size);
                                 }
                                 Log.d("Image data", s);
 
@@ -236,8 +242,7 @@ public class Update extends AppCompatActivity {
 
 
 
-                            startActivity(new Intent( Update.this,NavigationMenu.class));
-                            finish();
+
 
 
 
@@ -298,6 +303,8 @@ public class Update extends AppCompatActivity {
 
                         //loading.dismiss();
 
+                        dbHelper.InitOrd();
+
                         if (s!=null)
                         {
 
@@ -316,20 +323,21 @@ public class Update extends AppCompatActivity {
 
                                     String requid = details.getString("REQUID");
                                     String prouid = details.getString("PROUID");
+                                    String quantity = details.getString("QUANTITY");
+                                    String crafts = details.getString("CRAFT");
                                     String buyuid = details.getString("BUYUID");
                                     String description = details.getString("DESCRIPTION");
                                     String status = details.getString("STATUS");
                                     String path = details.getString("PATH");
                                     String reply = details.getString("REPLY");
 
-                                //    dbHelper.InitProfile();
 
 
 
 
 
 
-                                    dbHelper.InsertOrderData(prouid,buyuid,requid,description,path,status,reply);
+                                    dbHelper.InsertRequestData(prouid,buyuid,requid,description,path,status,reply,crafts,quantity);
 
 
                                 }
@@ -372,7 +380,7 @@ public class Update extends AppCompatActivity {
 
                 HashMap<String,String> Keyvalue = new HashMap<String,String>();
 
-                Keyvalue.put("buyid",buyerid);
+                Keyvalue.put("uid",buyerid);
 
 
 
@@ -397,6 +405,122 @@ public class Update extends AppCompatActivity {
 
      //   return  true;
     }
+
+
+
+    public boolean InsertCart(final String buyerid)
+    {
+        // final ProgressDialog loading = ProgressDialog.show(this,"Getting orders...","Please wait...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DOWN_URL4,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+
+
+                        //loading.dismiss();
+
+                        if (s!=null)
+                        {
+
+                            dbHelper.InitCart();
+
+
+                            try {
+                                JSONObject profile = new JSONObject(s);
+                                JSONArray data = profile.getJSONArray("CartData");
+                                dbHelper.InitOrd();
+
+                                for(int i=0;i<data.length();i++)
+                                {
+                                    JSONObject details = data.getJSONObject(i);
+
+
+
+                                    String requid = details.getString("CARTUID");
+                                    String prouid = details.getString("PROUID");
+                                    String quantity = details.getString("QUANTITY");
+                                    String buyuid = details.getString("USERUID");
+
+
+
+
+
+
+
+                                    dbHelper.InsertCartData(requid,prouid,buyuid,quantity);
+
+
+                                }
+                                Log.d("Profile fetched", s);
+                                // loading.dismiss();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            startActivity(new Intent( Update.this,NavigationMenu.class));
+                            finish();
+
+
+
+
+
+                        }
+
+
+
+
+
+                        //Disimissing the progress dialog
+
+                        //Showing toast message of the response
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        //loading.dismiss();
+
+                        //Showing toast
+                        Toast.makeText(Update.this, "Error In Connectivity four", Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+
+
+                HashMap<String,String> Keyvalue = new HashMap<String,String>();
+
+                Keyvalue.put("uid",buyerid);
+
+
+
+                //returning parameters
+                return Keyvalue;
+            }
+        };
+
+        //Creating a Request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+
+
+
+
+
+
+        return true;
+
+        //   return  true;
+    }
+
+
+
 
 
 
@@ -534,6 +658,7 @@ public class Update extends AppCompatActivity {
 
             setUpStream();
 
+            InsertCart(sessionManager.getUserDetails().get("uid"));
 
 
 
@@ -542,15 +667,27 @@ public class Update extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is upto you
+
+            if (result.equals("Executed"))
+            {
+
+
+
+            }
+
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute()
+        {
+
+        }
 
         @Override
-        protected void onProgressUpdate(Void... values) {}
+        protected void onProgressUpdate(Void... values)
+        {
+            
+        }
     }
 
 

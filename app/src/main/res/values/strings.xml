@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Laltern</string>
+    <string name="app_name">LAL10</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -120,7 +120,7 @@
     <string name="title_activity_upload">Upload</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_setup_profile">SetupProfile</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">LAL10</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -157,5 +157,10 @@
     <string name="title_activity_search_inflated">SearchInflated</string>
     <string name="title_activity_searchable">SearchableActivity</string>
     <string name="title_activity_filterable">FilterableActivity</string>
+    <string name="title_activity_artisian_page_show">ArtisianPageShow</string>
+    <string name="title_activity_cart">CartActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_submit__request__random">Submit_Request_Random</string>
+    <string name="title_activity_profile_drawer">  MY PROFILE</string>
 </resources>
 

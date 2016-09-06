@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
     android:background="@color/backgroundoff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sparsh23.laltern.FilterableActivity"
@@ -47,24 +47,27 @@
 
             <ToggleButton
 
+                android:id="@+id/productrate"
                 android:layout_margin="10dp"
                 android:background="@drawable/toggleback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="Press"
+                android:textOff="Product Rating"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textOn="pressed"/>
+
+                android:textOn="Product Rating"/>
 
             <ToggleButton
                 android:background="@drawable/toggleback"
                 android:layout_width="wrap_content"
 
+                android:id="@+id/artistrate"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textOn="Artist"
+                android:textOn="Artist Rating"
                 android:layout_margin="10dp"
-                android:textOff="Artist"
+                android:textOff="Artist Rating"
                 android:textColor="@color/white"
                 />
             
@@ -91,6 +94,7 @@
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textSize="20dp"
+
                 android:layout_margin="5dp"/>
 
             <LinearLayout
@@ -104,6 +108,7 @@
 
                 <ToggleButton
 
+                    android:id="@+id/below500"
                     android:layout_margin="10dp"
                     android:background="@drawable/toggleback"
                     android:layout_width="wrap_content"
@@ -116,6 +121,7 @@
 
                 <ToggleButton
 
+                    android:id="@+id/below1500"
                     android:layout_margin="10dp"
                     android:background="@drawable/toggleback"
                     android:layout_width="wrap_content"
@@ -128,6 +134,7 @@
 
                 <ToggleButton
 
+                    android:id="@+id/above2000"
                     android:layout_margin="10dp"
                     android:background="@drawable/toggleback"
                     android:layout_width="wrap_content"
@@ -138,6 +145,7 @@
                     android:textOn="ABOVE 2000"/>
 
                 <ToggleButton
+                    android:id="@+id/below5000"
                     android:background="@drawable/toggleback"
                     android:layout_width="wrap_content"
 
@@ -156,7 +164,71 @@
 
 
         </LinearLayout>
-        
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadowbag">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="TYPES &amp; CRAFTS "
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_margin="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:layout_margin="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                </Spinner>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1">
+
+                </Spinner>
+
+                <Spinner
+
+                    android:layout_margin="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                </Spinner>
+
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shadowbag"
+            android:layout_width="match_parent"
+            android:id="@+id/filterhomeapply"
+            android:layout_height="wrap_content"
+            android:text="APPLY"/>
+
     </LinearLayout>
     
     
