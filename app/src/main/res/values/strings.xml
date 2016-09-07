@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">LAL10</string>
+    <string name="facebook_app_id">1761495477471790</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -162,5 +163,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_submit__request__random">Submit_Request_Random</string>
     <string name="title_activity_profile_drawer">  MY PROFILE</string>
+    <string name="title_activity_chat_us">ChatUs</string>
 </resources>
 

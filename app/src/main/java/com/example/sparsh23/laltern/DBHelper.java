@@ -224,6 +224,7 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             list.add(res.getString(res.getColumnIndex(Filter_Struct.sizefil)));
             Log.d("inside sizes", res.getString(res.getColumnIndex(Filter_Struct.sizefil)));
+            res.moveToNext();
         }
 
         return list;
@@ -239,6 +240,7 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             list.add(res.getString(res.getColumnIndex(Filter_Struct.colorfil)));
             Log.d("inside color", res.getString(res.getColumnIndex(Filter_Struct.colorfil)));
+            res.moveToNext();
         }
 
         return list;
@@ -258,6 +260,7 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             list.add(res.getString(res.getColumnIndex(Filter_Struct.producttype)));
             Log.d("inside protype", res.getString(res.getColumnIndex(Filter_Struct.producttype)));
+            res.moveToNext();
         }
 
         return list;
@@ -317,6 +320,44 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         return  data;
+    }
+
+
+    public ArrayList<HashMap<String,String>> GetFilteredData(String cat, String subcat, String color, String size, String min, String max, String protype)
+    {
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+cat+"' and SUBCAT = '"+subcat+"' and COLOR = '"+color+" and SIZE = '"+size+"' and PROTYPE = '"+protype+"' PRICE between '"+min+"' and '"+max+"' ", null  );
+        res.moveToFirst();
+        Log.d("filter size",""+res.getCount());
+        if (!res.isAfterLast())
+        {
+            HashMap<String,String> map = new HashMap<String, String>();
+            map.put("uid",res.getString(res.getColumnIndex("UID")));
+            map.put("title",res.getString(res.getColumnIndex("TITLE")));
+            map.put("price",res.getString(res.getColumnIndex("PRICE")));
+            map.put("quantity",res.getString(res.getColumnIndex("QUANTITY")));
+            map.put("noimg",res.getString(res.getColumnIndex("NOIMAGES")));
+            map.put("type",res.getString(res.getColumnIndex("TYPE")));
+            map.put("category",res.getString(res.getColumnIndex("CATEGORY")));
+            map.put("subcat",res.getString(res.getColumnIndex("SUBCAT")));
+            map.put("meta",res.getString(res.getColumnIndex("META")));
+            map.put("des",res.getString(res.getColumnIndex("DES")));
+            map.put("owner",res.getString(res.getColumnIndex("OWNER")));
+            map.put("craft",res.getString(res.getColumnIndex("CRAFT")));
+            map.put("color",res.getString(res.getColumnIndex("COLOR")));
+            map.put("sie",res.getString(res.getColumnIndex("SIZE")));
+            map.put("protype",res.getString(res.getColumnIndex("PROTYPE")));
+            map.put("rating",res.getString(res.getColumnIndex("RATING")));
+            map.put("path",res.getString(res.getColumnIndex("PATH")));
+            data.add(map);
+            res.moveToNext();
+
+        }
+
+
+        return data;
+
     }
 
 

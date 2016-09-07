@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.nostra13.universalimageloader.utils.L;
 
 import java.util.ArrayList;
@@ -34,8 +38,11 @@ public class FilterFragment extends Fragment {
     Spinner cat, subcat, sizeall, color, producttype;
     DBHelper dbHelper;
     ArrayList<String> catitems = new ArrayList<String>();
+    TextView min, max;
+    Button apply;
 
     HashMap<String,String> map = new HashMap<String, String>();
+    CrystalRangeSeekbar seekbar;
     ArrayList< HashMap<String,ArrayList<String>>> spinnerdata = new ArrayList<HashMap<String, ArrayList<String>>>();
 
 
@@ -88,41 +95,38 @@ public class FilterFragment extends Fragment {
 
 
         dbHelper = new DBHelper(getContext());
-
-
-
-
         spinnerdata = dbHelper.GetCategories();
-
-
-
-
         for (int i = 0;i<spinnerdata.size();i++)
         {
             catitems.add(String.valueOf(spinnerdata.get(i).entrySet().iterator().next().getKey()));
             Log.d("cat spin item",""+spinnerdata.get(i).entrySet().iterator().next().getKey());
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
         producttype = (Spinner)root.findViewById(R.id.producttypespinner);
         sizeall = (Spinner)root.findViewById(R.id.sizespinner);
         color = (Spinner)root.findViewById(R.id.colorspinner);
 
+        seekbar = (CrystalRangeSeekbar)root.findViewById(R.id.rangeSeekbarprice);
+        seekbar.setMaxStartValue(10000);
+        seekbar.setMaxValue(10000);
         cat = (Spinner)root.findViewById(R.id.catspin);
         subcat = (Spinner)root.findViewById(R.id.subcatspin);
+        min = (TextView)root.findViewById(R.id.filterpricemin);
+        max = (TextView)root.findViewById(R.id.filterpricemax);
+        apply = (Button)root.findViewById(R.id.applyfilter);
 
 
+
+
+        seekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number minValue, Number maxValue) {
+
+                min.setText(minValue.toString());
+                max.setText( maxValue.toString());
+
+            }
+        });
 
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,catitems);
@@ -183,6 +187,24 @@ public class FilterFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                ArrayList<HashMap<String,String>> filteredData = new ArrayList<HashMap<String, String>>();
+
+                Bundle bundle
+
+                bundle.putSerializable("data",data);
+
+
 
             }
         });
