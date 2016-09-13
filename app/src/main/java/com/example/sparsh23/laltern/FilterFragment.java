@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -200,9 +202,21 @@ public class FilterFragment extends Fragment {
 
                 ArrayList<HashMap<String,String>> filteredData = new ArrayList<HashMap<String, String>>();
 
-                Bundle bundle
+                Bundle bundle = new Bundle();
 
-                bundle.putSerializable("data",data);
+
+                filteredData = dbHelper.GetFilteredData(cat.getSelectedItem().toString(),subcat.getSelectedItem().toString(),color.getSelectedItem().toString(),sizeall.getSelectedItem().toString(),min.getText().toString(),max.getText().toString(),producttype.getSelectedItem().toString());
+
+                bundle.putSerializable("data",filteredData);
+
+                ItemFragment itemFragment = new ItemFragment();
+
+                itemFragment.setArguments(bundle);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.navrep, itemFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
 
 

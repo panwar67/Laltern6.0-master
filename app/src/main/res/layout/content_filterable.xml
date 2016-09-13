@@ -187,6 +187,7 @@
                 android:layout_height="wrap_content">
 
                 <Spinner
+                    android:id="@+id/typefilter"
                     android:layout_margin="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -195,18 +196,10 @@
                 </Spinner>
 
                 <Spinner
+                    android:id="@+id/craftfilter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:layout_weight="1">
-
-                </Spinner>
-
-                <Spinner
-
-                    android:layout_margin="3dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                 </Spinner>

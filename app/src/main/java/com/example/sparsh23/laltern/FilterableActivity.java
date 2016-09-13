@@ -10,10 +10,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class FilterableActivity extends AppCompatActivity {
 
 
     ToggleButton price, artist, priceL500, priceL1500, priceA2000, priceL5000;
+    ArrayList<HashMap<String,ArrayList<String>>> filterdata = new ArrayList<HashMap<String, ArrayList<String>>>();
     ImageView back;
     Button button;
     @Override
@@ -33,6 +37,22 @@ public class FilterableActivity extends AppCompatActivity {
         priceA2000 = (ToggleButton)findViewById(R.id.above2000);
         priceL5000 = (ToggleButton)findViewById(R.id.below5000);
         back = (ImageView)findViewById(R.id.backfil);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+            }
+        });
+
+
+
+
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -327,7 +327,7 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+cat+"' and SUBCAT = '"+subcat+"' and COLOR = '"+color+" and SIZE = '"+size+"' and PROTYPE = '"+protype+"' PRICE between '"+min+"' and '"+max+"' ", null  );
+        Cursor res = db.rawQuery("select * from ImageData where CATEGORY = '"+cat+"' and SUBCAT = '"+subcat+"' and COLOR = '"+color+"' and SIZE = '"+size+"' and PROTYPE = '"+protype+"' and PRICE between "+min+" and "+max, null  );
         res.moveToFirst();
         Log.d("filter size",""+res.getCount());
         if (!res.isAfterLast())
@@ -343,13 +343,14 @@ public class DBHelper extends SQLiteOpenHelper {
             map.put("subcat",res.getString(res.getColumnIndex("SUBCAT")));
             map.put("meta",res.getString(res.getColumnIndex("META")));
             map.put("des",res.getString(res.getColumnIndex("DES")));
-            map.put("owner",res.getString(res.getColumnIndex("OWNER")));
+            map.put("artuid",res.getString(res.getColumnIndex("OWNER")));
             map.put("craft",res.getString(res.getColumnIndex("CRAFT")));
             map.put("color",res.getString(res.getColumnIndex("COLOR")));
             map.put("sie",res.getString(res.getColumnIndex("SIZE")));
             map.put("protype",res.getString(res.getColumnIndex("PROTYPE")));
             map.put("rating",res.getString(res.getColumnIndex("RATING")));
             map.put("path",res.getString(res.getColumnIndex("PATH")));
+            //map.put("artuid",res.getString(res.getColumnIndex("")))
             data.add(map);
             res.moveToNext();
 
@@ -358,6 +359,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return data;
 
+    }
+
+    public ArrayList<HashMap<String,String>> filtercraftprotype()
+    {
+        ArrayList<HashMap<String,String>> data = new ArrayList<HashMap<String, String>>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from ImageData where PRICE",null);
+
+
+
+
+
+        return null;
     }
 
 

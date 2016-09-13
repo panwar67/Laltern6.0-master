@@ -120,7 +120,7 @@ public class ItemFragment extends Fragment {
 
 
 
-        Toast.makeText(getContext(),""+ARG_CAT+" "+ARG_SUB+" "+ARG_UID+"",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(),""+ARG_CAT+" "+ARG_SUB+" "+ARG_UID+"",Toast.LENGTH_SHORT).show();
 
 
 
